@@ -10,13 +10,21 @@
     <?php
         $error = false;
         if(isset($_POST['login'])) {
-            if($_POST['user'] == '' || $_POST['password']) {
+            if($_POST['user'] == '' || $_POST['password'] == '') {
                 $error = true;
             } else {
                 $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? AND password = ?");
                 $sql->execute(array($_POST['user'], $_POST['password']));
                 if($sql->rowCount() == 1) {
-
+                    $info = $sql->fetch();
+                    $_SESSION['codeuniverse-login'] = true;
+                    $_SESSION['codeuniverse-user'] = $info['user'];
+                    $_SESSION['codeuniverse-password'] = $info['password'];
+                    $_SESSION['codeuniverse-name'] = $info['name'];
+                    header('Location: '.INCLUDE_PATH);
+                    die();
+                } else {
+                    $error = true;
                 }
             }
         }
