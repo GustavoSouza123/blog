@@ -26,6 +26,7 @@ body {
 .login-box form {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 .login-box form input {

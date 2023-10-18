@@ -19,13 +19,15 @@
                 );
                 CREATE TABLE IF NOT EXISTS `tb_articles` (
                     id INT NOT NULL AUTO_INCREMENT,
+                    category_id INT NOT NULL,
                     title VARCHAR(255) NOT NULL,
                     subtitle VARCHAR(255) NOT NULL,
                     creation_date DATETIME NOT NULL,
-                    update_time DATETIME NOT NULL,
+                    last_update DATETIME NOT NULL,
                     read_time VARCHAR(10) NOT NULL,
                     article LONGTEXT NOT NULL,
-                    PRIMARY KEY (id)
+                    PRIMARY KEY (id),
+                    FOREIGN KEY (category_id) REFERENCES tb_categories(id)
                 );";
                 // INSERT INTO `tb_admin_users` VALUES (null, 'admin', '1234', 'Gustavo Souza')
         $pdo->exec($sql);
