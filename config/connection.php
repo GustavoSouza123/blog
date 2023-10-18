@@ -20,6 +20,7 @@
                 CREATE TABLE IF NOT EXISTS `tb_articles` (
                     id INT NOT NULL AUTO_INCREMENT,
                     category_id INT NOT NULL,
+                    thumbnail VARCHAR(255) NOT NULL,
                     title VARCHAR(255) NOT NULL,
                     subtitle VARCHAR(255) NOT NULL,
                     creation_date DATETIME NOT NULL,
