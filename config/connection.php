@@ -17,7 +17,7 @@
                     image VARCHAR(255) NOT NULL,
                     PRIMARY KEY (id)
                 );
-                CREATE TABLE IF NOT EXISTS `tb_artigos` (
+                CREATE TABLE IF NOT EXISTS `tb_articles` (
                     id INT NOT NULL AUTO_INCREMENT,
                     title VARCHAR(255) NOT NULL,
                     subtitle VARCHAR(255) NOT NULL,
