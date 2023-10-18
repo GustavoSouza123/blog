@@ -7,6 +7,14 @@
     };
     spl_autoload_register($autoload);
 
-    /* constants variables */
+    /* website path */
     define('INCLUDE_PATH', 'http://localhost/code-universe');
+
+    /* database connection */
+    define('HOST', 'localhost');
+    define('USERNAME', 'root');
+    define('PASSWORD', '');
+    define('DATABASE', 'code-universe');
+
+    require 'connection.php';
 ?>
