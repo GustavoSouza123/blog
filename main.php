@@ -7,10 +7,18 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+    <?php
+        if(isset($_GET['logout'])) {
+            Panel::logout();
+        } 
+    ?>
     <div class="panel-container">
         <header>
-            <h1>Olá, <?php echo $_SESSION['codeuniverse-name']; ?>!</h1>
-            <div class="logout">Sair</div>
+                <h1><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h1>
+                <div class="btns">
+                    <div class="header-btn blog"><a href="blog.php">Blog</a></div>
+                    <div class="header-btn logout"><a href="?logout">Sair</a></div>
+                </div>
         </header>
         
         <div class="actions">
@@ -29,9 +37,7 @@
         <div class="main">
             <div class="action-window">
                 <div class="title"></div>
-                <form action="" method="post">
-                    <input type="submit" value="Enviar" />
-                </form>
+                <form action="" method="post"></form>
             </div>
         </div>
     </div>

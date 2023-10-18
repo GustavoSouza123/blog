@@ -64,13 +64,45 @@ header {
     z-index: 999;
     top: 0;
     left: 250px;
-    width: 100%;
+    width: calc(100% - 250px);
     height: 70px;
     background-color: #444;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0 3%;
+}
+
+header .btns {
+    display: flex;
+}
+
+header .header-btn {
+    width: 100px;
+    height: 40px;
+    background-color: #555; 
+    cursor: pointer;
+    transition: .2s;
+}
+
+header .header-btn:hover {
+    background-color: #666;
+}
+
+header .header-btn a {
+    color: #fff;
+    text-decoration: none;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 3px;
+}
+
+header .logout {
+    margin-left: 20px;
 }
 
 .actions {
@@ -123,7 +155,7 @@ header {
 .action-window {
     background-color: #fff;
     padding: 30px;
-    height: calc(100vh - 70px - 30px - 30px);
+    min-height: calc(100vh - 70px - 30px - 30px);
 }
 
 .action-window .title {
@@ -144,13 +176,20 @@ header {
     margin-bottom: 10px;
 }
 
-.action-window form input {
+.action-window form input,
+.action-window form textarea {
     margin-bottom: 20px;
     height: 40px;
     padding: 0 10px;
     outline: none;
     border: 1px solid #666;
     width: 80%;
+}
+
+.action-window form textarea {
+    width: 100%;
+    min-height: 400px;
+    padding: 10px;
 }
 
 .action-window form input[type="submit"] {
