@@ -1,4 +1,20 @@
 $(function() {
+    // show dropdown menu
+    $('header ul li.action').hover(function(e) {
+        $('header ul.dropdown').hide
+        $('header ul.dropdown').eq($(this).index()).stop().slideDown(200);
+        e.stopPropagation();
+    }, function() {
+        $('header ul.dropdown').eq($(this).index()).stop().slideUp(200);
+    })
+
+    $('header ul.dropdown').hover(function(e) {
+        e.stopPropagation();
+    }, function() {
+        $(this).stop().slideUp(200);
+    })
+
+    // show action
     $('.actions .action').click(function() {
         $('.action-window .title').text($(this).text());
         $('.action-window form').css('display', 'flex')

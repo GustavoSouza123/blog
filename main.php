@@ -14,25 +14,38 @@
     ?>
     <div class="panel-container">
         <header>
-                <h1><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h1>
-                <div class="btns">
-                    <div class="header-btn blog"><a href="blog.php">Blog</a></div>
-                    <div class="header-btn logout"><a href="?logout">Sair</a></div>
+                <h3><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h3>
+                <div class="menu">
+                    <ul>
+                        <li class="action">
+                            <a href="">Categorias</a>
+                            <span></span>
+                            <ul class="dropdown">
+                                <li><a href="">Adicionar categoria</a></li>
+                                <li><a href="">Editar categorias</a></li>
+                            </ul>
+                        </li>
+                        <li class="action">
+                            <a href="">Artigos</a>
+                            <span></span>
+                            <ul class="dropdown">
+                                <li><a href="">Adicionar artigo</a></li>
+                                <li><a href="">Editar artigos</a></li>
+                            </ul>
+                        </li>
+                        <li class="action">
+                            <a href="">Painel</a>
+                            <span></span>
+                            <ul class="dropdown">
+                                <li><a href="">Adicionar usuário</a></li>
+                                <li><a href="">Editar usuários</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.php">Blog</a></li>
+                        <li><a href="?logout">Sair</a></li>
+                    </ul>
                 </div>
         </header>
-        
-        <div class="actions">
-            <h3>Ações</h3>
-            <div class="title">Categorias</div>
-            <div class="action">Adicionar categoria</div>
-            <div class="action">Editar categorias</div>
-            <div class="title">Artigos</div>
-            <div class="action">Adicionar artigo</div>
-            <div class="action">Editar artigos</div>
-            <div class="title">Painel</div>
-            <div class="action">Adicionar usuário</div>
-            <div class="action">Editar usuários</div>
-        </div>
 
         <div class="main">
             <div class="action-window">

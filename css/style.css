@@ -50,22 +50,19 @@ body {
     color: #fff;
 }
 
-h1,
-h3 {
+h1, h2, h3 {
     font-weight: 600;
 }
 
 h3 {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 header {
     position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 250px;
-    width: calc(100% - 250px);
-    height: 70px;
+    z-index: 99;
+    width: 100%;
+    height: 50px;
     background-color: #444;
     display: flex;
     flex-direction: row;
@@ -74,78 +71,71 @@ header {
     padding: 0 3%;
 }
 
-header .btns {
+header .menu {
     display: flex;
+    height: 100%;
 }
 
-header .header-btn {
-    width: 100px;
-    height: 40px;
-    background-color: #555; 
-    cursor: pointer;
+header ul {
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+
+header ul.dropdown {
+    position: absolute;
+    top: 50px;
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    height: auto;
+}
+
+header ul.dropdown li {
+    background-color: #444;
+    height: 50px;
+}
+
+header ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 100%;
     transition: .2s;
 }
 
-header .header-btn:hover {
-    background-color: #666;
+header ul li.action span {
+    width: 0px;
+    height: 0px;
+    border-top: 6px solid #fff;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    margin: 4px 20px 0px 10px;
 }
 
-header .header-btn a {
-    color: #fff;
-    text-decoration: none;
-    width: 100px;
-    height: 40px;
+header ul li:hover {
+    background-color: #333;
+}
+
+header a {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 3px;
+    color: #fff;
+    text-decoration: none;
+    height: 100%;
+    padding: 0 20px;
 }
 
-header .logout {
-    margin-left: 20px;
-}
-
-.actions {
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 250px;
-    min-height: 100vh;
-    padding-top: 20px;
-    background-color: #222;
-}
-
-.actions > div {
-    padding: 10px;
-    background-color: #eee;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-}
-
-.actions .title {
-    background-color: #111;
-    font-weight: bold;
-}
-
-.actions .action {
-    background-color: #333;
-    border-bottom: 1px solid #222;
-}
-
-.actions .action:hover {
-    text-decoration: underline;
+header ul li.action > a {
+    padding: 0;
+    padding-left: 20px;
 }
 
 .main {
     position: absolute;
-    top: 70px;
-    left: 250px;
-    width: calc(100% - 250px);
+    top: 50px;
+    width: 100%;
     min-height: calc(100vh - 70px);
     background-color: #eee;
     color: #000;
