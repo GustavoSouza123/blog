@@ -8,10 +8,16 @@
 </head>
 <body>
     <?php
+        // logout
         if(isset($_GET['logout'])) {
             Panel::logout();
-        } 
+        }
     ?>
+
+    <!-- include path -->
+    <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
+
+    <!-- admin panel container -->
     <div class="panel-container">
         <header>
             <h3><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h3>

@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php
+        // login verification
         $error = false;
         if(isset($_POST['login'])) {
             if($_POST['user'] == '' || $_POST['password'] == '') {
@@ -30,6 +31,10 @@
         }
     ?>
 
+    <!-- include path --> 
+    <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
+
+    <!-- login container -->
     <div class="login-container">
         <div class="login-box">
             <div class="title">
