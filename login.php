@@ -37,7 +37,7 @@
                 <input type="text" name="user" placeholder="Usuário" required />
                 <input type="password" name="password" placeholder="Senha" required />
                 <input type="submit" name="login" value="Login" />
-                <?php if($error) echo "Preencha todos os campos"; ?>
+                <?php if($error) echo "Erro ao enviar o formulário"; ?>
             </form>
         </div>
     </div>

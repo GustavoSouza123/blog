@@ -30,7 +30,7 @@ body {
 }
 
 .login-box form input {
-    margin-top: 10px;
+    margin-bottom: 10px;
     height: 30px;
     padding: 0 10px;
     outline: none;
@@ -145,7 +145,7 @@ header ul li.action > a {
 .action-window {
     background-color: #fff;
     padding: 30px;
-    min-height: calc(100vh - 70px - 30px - 30px);
+    min-height: calc(100vh - 50px - 30px - 30px);
 }
 
 .action-window .title {
@@ -178,8 +178,9 @@ header ul li.action > a {
 
 .action-window form textarea {
     width: 100%;
-    min-height: 400px;
+    height: 335px;
     padding: 10px;
+    resize: none;
 }
 
 .action-window form input[type="submit"] {
