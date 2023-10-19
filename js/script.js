@@ -14,7 +14,7 @@ $(function() {
         $(this).stop().slideUp(200);
     })
 
-    // show action
+    // show action windows
     $('li.action ul li a').click(function(e) {
         e.preventDefault();
         $('header ul.dropdown').stop().slideUp(200);

@@ -14,37 +14,37 @@
     ?>
     <div class="panel-container">
         <header>
-                <h3><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h3>
-                <div class="menu">
-                    <ul>
-                        <li class="action">
-                            <a href="">Categorias</a>
-                            <span></span>
-                            <ul class="dropdown">
-                                <li><a href="" index="0">Adicionar categoria</a></li>
-                                <li><a href="" index="1">Gerenciar categorias</a></li>
-                            </ul>
-                        </li>
-                        <li class="action">
-                                <a href="">Posts</a>
-                            <span></span>
-                            <ul class="dropdown">
-                                <li><a href="" index="2">Adicionar post</a></li>
-                                <li><a href="" index="3">Gerenciar posts</a></li>
-                            </ul>
-                        </li>
-                        <li class="action">
-                            <a href="">Painel</a>
-                            <span></span>
-                            <ul class="dropdown">
-                                <li><a href="" index="4">Adicionar usuário</a></li>
-                                <li><a href="" index="5">Gerenciar usuários</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.php" target="_blank">Blog</a></li>
-                        <li><a href="?logout">Sair</a></li>
-                    </ul>
-                </div>
+            <h3><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h3>
+            <div class="menu">
+                <ul>
+                    <li class="action">
+                        <a href="">Categorias</a>
+                        <span></span>
+                        <ul class="dropdown">
+                            <li><a href="" index="0">Adicionar categoria</a></li>
+                            <li><a href="" index="1">Gerenciar categorias</a></li>
+                        </ul>
+                    </li>
+                    <li class="action">
+                        <a href="">Posts</a>
+                        <span></span>
+                        <ul class="dropdown">
+                            <li><a href="" index="2">Adicionar post</a></li>
+                            <li><a href="" index="3">Gerenciar posts</a></li>
+                        </ul>
+                    </li>
+                    <li class="action">
+                        <a href="">Painel</a>
+                        <span></span>
+                        <ul class="dropdown">
+                            <li><a href="" index="4">Adicionar usuário</a></li>
+                            <li><a href="" index="5">Gerenciar usuários</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.php" target="_blank">Blog</a></li>
+                    <li><a href="?logout">Sair</a></li>
+                </ul>
+            </div>
         </header>
 
         <div class="main">
