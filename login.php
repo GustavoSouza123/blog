@@ -32,10 +32,18 @@
 
     <div class="login-container">
         <div class="login-box">
-            <h1>Login</h1>
+            <div class="title">
+                <h3>Login</h3>
+            </div>
             <form action="" method="post">
-                <input type="text" name="user" placeholder="Usuário" required />
-                <input type="password" name="password" placeholder="Senha" required />
+                <label for="user">Usuário ou email</label>
+                <input type="text" name="user" id="user" required />
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" required />
+                <div class="remember">
+                    <input type="checkbox" name="remember" />
+                    <label for="remember">Lembrar Senha</label>
+                </div>
                 <input type="submit" name="login" value="Login" />
                 <?php if($error) echo "Erro ao enviar o formulário"; ?>
             </form>

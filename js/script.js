@@ -14,6 +14,10 @@ $(function() {
         $(this).stop().slideUp(200);
     })
 
+    $('header ul li.action a').click(function(e) {
+        e.preventDefault();
+    }) 
+
     // show action windows
     $('li.action ul li a').click(function(e) {
         e.preventDefault();
