@@ -4,6 +4,7 @@
 
     $data['ajax'] = true;
     $data['post'] = $_POST;
+    print_r($_FILES);
 
     // forms submition
     if(isset($_POST['category'])) {
@@ -24,12 +25,17 @@
     if(isset($_POST['post'])) {
         $data['isset'] = true;
         $category_id = $_POST['category_id'];
+        $upload_dir = 'uploads/';
+        $thumbnail = $upload_dir.basename($_FILES['thumbnail']['name']); /* PAREI AQUI */
         $title = $_POST['title'];
         $subtitle = $_POST['subtitle'];
         $post = $_POST['post'];
+        $creation_date = date("Y-m-d h:i:s");
+        $last_update = $creation_date;
+        $read_time = ceil(str_word_count($post) / 250);
         try {
-            $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?)");
-            $sql->execute(array($category_id, $title, $subtitle, $post));
+            $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $sql->execute(array($category_id, $thumbnail, $title, $subtitle, $post, $creation_date, $last_update, $read_time));
             $data['success'] = true;
         } catch(PDOExcetion $e) {
             $data['success'] = false;

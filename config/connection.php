@@ -17,16 +17,16 @@
                     image VARCHAR(255) NOT NULL,
                     PRIMARY KEY (id)
                 );
-                CREATE TABLE IF NOT EXISTS `tb_articles` (
+                CREATE TABLE IF NOT EXISTS `tb_posts` (
                     id INT NOT NULL AUTO_INCREMENT,
                     category_id INT NOT NULL,
                     thumbnail VARCHAR(255) NOT NULL,
                     title VARCHAR(255) NOT NULL,
                     subtitle VARCHAR(255) NOT NULL,
+                    post LONGTEXT NOT NULL,
                     creation_date DATETIME NOT NULL,
                     last_update DATETIME NOT NULL,
                     read_time VARCHAR(10) NOT NULL,
-                    article LONGTEXT NOT NULL,
                     PRIMARY KEY (id),
                     FOREIGN KEY (category_id) REFERENCES tb_categories(id)
                 );";

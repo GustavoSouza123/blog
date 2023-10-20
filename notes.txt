@@ -1,0 +1,5 @@
+preview upload images:
+https://dev.to/shantanu_jana/how-to-preview-image-before-uploading-in-javascript-1f6g
+
+file upload with php:
+https://www.w3schools.com/php/php_file_upload.asp

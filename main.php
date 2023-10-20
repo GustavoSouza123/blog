@@ -56,7 +56,7 @@
         <div class="main">
             <div class="action-window">
                 <div class="title"></div>
-                <form action="" method="post"></form>
+                <form action="" method="post" enctype="multipart/form-data"></form>
             </div>
         </div>
     </div>

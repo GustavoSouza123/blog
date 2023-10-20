@@ -39,19 +39,16 @@ $(function() {
         switch(index) {
             case 0:
                 formName = "category";
-                inputNum = 2;
                 inputNames = ['name', 'image'];
                 inputLabels = ['Nome', 'Imagem'];
                 break;
             case 2:
                 formName = "post";
-                inputNum = 3;
-                inputNames = ['category_id', 'title', 'subtitle'];
-                inputLabels = ['Categoria', 'Título', 'Subtítulo'];
+                inputNames = ['category_id', 'thumbnail', 'title', 'subtitle'];
+                inputLabels = ['Categoria', 'Imagem principal', 'Título', 'Subtítulo'];
                 break;
             case 4:
                 formName = "user";
-                inputNum = 3;
                 inputNames = ['user', 'password', 'name'];
                 inputLabels = ['Usuário', 'Senha', 'Nome'];
                 break;
@@ -61,7 +58,11 @@ $(function() {
 
         if(inputNames.length > 0) {
             for(let i = 0; i < inputNames.length; i++) {
-                $('.action-window form').append(`<label>${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" />`);
+                if(inputNames[i] == 'thumbnail') {
+                    $('.action-window form').append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);
+                    continue;
+                }
+                $('.action-window form').append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
             if(inputNames[0] == 'category_id') {
                 $('.action-window form').append('<label>Post</label><textarea name="post"></textarea>'); 

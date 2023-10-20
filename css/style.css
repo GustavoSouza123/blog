@@ -231,6 +231,10 @@ header ul li.action > a {
     resize: none;
 }
 
+.action-window form input[type="file"] {
+    padding-top: 7px;
+}
+
 .action-window form input[type="submit"] {
     width: 200px;
     cursor: pointer;
