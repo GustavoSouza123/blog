@@ -4,7 +4,7 @@
     <title>Painel de Controle | Code Universe</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
+        <link href="<?php echo INCLUDE_PATH_ADMIN; ?>css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/script.js"></script>
+    <script src="<?php echo INCLUDE_PATH; ?>js/jquery.js"></script>
+<script src="<?php echo INCLUDE_PATH_ADMIN; ?>js/script.js"></script>
 </body>
 </html>

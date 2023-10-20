@@ -9,7 +9,8 @@
     spl_autoload_register($autoload);
 
     /* website path */
-    define('INCLUDE_PATH', 'http://localhost/code-universe/');
+    define('INCLUDE_PATH', 'http://localhost/blog/');
+    define('INCLUDE_PATH_ADMIN', 'http://localhost/blog/admin/');
 
     /* database connection */
     define('HOST', 'localhost');

@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
+    <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>assets/css/style.css" />
+    <title></title>
 </head>
 <body>
-    
+    <h1>Meu artigo</h1>
+
+    <script src="<?php echo INCLUDE_PATH;?>assets/js/jquery.js"></script>
+    <script src="<?php echo INCLUDE_PATH;?>assets/js/script.js"></script>
 </body>
 </html>
