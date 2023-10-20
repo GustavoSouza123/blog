@@ -1,6 +1,5 @@
 <?php require 'config/config.php'; ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +17,13 @@
     
     <?php
         // friendly url
-        $url = isset($_GET['url']) ? $_GET['url'] : 'blog';
+        $url = (isset($_GET['url'])) ? $_GET['url'] : 'blog';
         if(file_exists('pages/'.$url.'.php')) {
             include 'pages/'.$url.'.php';
         } else {
             include 'pages/404.php';
         }
     ?>
-
 
     <script src="<?php echo INCLUDE_PATH;?>assets/js/jquery.js"></script> <!-- jquery file -->
     <script src="<?php echo INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->

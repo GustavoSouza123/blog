@@ -1,13 +1,14 @@
 <?php
     require '../config/config.php';
     $data = [];
+    $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
 
     $data['ajax'] = true;
     $data['post'] = $_POST;
     print_r($_FILES);
 
     // forms submition
-    if(isset($_POST['category'])) {
+    if($form_name == 'category') {
         $data['isset'] = true;
         $name = $_POST['name'];
         $image = $_POST['image'];
@@ -20,9 +21,7 @@
             $data['error'] = "Erro ao adicionar categoria<br>";
             $data['error'] .= $e->getMessage();
         }
-    }
-        
-    if(isset($_POST['post'])) {
+    } else if($form_name == 'post') {
         $data['isset'] = true;
         $category_id = $_POST['category_id'];
         $upload_dir = 'uploads/';
@@ -42,9 +41,7 @@
             $data['error'] = "Erro ao adicionar post<br>";
             $data['error'] .= $e->getMessage();
         }
-    }
-
-    if(isset($_POST['user'])) {
+    } else if($form_name == 'user') {
         $data['isset'] = true;
         $user = $_POST['user'];
         $password = $_POST['password'];
@@ -58,6 +55,9 @@
             $data['error'] = "Erro ao adicionar usuário<br>";
             $data['error'] .= $e->getMessage();               
         }
+    } else {
+        $data['success'] = false;
+        $data['error'] = "Erro no nome do formulário";
     }
 
     die(json_encode($data)); 

@@ -27,9 +27,10 @@ $(function() {
         $('header ul.dropdown').stop().slideUp(200);
 
         $('.action-window .title').text($(this).text());
-        $('.action-window form').addClass('add');
-        $('.action-window form').css('display', 'flex')
-        $('.action-window form').html('');
+        let currentForm = $('.action-window form');
+        currentForm.addClass('add');
+        currentForm.css('display', 'flex')
+        currentForm.html('');
 
         let index = parseInt($(this).attr('index'));
         let formName;
@@ -38,17 +39,17 @@ $(function() {
         let inputLabels = [];
         switch(index) {
             case 0:
-                formName = "category";
+                formName = 'category';
                 inputNames = ['name', 'image'];
                 inputLabels = ['Nome', 'Imagem'];
                 break;
             case 2:
-                formName = "post";
+                formName = 'post';
                 inputNames = ['category_id', 'thumbnail', 'title', 'subtitle'];
                 inputLabels = ['Categoria', 'Imagem principal', 'Título', 'Subtítulo'];
                 break;
             case 4:
-                formName = "user";
+                formName = 'user';
                 inputNames = ['user', 'password', 'name'];
                 inputLabels = ['Usuário', 'Senha', 'Nome'];
                 break;
@@ -59,15 +60,16 @@ $(function() {
         if(inputNames.length > 0) {
             for(let i = 0; i < inputNames.length; i++) {
                 if(inputNames[i] == 'thumbnail') {
-                    $('.action-window form').append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);
+                    currentForm.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);
                     continue;
                 }
-                $('.action-window form').append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                currentForm.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
             if(inputNames[0] == 'category_id') {
-                $('.action-window form').append('<label>Post</label><textarea name="post"></textarea>'); 
+                currentForm.append('<label>Post</label><textarea name="post"></textarea>'); 
             }
-            $('.action-window form').append(`<input type="submit" name="${formName}" value="Adicionar" />`);
+            currentForm.append(`<input type="hidden" name="form_name" value="${formName}" />`);
+            currentForm.append(`<input type="submit" value="Adicionar" />`);
         } else {
             // ação editar
         }
@@ -80,7 +82,7 @@ $(function() {
             url: include_path+'ajax/addForms.php',
             method: 'post',
             dataType: 'json',
-            data: form.serialize()
+            data: form.serialize() // adicionar file com .files[0]
         }).done(function(data) {
             console.log(data);
         });
