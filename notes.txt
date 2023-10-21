@@ -3,3 +3,7 @@ https://dev.to/shantanu_jana/how-to-preview-image-before-uploading-in-javascript
 
 file upload with php:
 https://www.w3schools.com/php/php_file_upload.asp
+
+to-do:
+> upload files to admin/uploads/ directory
+> add input file on the category form
