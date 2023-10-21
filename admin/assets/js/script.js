@@ -78,34 +78,15 @@ $(function() {
     // ajax add forms
     $('body').on('submit', 'form.add', function(e) {
         e.preventDefault();
-        let formDataObj = new FormData(form[0]);
-        let formDataStr = Object.fromEntries(formDataObj);
-        // formDataStr = JSON.stringify(formDataStr);
+        let formData = new FormData(form[0]);
 
-        let fileObj = formDataStr.thumbnail;
-        let file = {
-            lastModified: fileObj.lastModified,
-            lastModifiedDate: fileObj.lastModifiedDate,
-            name: fileObj.name,
-            size: fileObj.size,
-            type: fileObj.type,
-        }
-        // PAREI AQUI //
-        console.log(formDataStr.thumbnail)
-        console.log(JSON.stringify(file))
-        // formDataObj.forEach(function(value, key) {
-        //     if(key == 'thumbnail') {
-        //         // formDataStr[key] =  form[0].files[0];
-        //         console.log(value)
-        //     } else {
-        //         formDataStr[key] = value
-        //     }
-        // });
         $.ajax({
             url: include_path+'ajax/addForms.php',
             method: 'post',
             dataType: 'json',
-            // data: formDataObj
+            processData: false,
+            contentType: false,
+            data: formData
         }).done(function(data) {
             console.log(data);
         });

@@ -4,8 +4,8 @@
     $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
 
     $data['ajax'] = true;
-    $data['post'] = $_POST;
     print_r($_FILES);
+    print_r($_POST);
 
     // forms submition
     if($form_name == 'category') {
@@ -24,12 +24,14 @@
     } else if($form_name == 'post') {
         $data['isset'] = true;
         $category_id = $_POST['category_id'];
+
         $upload_dir = 'uploads/';
-        $thumbnail = $upload_dir.basename($_FILES['thumbnail']['name']); /* PAREI AQUI */
+        $thumbnail = $upload_dir.basename($_FILES['thumbnail']['name']);
+
         $title = $_POST['title'];
         $subtitle = $_POST['subtitle'];
         $post = $_POST['post'];
-        $creation_date = date("Y-m-d h:i:s");
+        $creation_date = date("Y-m-d H:i:s");
         $last_update = $creation_date;
         $read_time = ceil(str_word_count($post) / 250);
         try {
@@ -60,5 +62,5 @@
         $data['error'] = "Erro no nome do formulário";
     }
 
-    die(json_encode($data)); 
+    die(json_encode($data));
 ?>
