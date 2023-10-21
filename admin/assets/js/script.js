@@ -22,15 +22,15 @@ $(function() {
     })
 
     // show action windows
+    let form = $('.action-window form');
     $('li.action ul li a').click(function(e) {
         e.preventDefault();
         $('header ul.dropdown').stop().slideUp(200);
 
         $('.action-window .title').text($(this).text());
-        let currentForm = $('.action-window form');
-        currentForm.addClass('add');
-        currentForm.css('display', 'flex')
-        currentForm.html('');
+        form.addClass('add');
+        form.css('display', 'flex')
+        form.html('');
 
         let index = parseInt($(this).attr('index'));
         let formName;
@@ -60,33 +60,33 @@ $(function() {
         if(inputNames.length > 0) {
             for(let i = 0; i < inputNames.length; i++) {
                 if(inputNames[i] == 'thumbnail') {
-                    currentForm.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);
+                    form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);
                     continue;
                 }
-                currentForm.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
             if(inputNames[0] == 'category_id') {
-                currentForm.append('<label>Post</label><textarea name="post"></textarea>'); 
+                form.append('<label>Post</label><textarea name="post"></textarea>'); 
             }
-            currentForm.append(`<input type="hidden" name="form_name" value="${formName}" />`);
-            currentForm.append(`<input type="submit" value="Adicionar" />`);
+            form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
+            form.append(`<input type="submit" value="Adicionar" />`);
         } else {
             // ação editar
         }
     })
 
-    // ajax add forms
-    $('body').on('submit', 'form.add', function() {
-        let form = $(this);
+    // ajax add forms  
+    $('body').on('submit', 'form.add', function(e) {
+        e.preventDefault();
+        console.log(form[0])
+        const formData = new FormData(form[0]);
         $.ajax({
             url: include_path+'ajax/addForms.php',
             method: 'post',
             dataType: 'json',
-            data: form.serialize() // adicionar file com .files[0]
+            data: formData
         }).done(function(data) {
             console.log(data);
         });
-
-        return false;
     })
 })
