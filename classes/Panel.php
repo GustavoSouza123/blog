@@ -6,7 +6,7 @@
 
         public static function logout() {
             session_destroy();
-            header('Location: '.INCLUDE_PATH);
+            header('Location: '.INCLUDE_PATH_ADMIN);
         }
     }
 ?>
