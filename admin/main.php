@@ -35,8 +35,8 @@
                         <a href="">Posts</a>
                         <span></span>
                         <ul class="dropdown">
-                            <li><a href="" index="2">Adicionar post</a></li>
-                            <li><a href="" index="3">Gerenciar posts</a></li>
+                            <li><a href="" index="2">Adicionar postagem</a></li>
+                            <li><a href="" index="3">Gerenciar postagens</a></li>
                         </ul>
                     </li>
                     <li class="action">

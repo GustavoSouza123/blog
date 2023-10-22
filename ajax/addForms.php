@@ -2,6 +2,7 @@
     require '../config/config.php';
     $data = [];
     $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
+    $upload_dir = 'uploads/';
 
     $data['ajax'] = true;
     print_r($_FILES);
@@ -11,7 +12,7 @@
     if($form_name == 'category') {
         $data['isset'] = true;
         $name = $_POST['name'];
-        $image = $_POST['image'];
+        $image = $upload_dir.basename($_FILES['image']['name']);
         try {
             $sql = $pdo->prepare("INSERT INTO `tb_categories` VALUES (null, ?, ?)");
             $sql->execute(array($name, $image));
@@ -25,7 +26,6 @@
         $data['isset'] = true;
         $category_id = $_POST['category_id'];
 
-        $upload_dir = 'uploads/';
         $thumbnail = $upload_dir.basename($_FILES['thumbnail']['name']);
 
         $title = $_POST['title'];

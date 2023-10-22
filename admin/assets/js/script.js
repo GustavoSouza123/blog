@@ -22,8 +22,19 @@ $(function() {
     })
 
     // show action windows
+
+    // async function to get the categories of the blog through an ajax request
+    async function getCategories() {
+        const result = await $.ajax({
+            url: include_path+'ajax/categories.php',
+            method: 'post',
+            dataType: 'json'
+        });
+        return result;
+    }
+
     let form = $('.action-window form');
-    $('li.action ul li a').click(function(e) {
+    $('li.action ul li a').click(async function(e) {
         e.preventDefault();
         $('header ul.dropdown').stop().slideUp(200);
 
@@ -50,8 +61,8 @@ $(function() {
                 break;
             case 4:
                 formName = 'user';
-                inputNames = ['user', 'password', 'name'];
-                inputLabels = ['Usuário', 'Senha', 'Nome'];
+                inputNames = ['user', 'email', 'password', 'name'];
+                inputLabels = ['Usuário', 'Email', 'Senha', 'Nome'];
                 break;
             default:
                 // console.log(index);
@@ -59,14 +70,41 @@ $(function() {
 
         if(inputNames.length > 0) {
             for(let i = 0; i < inputNames.length; i++) {
-                if(inputNames[i] == 'thumbnail') {
-                    form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);
+                form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label>`);
+                if(inputNames[i] == 'category_id') {
+                    async function showCategories() {
+                        try {
+                            const data = await getCategories();
+                            console.log(data);
+
+                            if(data.error != undefined) {
+                                form.append(data.error);
+                            } else {
+                                form.append(`<select name="${inputNames[i]}" id="${inputNames[i]}"></select>`);
+                                let formSelect = form.find(`select[name="${inputNames[i]}"]`);
+                                for(let i = 0; i < data.categories.length; i++) {
+                                    formSelect.append(`<option value="${data.categories[i].id}">${data.categories[i].name}</option>`);
+                                }
+                            }
+                        } catch(error) {
+                            console.error('Error loading categories: ', error)
+                        }
+                    }
+                    await showCategories();
                     continue;
                 }
-                form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label><input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                if(inputNames[i] == 'thumbnail' || inputNames[i] == 'image') {
+                    form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);    
+                    continue;
+                }
+                if(inputNames[i] == 'email') {
+                    form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                    continue;
+                }
+                form.append(`<input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
             if(inputNames[0] == 'category_id') {
-                form.append('<label>Post</label><textarea name="post"></textarea>'); 
+                form.append('<label>Postagem</label><textarea name="post"></textarea>'); 
             }
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
             form.append(`<input type="submit" value="Adicionar" />`);
