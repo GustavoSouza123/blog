@@ -1,9 +1,20 @@
 <?php
     require '../config/config.php';
 
-    if(Panel::isLogged()) {
-        include 'main.php'; 
+    // friendly url
+    $url = (isset($_GET['url'])) ? $_GET['url'] : '';
+    
+    if($url == '') {
+        if(Panel::isLogged()) {
+            include 'main.php'; 
+        } else {
+            include 'login.php';
+        }    
     } else {
-        include 'login.php';
+        if(file_exists($url.'.php')) {
+            include $url.'.php';
+        } else {
+            include '404.php';
+        }
     }
- ?>
+?>

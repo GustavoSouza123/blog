@@ -2,7 +2,7 @@
     require '../config/config.php';
     $data = [];
     $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
-    $upload_dir = 'uploads/';
+    $upload_dir = '../admin/assets/uploads/';
 
     $data['ajax'] = true;
     print_r($_FILES);
@@ -12,7 +12,9 @@
     if($form_name == 'category') {
         $data['isset'] = true;
         $name = $_POST['name'];
+
         $image = $upload_dir.basename($_FILES['image']['name']);
+
         try {
             $sql = $pdo->prepare("INSERT INTO `tb_categories` VALUES (null, ?, ?)");
             $sql->execute(array($name, $image));
@@ -46,11 +48,15 @@
     } else if($form_name == 'user') {
         $data['isset'] = true;
         $user = $_POST['user'];
+        $email = $_POST['email'];
         $password = $_POST['password'];
         $name = $_POST['name'];
+
+        $profile_photo = $upload_dir.basename($_FILES['profile_photo']['name']);
+
         try {
-            $sql = $pdo->prepare("INSERT INTO `tb_admin_users` VALUES (null, ?, ?, ?)");
-            $sql->execute(array($user, $password, $name));
+            $sql = $pdo->prepare("INSERT INTO `tb_admin_users` VALUES (null, ?, ?, ?, ?, ?)");
+            $sql->execute(array($user, $email, $password, $name, $profile_photo));
             $data['success'] = true;
         } catch(PDOExcetion $e) {
             $data['success'] = false;

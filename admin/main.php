@@ -1,10 +1,15 @@
+<?php
+    // session verification
+    if(Panel::isLogged()) {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Painel de Controle | Code Universe</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
+    <title>Painel de Controle | My Blog</title>
 </head>
 <body>
     <?php
@@ -47,7 +52,7 @@
                             <li><a href="" index="5">Gerenciar usuários</a></li>
                         </ul>
                     </li>
-                    <li><a href="blog.php" target="_blank">Blog</a></li>
+                        <li><a href="<?php echo INCLUDE_PATH; ?>" target="_blank">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
             </div>
@@ -62,6 +67,13 @@
     </div>
 
     <script src="<?php echo INCLUDE_PATH; ?>assets/js/jquery.js"></script>
-    <script src="<?php echo INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script>
+    <script src="<?php echo INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script> 
 </body>
 </html>
+
+<?php
+    } else {
+        echo '<title>Erro na sessão</title>';
+        echo '<p style="font-size: 18px;">Erro ao iniciar sessão. <a href="login">Entre</a> ou <a href="signup">cadastre-se</a></p>';
+    }    
+?>

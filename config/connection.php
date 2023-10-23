@@ -10,6 +10,7 @@
                     email VARCHAR(255) NOT NULL,
                     password VARCHAR(255) NOT NULL,
                     name VARCHAR(255) NOT NULL,
+                    profile_photo VARCHAR(255) NOT NULL,
                     PRIMARY KEY (id)
                 );
                 CREATE TABLE IF NOT EXISTS `tb_categories` (
@@ -31,7 +32,7 @@
                     PRIMARY KEY (id),
                     FOREIGN KEY (category_id) REFERENCES tb_categories(id)
                 );";
-                // INSERT INTO `tb_admin_users` VALUES (null, 'admin', '1234', 'Gustavo Souza')
+                // INSERT INTO `tb_admin_users` VALUES (null, 'admin', 'contato@gustavo-souza.com', '1233', 'Gustavo Souza', 'profile-photo.png')
         $pdo->exec($sql);
     } catch(PDOException $e) {
         echo '<h2>Erro ao conectar no banco de dados.</h2>'.$e->getMessage();

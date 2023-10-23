@@ -9,7 +9,7 @@
     <meta name="keywords" content="palavras,chave,do,meu,website"> <!-- seo -->
     <link rel="icon" type="image/x-icon" href=""> <!-- website icon -->
     <link href="<?php echo INCLUDE_PATH; ?>assets/css/style.css" rel="stylesheet"> <!-- css file -->
-    <title>Meu blog</title> <!-- title -->
+    <title>My Blog</title> <!-- title -->
 </head>
 <body>
     <!-- include path --> 

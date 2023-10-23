@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Painel de Controle | Code Universe</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
+    <title>Entre | My Blog</title>
 </head>
 <body>
     <?php
         // login verification
         $error = false;
-        if(isset($_POST['login'])) {
+        if(isset($_POST['register'])) {
             if($_POST['user'] == '' || $_POST['password'] == '') {
                 $error = true;
             } else {
-                $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? AND password = ?");
-                $sql->execute(array($_POST['user'], $_POST['password']));
+                $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE (user = ? OR email = ?) AND password = ?");
+                $sql->execute(array($_POST['user'], $_POST['user'], $_POST['password']));
                 if($sql->rowCount() == 1) {
                     $info = $sql->fetch();
                     $_SESSION['codeuniverse-login'] = true;
@@ -35,10 +35,11 @@
     <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
 
     <!-- login container -->
-    <div class="login-container">
-        <div class="login-box">
+    <div class="register-container">
+        <div class="register-box">
+            <?php if($error) echo '<p class="error">Erro ao enviar o formulário</p>'; ?>
             <div class="title">
-                <h3>Login</h3>
+                <h3>Entre</h3>
             </div>
             <form action="" method="post">
                 <label for="user">Usuário ou email</label>
@@ -49,9 +50,8 @@
                     <input type="checkbox" name="remember" />
                     <label for="remember">Lembrar Senha</label>
                 </div>
-                <div class="signup">Não tem uma conta? <a href="signup.php">cadastre-se</a></div>
-                <input type="submit" name="login" value="Login" />
-                <?php if($error) echo "Erro ao enviar o formulário"; ?>
+                    <div class="change-register">Não tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
+                <input type="submit" name="register" value="Login" />
             </form>
         </div>
     </div>

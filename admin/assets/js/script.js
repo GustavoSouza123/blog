@@ -39,7 +39,7 @@ $(function() {
         $('header ul.dropdown').stop().slideUp(200);
 
         $('.action-window .title').text($(this).text());
-        form.addClass('add');
+        form.addClass('add'); 
         form.css('display', 'flex')
         form.html('');
 
@@ -61,8 +61,8 @@ $(function() {
                 break;
             case 4:
                 formName = 'user';
-                inputNames = ['user', 'email', 'password', 'name'];
-                inputLabels = ['Usuário', 'Email', 'Senha', 'Nome'];
+                inputNames = ['user', 'email', 'password', 'name', 'profile_photo'];
+                inputLabels = ['Usuário', 'Email', 'Senha', 'Nome', 'Foto'];
                 break;
             default:
                 // console.log(index);
@@ -72,10 +72,11 @@ $(function() {
             for(let i = 0; i < inputNames.length; i++) {
                 form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label>`);
                 if(inputNames[i] == 'category_id') {
+                    // show the categories of the blog in the form through a select field
                     async function showCategories() {
                         try {
                             const data = await getCategories();
-                            console.log(data);
+                            // console.log(data);
 
                             if(data.error != undefined) {
                                 form.append(data.error);
@@ -93,16 +94,19 @@ $(function() {
                     await showCategories();
                     continue;
                 }
-                if(inputNames[i] == 'thumbnail' || inputNames[i] == 'image') {
+                // file inputs for uploading photos
+                if(inputNames[i] == 'image' || inputNames[i] == 'thumbnail' || inputNames[i] == 'profile_photo') {
                     form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);    
                     continue;
                 }
+                // email inputs
                 if(inputNames[i] == 'email') {
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
                 }
                 form.append(`<input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
+            // post textarea
             if(inputNames[0] == 'category_id') {
                 form.append('<label>Postagem</label><textarea name="post"></textarea>'); 
             }
