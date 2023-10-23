@@ -17,7 +17,7 @@
     
     <?php
         // friendly url
-        $url = (isset($_GET['url'])) ? $_GET['url'] : 'blog';
+        $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
         if(file_exists('pages/'.$url.'.php')) {
             include 'pages/'.$url.'.php';
         } else {
