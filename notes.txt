@@ -4,6 +4,9 @@ https://dev.to/shantanu_jana/how-to-preview-image-before-uploading-in-javascript
 file upload with php:
 https://www.w3schools.com/php/php_file_upload.asp
 
+color palettes:
+https://www.shutterstock.com/blog/color-palettes-tech-branding-logos
+
 to-do:
 > upload files to admin/assets/uploads/ directory
 > add a line break before calling the die method on the ajax/categories.php script

@@ -49,6 +49,7 @@
                     <input type="checkbox" name="remember" />
                     <label for="remember">Lembrar Senha</label>
                 </div>
+                <div class="signup">Não tem uma conta? <a href="signup.php">cadastre-se</a></div>
                 <input type="submit" name="login" value="Login" />
                 <?php if($error) echo "Erro ao enviar o formulário"; ?>
             </form>
