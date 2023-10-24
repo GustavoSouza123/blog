@@ -21,7 +21,7 @@ body {
     justify-content: center;
 }
 
-p.error {
+p.form-message {
     position: absolute;
     top: -60px;
     margin: 20px 0;

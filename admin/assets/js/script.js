@@ -120,7 +120,7 @@ $(function() {
     // ajax add forms
     $('body').on('submit', 'form.add', function(e) {
         e.preventDefault();
-        let formData = new FormData(form[0]);
+        let formData = new FormData($('form.add')[0]);
 
         $.ajax({
             url: include_path+'ajax/addForms.php',
@@ -130,7 +130,14 @@ $(function() {
             contentType: false,
             data: formData
         }).done(function(data) {
-            console.log(data);
+            console.log(data.sucess)
+            if(!data.success) {
+                $('p.form-message').text(data.error);
+            } else {
+                $('p.form-message').text('Formulário enviado com sucesso!');
+            }
+        }).fail(function() {
+            alert('erro');
         });
     })
 })

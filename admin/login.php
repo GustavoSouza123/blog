@@ -37,7 +37,7 @@
     <!-- login container -->
     <div class="register-container">
         <div class="register-box">
-            <?php if($error) echo '<p class="error">Erro ao enviar o formulário</p>'; ?>
+            <?php if($error) echo '<p class="form-message">Erro ao enviar o formulário</p>'; ?>
             <div class="title">
                 <h3>Entre</h3>
             </div>
@@ -47,10 +47,10 @@
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" required />
                 <div class="remember">
-                    <input type="checkbox" name="remember" />
+                    <input type="checkbox" name="remember" id="remember" />
                     <label for="remember">Lembrar Senha</label>
                 </div>
-                    <div class="change-register">Não tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
+                <div class="change-register">Não tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
                 <input type="submit" name="register" value="Login" />
             </form>
         </div>
