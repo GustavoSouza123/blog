@@ -45,10 +45,10 @@ $(function() {
 
         let index = parseInt($(this).attr('index'));
         let formName;
-        let inputNum = 0;
         let inputNames = [];
         let inputLabels = [];
         switch(index) {
+            // add forms
             case 0:
                 formName = 'category';
                 inputNames = ['name', 'image'];
@@ -64,8 +64,16 @@ $(function() {
                 inputNames = ['user', 'email', 'password', 'name', 'profile_photo'];
                 inputLabels = ['Usuário', 'Email', 'Senha', 'Nome', 'Foto'];
                 break;
-            default:
-                // console.log(index);
+            // edit forms
+            case 1:
+                formName = 'category';
+                break;
+            case 3:
+                formName = 'post';
+                break;
+            case 5:
+                formName = 'user';
+                break;
         }
 
         if(inputNames.length > 0) {
@@ -113,7 +121,16 @@ $(function() {
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
             form.append(`<input type="submit" value="Adicionar" />`);
         } else {
-            // ação editar
+            // show database tables using an ajax request - PAREI AQUI!
+            let postData = {formName: formName};
+            $.ajax({
+                url: include_path+'ajax/showEditForms.php',
+                method: 'post',
+                dataType: 'json',
+                data: postData
+            }).done(function(data) {
+                console.log(data)
+            });
         }
     })
 
