@@ -12,7 +12,6 @@
 <body>
     <h1>Erro 404</h1>
     <h3>Página não encontrada</h2>
-    <a href="http://localhost/blog/">Ir para a página principal</a>
+    <a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Ir para a página principal</a>
 </body>
 </html>
-

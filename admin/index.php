@@ -1,5 +1,5 @@
 <?php
-    require '../config/config.php';
+    require_once '../config/config.php';
 
     // friendly url
     $url = (isset($_GET['url'])) ? $_GET['url'] : '';
