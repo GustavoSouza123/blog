@@ -9,5 +9,6 @@
     } else {
         $data['error'] = '<p style="margin-bottom: 20px;">Nenhuma categoria cadastrada</p>';
     }
+    
     die(json_encode($data));
 ?>

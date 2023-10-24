@@ -54,7 +54,7 @@
                             <li><a href="" index="5">Gerenciar usuários</a></li>
                         </ul>
                     </li>
-                        <li><a href="<?php echo INCLUDE_PATH; ?>" target="_blank">Blog</a></li>
+                        <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
             </div>

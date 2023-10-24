@@ -24,8 +24,10 @@
                     $info = $sql->fetch();
                     $_SESSION['codeuniverse-login'] = true;
                     $_SESSION['codeuniverse-user'] = $info['user'];
+                    $_SESSION['codeuniverse-email'] = $info['email'];
                     $_SESSION['codeuniverse-password'] = $info['password'];
                     $_SESSION['codeuniverse-name'] = $info['name'];
+                    $_SESSION['codeuniverse-profile-photo'] = $info['profile_photo'];
                     header('Location: '.INCLUDE_PATH_ADMIN);
                     die();
                 } else {
