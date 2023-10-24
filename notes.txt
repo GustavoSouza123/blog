@@ -10,5 +10,3 @@ https://www.shutterstock.com/blog/color-palettes-tech-branding-logos
 to-do:
 > upload files to admin/assets/uploads/ directory
 > add a line break before calling the die method on the ajax/categories.php script
-> add an image field in the add user form
-> make a sign up page
