@@ -1,6 +1,6 @@
 <?php
     require '../config/config.php';
-    $data = array();
+    $data = [];
 
     $sql = $pdo->prepare("SELECT * FROM `tb_categories`");
     $sql->execute();

@@ -34,14 +34,11 @@ $(function() {
     }
 
     let form = $('.action-window form');
+    let table = $('.action-window table');
     $('li.action ul li a').click(async function(e) {
         e.preventDefault();
         $('header ul.dropdown').stop().slideUp(200);
-
         $('.action-window .title').text($(this).text());
-        form.addClass('add'); 
-        form.css('display', 'flex')
-        form.html('');
 
         let index = parseInt($(this).attr('index'));
         let formName;
@@ -77,6 +74,11 @@ $(function() {
         }
 
         if(inputNames.length > 0) {
+            // add forms
+            form.addClass('add'); 
+            form.css('display', 'flex');
+            form.html('');
+            table.css('display', 'none');
             for(let i = 0; i < inputNames.length; i++) {
                 form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label>`);
                 if(inputNames[i] == 'category_id') {
@@ -121,7 +123,11 @@ $(function() {
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
             form.append(`<input type="submit" value="Adicionar" />`);
         } else {
-            // show database tables using an ajax request - PAREI AQUI!
+            // edit forms
+            // show database tables using an ajax request
+            form.css('display', 'none');
+            table.css('display', 'block');
+            table.html('');
             let postData = {formName: formName};
             $.ajax({
                 url: include_path+'ajax/showEditForms.php',
@@ -129,7 +135,7 @@ $(function() {
                 dataType: 'json',
                 data: postData
             }).done(function(data) {
-                console.log(data)
+                table.append(data.table);
             });
         }
     })

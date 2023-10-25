@@ -64,6 +64,7 @@
             <div class="action-window">
                 <div class="title"></div>
                 <form action="" method="post" enctype="multipart/form-data"></form>
+                <table></table>
             </div>
         </div>
     </div>
