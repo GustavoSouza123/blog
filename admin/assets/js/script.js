@@ -4,11 +4,11 @@ $(function() {
 
     // show dropdown menu
     $('header ul li.action').hover(function(e) {
-        $('header ul.dropdown').hide
-        $('header ul.dropdown').eq($(this).index()).stop().slideDown(200);
+        $('header ul.dropdown').hide();
+        $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideDown(200);
         e.stopPropagation();
     }, function() {
-        $('header ul.dropdown').eq($(this).index()).stop().slideUp(200);
+        $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideUp(200);
     })
 
     $('header ul.dropdown').hover(function(e) {
@@ -58,8 +58,8 @@ $(function() {
                 break;
             case 4:
                 formName = 'user';
-                inputNames = ['user', 'email', 'password', 'name', 'profile_photo'];
-                inputLabels = ['Usuário', 'Email', 'Senha', 'Nome', 'Foto'];
+                inputNames = ['user', 'email', 'password', 'name', 'profile_photo', 'role'];
+                inputLabels = ['Usuário', 'Email', 'Senha', 'Nome', 'Foto', 'Permissão'];
                 break;
             // edit forms
             case 1:
@@ -78,6 +78,7 @@ $(function() {
             form.addClass('add'); 
             form.css('display', 'flex');
             form.html('');
+            form.append('<p class="form-message"></p>');
             table.css('display', 'none');
             for(let i = 0; i < inputNames.length; i++) {
                 form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label>`);
@@ -114,12 +115,17 @@ $(function() {
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
                 }
+                // user role permission
+                if(inputNames[i] == 'role') {
+                    form.append('<input type="text" name="role" id="role" value="Usuário" readonly />');
+                }
+                // normal text inputs
                 form.append(`<input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
             // post textarea
             if(inputNames[0] == 'category_id') {
                 form.append('<label>Postagem</label><textarea name="post"></textarea>'); 
-            }
+            } 
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
             form.append(`<input type="submit" value="Adicionar" />`);
         } else {
@@ -153,14 +159,16 @@ $(function() {
             contentType: false,
             data: formData
         }).done(function(data) {
-            console.log(data.sucess)
-            if(!data.success) {
+            // TEMPORÁRIO!
+            alert('Formulário enviado com sucesso!');
+            $('form.add')[0].reset();
+           
+            /*if(!data.success) {
                 $('p.form-message').text(data.error);
             } else {
                 $('p.form-message').text('Formulário enviado com sucesso!');
-            }
-        }).fail(function() {
-            alert('erro');
+                $('form.add')[0].reset();
+            }*/
         });
     })
 })

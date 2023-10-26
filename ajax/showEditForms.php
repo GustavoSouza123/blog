@@ -22,21 +22,25 @@
         $numColumns = $sql->columnCount();
         $columnNames = [];
         if($sql->rowCount() == 0) {
-            $data['table'] = 'Nenhum resultado encontrado';
+            $data['table'] = 'Tabela vazia';
         } else {
             $data = $sql->fetchAll(PDO::FETCH_ASSOC);
             $count = 0;
             foreach($data as $key => $value) {
                 if($count == 0) {
                     $data['table'] = '<tr>';
+                    $data['table'] .= '<th class="action-btn"></th>';
+                    $data['table'] .= '<th class="action-btn"></th>';
                     for($i = 0; $i < $numColumns; $i++) {
                         $meta = $sql->getColumnMeta($i);
                         $columnNames[] = $meta['name'];
-                        $data['table'] .= '<th>'.$meta['name'].'</th>';
+                        $data['table'] .= '<th>'.ucfirst($meta['name']).'</th>';
                     }
                     $data['table'] .= '</tr>';
                 }
                 $data['table'] .= '<tr>';
+                $data['table'] .= '<td class="action-btn"><a href="">Editar</a></td>';
+                $data['table'] .= '<td class="action-btn"><a href="">Excluir</a></td>';
                 for($i = 0; $i < $numColumns; $i++) {
                     $data['table'] .= '<td>'.$value[$columnNames[$i]].'</td>';
                 }

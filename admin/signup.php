@@ -18,23 +18,30 @@
     <div class="register-container">
         <div class="register-box">
             <p class="form-message"></p>
-
             <div class="title">
                 <h3>Cadastre-se</h3>
             </div>
-
             <form action="" method="post" enctype="multipart/form-data" class="add">
                 <label for="user">Usuário</label>
                 <input type="text" name="user" id="user" required />
+
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" required />
+
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" required />
+
                 <label for="name">Nome</label>
                 <input type="text" name="name" id="name" required /> 
+
                 <label for="profile-photo">Foto</label>
                 <input type="file" name="profile_photo" id="profile-photo" accept="image/*" />
+
+                <label for="role">Permissão</label>
+                <input type="text" name="role" id="role" value="Usuário" readonly />
+
                 <div class="change-register">Já tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>login">Entre</a></div>
+
                 <input type="hidden" name="form_name" value="user" />
                 <input type="submit" name="register" value="Login" />
             </form>

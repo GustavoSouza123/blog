@@ -5,8 +5,8 @@
     $upload_dir = 'assets/uploads/';
 
     $data['ajax'] = true;
-    print_r($_FILES);
-    print_r($_POST);
+    $data['post'] = $_POST;    
+    $data['files'] = $_FILES;    
 
     // forms submition
     if($form_name == 'category') {
@@ -19,18 +19,20 @@
             $data['success'] = true;
         } else {
             $data['success'] = false;
-            $data['error'] = "Erro ao enviar arquivo<br>";
+            $data['error'] = "Erro ao enviar arquivo";
         }
+
+        $creation_date = date("Y-m-d H:i:s");
 
         // adding data to database
         if($data['success']) {
             try {
-                $sql = $pdo->prepare("INSERT INTO `tb_categories` VALUES (null, ?, ?)");
-                $sql->execute(array($name, $image));
+                $sql = $pdo->prepare("INSERT INTO `tb_categories` VALUES (null, ?, ?, ?)");
+                $sql->execute(array($name, $image, $creation_date));
                 $data['success'] = true;
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
-                $data['error'] = "Erro ao adicionar categoria<br>";
+                $data['error'] = "Erro ao adicionar categoria";
                 $data['error'] .= $e->getMessage();
             }
         }
@@ -44,7 +46,7 @@
             $data['success'] = true;
         } else {
             $data['success'] = false;
-            $data['error'] = "Erro ao enviar arquivo<br>";
+            $data['error'] = "Erro ao enviar arquivo";
         }
 
         $title = $_POST['title'];
@@ -53,16 +55,17 @@
         $creation_date = date("Y-m-d H:i:s");
         $last_update = $creation_date;
         $read_time = ceil(str_word_count($post) / 250);
+        $published = 0;
 
         // adding data to database
         if($data['success']) {
             try {
-                $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $sql->execute(array($category_id, $thumbnail, $title, $subtitle, $post, $creation_date, $last_update, $read_time));
+                $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $sql->execute(array($category_id, $thumbnail, $title, $subtitle, $post, $creation_date, $last_update, $read_time, $published));
                 $data['success'] = true;
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
-                $data['error'] = "Erro ao adicionar post<br>";
+                $data['error'] = "Erro ao adicionar post";
                 $data['error'] .= $e->getMessage();
             }
         }
@@ -79,18 +82,21 @@
             $data['success'] = true;
         } else {
             $data['success'] = false;
-            $data['error'] = "Erro ao enviar arquivo<br>";
+            $data['error'] = "Erro ao enviar arquivo";
         }
+
+        $role = $_POST['role'];
+        $joined_in = date("Y-m-d H:i:s");
 
         // adding data to database
         if($data['success']) {
             try {
-                $sql = $pdo->prepare("INSERT INTO `tb_admin_users` VALUES (null, ?, ?, ?, ?, ?)");
-                $sql->execute(array($user, $email, $password, $name, $profile_photo));
+                $sql = $pdo->prepare("INSERT INTO `tb_admin_users` VALUES (null, ?, ?, ?, ?, ?, ?, ?)");
+                $sql->execute(array($user, $email, $password, $name, $profile_photo, $role, $joined_in));
                 $data['success'] = true;
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
-                $data['error'] = "Erro ao adicionar usuário<br>";
+                $data['error'] = "Erro ao adicionar usuário";
                 $data['error'] .= $e->getMessage();               
             }
         }

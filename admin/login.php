@@ -22,12 +22,13 @@
                 $sql->execute(array($_POST['user'], $_POST['user'], $_POST['password']));
                 if($sql->rowCount() == 1) {
                     $info = $sql->fetch();
-                    $_SESSION['codeuniverse-login'] = true;
-                    $_SESSION['codeuniverse-user'] = $info['user'];
-                    $_SESSION['codeuniverse-email'] = $info['email'];
-                    $_SESSION['codeuniverse-password'] = $info['password'];
-                    $_SESSION['codeuniverse-name'] = $info['name'];
-                    $_SESSION['codeuniverse-profile-photo'] = $info['profile_photo'];
+                    $_SESSION['myblog-login'] = true;
+                    $_SESSION['myblog-user'] = $info['user'];
+                    $_SESSION['myblog-email'] = $info['email'];
+                    $_SESSION['myblog-password'] = $info['password'];
+                    $_SESSION['myblog-name'] = $info['name'];
+                    $_SESSION['myblog-profile-photo'] = $info['profile_photo'];
+                    $_SESSION['myblog-role'] = Panel::getRole($info['role']);
                     header('Location: '.INCLUDE_PATH_ADMIN);
                     die();
                 } else {

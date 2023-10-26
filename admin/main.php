@@ -27,10 +27,11 @@
     <!-- admin panel container -->
     <div class="panel-container">
         <header>
-            <h3><?php echo 'Olá, '.$_SESSION['codeuniverse-name'].'!'; ?></h3>
+            <h3><?php echo 'Olá, '.$_SESSION['myblog-name'].'!'; ?></h3>
             <div class="menu">
                 <ul>
-                    <li class="action">
+                    <li><a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Dashboard</a></li>
+                    <li class="action" dropdown="0">
                         <a href="">Categorias</a>
                         <span></span>
                         <ul class="dropdown">
@@ -38,7 +39,7 @@
                             <li><a href="" index="1">Gerenciar categorias</a></li>
                         </ul>
                     </li>
-                    <li class="action">
+                    <li class="action" dropdown="1">
                         <a href="">Posts</a>
                         <span></span>
                         <ul class="dropdown">
@@ -46,7 +47,7 @@
                             <li><a href="" index="3">Gerenciar postagens</a></li>
                         </ul>
                     </li>
-                    <li class="action">
+                    <li class="action" dropdown="2">
                         <a href="">Painel</a>
                         <span></span>
                         <ul class="dropdown">
@@ -54,7 +55,7 @@
                             <li><a href="" index="5">Gerenciar usuários</a></li>
                         </ul>
                     </li>
-                        <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
             </div>

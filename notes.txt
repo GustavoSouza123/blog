@@ -8,5 +8,6 @@ color palettes:
 https://www.shutterstock.com/blog/color-palettes-tech-branding-logos
 
 to-do:
-> upload files to admin/assets/uploads/ directory
-> add a line break before calling the die method on the ajax/categories.php script
+> make draft/sketch verification on the posts (confirm if I want to publish the post after writing it)
+> add user permissions (...)
+> make success and error messages after form submitions

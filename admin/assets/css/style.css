@@ -21,12 +21,6 @@ body {
     justify-content: center;
 }
 
-p.form-message {
-    position: absolute;
-    top: -60px;
-    margin: 20px 0;
-}
-
 .register-box {
     position: relative;
     width: 90%;
@@ -35,6 +29,12 @@ p.form-message {
     padding: 20px;
     padding-top: 60px;
     border-radius: 5px;
+}
+
+p.form-message {
+    position: absolute;
+    top: -60px;
+    margin: 20px 0;
 }
 
 .register-box .title {
@@ -50,7 +50,7 @@ p.form-message {
     align-items: center;
     padding: 0 20px;
     border-bottom: 1px solid #ddd;
-} 
+}
 
 .register-box form {
     display: flex;
@@ -197,7 +197,7 @@ header ul li.action > a {
     min-height: calc(100vh - 70px);
     background-color: #eee;
     color: #000;
-    padding: 30px;
+    padding: 40px;
 }
 
 .action-window {
@@ -206,7 +206,7 @@ header ul li.action > a {
     align-items: center;
     background-color: #fff;
     padding: 30px;
-    min-height: calc(100vh - 50px - 30px - 30px);
+    min-height: calc(100vh - 50px - 40px - 40px);
 }
 
 .action-window .title {
@@ -262,17 +262,48 @@ form input[type="file"] {
 }
 
 .action-window table {
-    width: 100%;
     display: none;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
     overflow: auto;
+    border-collapse: collapse;
+    border-radius: 5px;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
+tr {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 th, td {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 400;
+}
+
+th {
+    background-color: #f6f6f6;
+}
+
+.action-btn {
+    border: none;
+}
+
+.action-btn:first-child {
+    padding-right: 0;
+}
+
+.action-btn a {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    border-radius: 5px;
 }
