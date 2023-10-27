@@ -114,7 +114,8 @@ select {
 
 input[type="submit"] {
     cursor: pointer;
-    background-color: #f7f7f7;
+    background-color: var(--color1);
+    color: var(--light0);
 }
 
 /* control panel page */
