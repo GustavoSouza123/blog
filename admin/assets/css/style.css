@@ -331,4 +331,5 @@ th {
 .action-btn.delete a {
     background-color: var(--color1);
     color: var(--light0);
+    border: 0;
 }
