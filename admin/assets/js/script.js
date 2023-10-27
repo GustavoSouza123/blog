@@ -36,12 +36,14 @@ $(function() {
     let form = $('.action-window form');
     let table = $('.action-window table');
     $('li.action ul li a').click(async function(e) {
+        let dropdown = $(this);
+
         e.preventDefault();
         $('header ul.dropdown').stop().slideUp(200);
         $('.action-window .title').text($(this).text());
 
         let index = parseInt($(this).attr('index'));
-        let formName;
+        let formName = '';
         let inputNames = [];
         let inputLabels = [];
         switch(index) {
@@ -72,6 +74,8 @@ $(function() {
                 formName = 'user';
                 break;
         }
+
+        dropdown.attr('name', formName);
 
         if(inputNames.length > 0) {
             // add forms
@@ -129,6 +133,7 @@ $(function() {
             form.append(`<input type="submit" value="Adicionar" />`);
         } else {
             // edit forms
+
             // show database tables using an ajax request
             form.css('display', 'none');
             table.css('display', 'block');
@@ -143,28 +148,25 @@ $(function() {
                 table.append(data.table);
             });
 
-            // edit data
-            $('body').on('click', '.edit a', function() {
-                let actionData = {actionName: 'edit', index: $(this).attr('index')};
-                // console.log($(this).className);
-                $.ajax({
-                    url: include_path+'ajax/editForms.php',
-                    method: 'post',
-                    dataType: 'json',
-                    data: actionData
-                });
-                return false;
-            })
-            
-            // delete data
-            $('body').on('click', '.delete a', function() {
-                let actionData = {actionName: 'delete', index: $(this).attr('index')};
-                $.ajax({
-                    url: include_path+'ajax/editForms.php',
-                    method: 'post',
-                    dataType: 'json',
-                    data: actionData
-                });
+            // edit and delete data
+            $('body').off('click');
+            $('body').on('click', '.action-btn a', function() {
+                let actionData = {formName: formName, actionName: $(this).attr('name'), index: $(this).attr('index')};
+                if(actionData.actionName == 'edit') {
+                    $('.menu ul.dropdown li a[index=0]').trigger('click');
+                    $('.action-window .title').text('Editar ' + formName);
+                } else if(actionData.actionName == 'delete') {
+                    if(confirm("Tem certeza que deseja excluir este campo?") == true) {
+                        $.ajax({
+                            url: include_path+'ajax/editForms.php',
+                            method: 'post',
+                            dataType: 'json',
+                            data: actionData
+                        });
+                        dropdown.trigger('click');
+                    }
+                }
+
                 return false;
             })
         }

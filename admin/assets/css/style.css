@@ -37,6 +37,8 @@ body {
     position: relative;
     width: 90%;
     max-width: 400px;
+    max-height: 80vh;
+    overflow: auto;
     border: 1px solid var(--light2);
     padding: 20px;
     padding-top: 60px;
@@ -189,7 +191,7 @@ header ul li.action span {
 }
 
 header ul li:hover {
-    background-color: #333;
+    background-color: var(--dark1);
 }
 
 header a {

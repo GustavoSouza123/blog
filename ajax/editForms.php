@@ -1,15 +1,36 @@
 <?php
     require '../config/config.php';
     $data = [];
+    $form_name = (isset($_POST['formName'])) ? $_POST['formName'] : '';
     $action_name = (isset($_POST['actionName'])) ? $_POST['actionName'] : '';
     $index = (isset($_POST['index'])) ? $_POST['index'] : '';
 
+    $tableName = '';
+    if($form_name == 'category') {
+        $tableName = 'tb_categories';
+    } else if($form_name == 'post') {
+        $tableName = 'tb_posts';
+    } else if($form_name == 'user') {
+        $tableName = 'tb_admin_users';
+    }
+
     if($action_name == 'edit') {
-        $data['action'] = 'edit';
+        $data['table'] = $tableName;
+        $data['action'] = $action_name;
         $data['index'] = $index;
     } else if($action_name == 'delete') {
-        $data['action'] = 'delete';
+        $data['table'] = $tableName;
+        $data['action'] = $action_name;
         $data['index'] = $index;
+        try {
+            $sql = $pdo->prepare("DELETE FROM `".$tableName."` WHERE id = ?");
+            $sql->execute(array($index));
+            $data['success'] = true;
+        } catch(PDOException $e) {
+            $data['success'] = false;
+            $data['error'] = "Erro ao adicionar categoria";
+            $data['error'] .= $e->getMessage();
+        }
     } else {
         $data['error'] = "Erro no nome da ação";
     }

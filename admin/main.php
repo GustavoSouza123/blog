@@ -19,6 +19,12 @@
         if(isset($_GET['logout'])) {
             Panel::logout();
         }
+
+        /* // edit data
+        $isEditing = false;
+        if(isset($_GET['edit'])) {
+            $isEditing = $_GET['edit'];
+        }*/
     ?>
 
     <!-- include path -->
