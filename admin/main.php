@@ -30,7 +30,7 @@
             <h3><?php echo 'Olá, '.$_SESSION['myblog-name'].'!'; ?></h3>
             <div class="menu">
                 <ul>
-                    <li><a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Dashboard</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Painel</a></li>
                     <li class="action" dropdown="0">
                         <a href="">Categorias</a>
                         <span></span>

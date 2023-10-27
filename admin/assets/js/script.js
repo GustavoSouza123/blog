@@ -105,22 +105,21 @@ $(function() {
                     await showCategories();
                     continue;
                 }
-                // file inputs for uploading photos
                 if(inputNames[i] == 'image' || inputNames[i] == 'thumbnail' || inputNames[i] == 'profile_photo') {
+                    // file inputs for uploading photos
                     form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);    
                     continue;
-                }
-                // email inputs
-                if(inputNames[i] == 'email') {
+                } else if(inputNames[i] == 'email') {
+                    // email inputs
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
-                }
-                // user role permission
-                if(inputNames[i] == 'role') {
+                } else if(inputNames[i] == 'role') {
+                    // user role permission
                     form.append('<input type="text" name="role" id="role" value="Usuário" readonly />');
+                } else {
+                    // normal text inputs
+                    form.append(`<input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                 }
-                // normal text inputs
-                form.append(`<input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
             }
             // post textarea
             if(inputNames[0] == 'category_id') {
@@ -143,6 +142,31 @@ $(function() {
             }).done(function(data) {
                 table.append(data.table);
             });
+
+            // edit data
+            $('body').on('click', '.edit a', function() {
+                let actionData = {actionName: 'edit', index: $(this).attr('index')};
+                // console.log($(this).className);
+                $.ajax({
+                    url: include_path+'ajax/editForms.php',
+                    method: 'post',
+                    dataType: 'json',
+                    data: actionData
+                });
+                return false;
+            })
+            
+            // delete data
+            $('body').on('click', '.delete a', function() {
+                let actionData = {actionName: 'delete', index: $(this).attr('index')};
+                $.ajax({
+                    url: include_path+'ajax/editForms.php',
+                    method: 'post',
+                    dataType: 'json',
+                    data: actionData
+                });
+                return false;
+            })
         }
     })
 

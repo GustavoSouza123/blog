@@ -6,16 +6,18 @@
 
 /* my color palette */
 :root {
-    --dark1: #6d696a;
-    --dark2: #a2a7a5;
-    --light1: #ffffff;
-    --light2: #dae2df;
-    --color: #020887;
+    --dark0: #000000;
+    --dark1: #393E41;
+    --dark2: #D3D0CB;
+    --light1: #E7E5DF;
+    --color1: #0075F2;
+    --color2: #A594F9;
 }
 
 body {
     font-family: 'Segoe UI';
     font-size: 16px;
+    color: var(--dark0);
 }
 
 /* blog styles */

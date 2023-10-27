@@ -39,8 +39,8 @@
                     $data['table'] .= '</tr>';
                 }
                 $data['table'] .= '<tr>';
-                $data['table'] .= '<td class="action-btn"><a href="">Editar</a></td>';
-                $data['table'] .= '<td class="action-btn"><a href="">Excluir</a></td>';
+                $data['table'] .= '<td class="action-btn edit"><a href="" index="'.$value['id'].'">Editar</a></td>';
+                $data['table'] .= '<td class="action-btn delete"><a href="" index="'.$value['id'].'">Excluir</a></td>';
                 for($i = 0; $i < $numColumns; $i++) {
                     $data['table'] .= '<td>'.$value[$columnNames[$i]].'</td>';
                 }
