@@ -4,8 +4,13 @@
     padding: 0;
 }
 
+/* my color palette */
 :root {
-    /* my color palette here */
+    --dark1: #6d696a;
+    --dark2: #a2a7a5;
+    --light1: #ffffff;
+    --light2: #dae2df;
+    --color: #020887;
 }
 
 body {
@@ -18,7 +23,7 @@ body {
 header {
     width: 100%;
     height: 50px;
-    background-color: #222;
+    background-color: var(--dark1);
     display: flex;
     justify-content: center;
 }
