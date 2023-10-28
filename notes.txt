@@ -7,7 +7,12 @@ https://www.w3schools.com/php/php_file_upload.asp
 color palettes:
 https://www.shutterstock.com/blog/color-palettes-tech-branding-logos
 
+
 to-do:
+
+> remove some columns from the manage page (only show certain columns)
+> allow editing posts that have me as the author
+
 > make draft/sketch verification on the posts (confirm if I want to publish the post after writing it)
 > add user permissions (...)
 > make success and error messages after form submitions

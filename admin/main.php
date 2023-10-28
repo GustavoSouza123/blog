@@ -33,7 +33,7 @@
     <!-- admin panel container -->
     <div class="panel-container">
         <header>
-            <h3><?php echo 'Olá, '.$_SESSION['myblog-name'].'!'; ?></h3>
+            <h3><?php echo 'Olá, <span>'.$_SESSION['myblog-name'].'</span>!'; ?></h3>
             <div class="menu">
                 <ul>
                     <li><a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Painel</a></li>

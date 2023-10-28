@@ -39,6 +39,7 @@
         }
     } else if($form_name == 'post') {
         $data['isset'] = true;
+
         $category_id = $_POST['category_id'];
 
         $thumbnail = $upload_dir.$_FILES['thumbnail']['name'];
@@ -57,12 +58,16 @@
         $last_update = $creation_date;
         $read_time = ceil(str_word_count($post) / 250);
         $published = 0;
+        
+        $sql = $pdo->prepare("SELECT id FROM `tb_admin_users` WHERE name = ?");
+        $sql->execute(array($_POST['author']));
+        $author_id = $sql->fetchColumn();
 
         // adding data to database
         if($data['success']) {
             try {
-                $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $sql->execute(array($category_id, $thumbnail, $title, $subtitle, $post, $creation_date, $last_update, $read_time, $published));
+                $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $sql->execute(array($author_id, $category_id, $thumbnail, $title, $subtitle, $post, $read_time, $creation_date, $last_update, $published));
                 $data['success'] = true;
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
@@ -137,8 +142,10 @@
             }
         } else if($tableName == 'tb_posts') {
             try {
-                $sql = $pdo->prepare("UPDATE `".$tableName."` SET categoria_id = ?, title = ?, subtitle = ?, post = ? WHERE id = ?");
-                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $id));
+                $read_time = ceil(str_word_count($_POST['post']) / 250);
+                $last_update = date("Y-m-d H:i:s");
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET category_id = ?, title = ?, subtitle = ?, post = ?, read_time = ?, last_update = ? WHERE id = ?");
+                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $read_time, $last_update, $id));
                 // verify if a new image was uploaded
                 if($hasImage) {
                     $thumbnail = $upload_dir.$_FILES['thumbnail']['name'];

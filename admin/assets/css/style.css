@@ -217,7 +217,7 @@ header ul li.action > a {
     min-height: calc(100vh - 70px);
     background-color: var(--light1);
     color: #000;
-    padding: 40px;
+    padding: 40px 3%;
 }
 
 .action-window {
@@ -279,6 +279,7 @@ form input[type="file"] {
     width: 200px;
     cursor: pointer;
     margin-top: 10px;
+    border: none;
 }
 
 .action-window table {

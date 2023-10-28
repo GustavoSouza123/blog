@@ -130,7 +130,10 @@ $(function() {
             // post textarea
             if(inputNames[0] == 'category_id') {
                 form.append('<label>Postagem</label><textarea name="post"></textarea>'); 
-            } 
+            }
+            // name of the author of the post
+            form.append(`<input type="hidden" name="author" value="${$('header h3 span').text()}" />`);
+            // name of the form
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
             form.append(`<input type="submit" value="Adicionar" />`);
         } else {
@@ -162,6 +165,7 @@ $(function() {
                     form.removeClass('add'); 
                     form.addClass('edit');
                     $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
+                    $('.action-window form.edit input[type="submit"]').val('Atualizar');
                     $.ajax({
                         url: include_path+'ajax/editForms.php',
                         method: 'post',
@@ -172,11 +176,16 @@ $(function() {
                         $('form.edit').append(`<input type="hidden" name="index" value="${data.index}" />`);
                         $('form.edit').append(`<input type="hidden" name="table" value="${data.table}" />`);
                         $('form.edit input[name="form_name"]').remove();
-                        // *** FAZER VERIFICAÇÃO DA TABELA ***
+                        
+                        // put data on the inputs
                         $('input[name="user"]').val(data.row.user);
                         $('input[name="email"]').val(data.row.email);
                         $('input[name="password"]').val(data.row.password);
                         $('input[name="name"]').val(data.row.name);
+                        $('form.edit select option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
+                        $('input[name="title"]').val(data.row.title);
+                        $('input[name="subtitle"]').val(data.row.subtitle);
+                        $('textarea[name="post"]').text(data.row.post);
                     });
                 } else if(actionData.actionName == 'delete') {
                     if(confirm("Tem certeza que deseja excluir este campo?") == true) {
@@ -209,8 +218,13 @@ $(function() {
             data: formData
         }).done(function(data) {
             // TEMPORÁRIO!
-            alert('Formulário enviado com sucesso!');
-            $('form.add')[0].reset();
+            if(data.success) {
+                alert('Formulário enviado com sucesso!');
+                $('form.add')[0].reset();
+                $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
+            } else {
+                alert(data.error);
+            }
            
             /*if(!data.success) {
                 $('p.form-message').text(data.error);
@@ -233,7 +247,7 @@ $(function() {
             processData: false,
             contentType: false,
             data: formData
-        }).done(function() {
+        }).done(function(data) {
             alert('Campo modificado com sucesso!');
             $('form.edit')[0].reset();
             $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
