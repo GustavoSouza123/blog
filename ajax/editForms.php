@@ -18,6 +18,16 @@
         $data['table'] = $tableName;
         $data['action'] = $action_name;
         $data['index'] = $index;
+        try {
+            $sql = $pdo->prepare("SELECT * FROM `".$tableName."` WHERE id = ?");     
+            $sql->execute(array($index));
+            $data['row'] = $sql->fetch(PDO::FETCH_ASSOC);
+            $data['success'] = true;
+        } catch(PDOException $e) {
+            $data['success'] = false;
+            $data['error'] = "Erro ao editar campo";
+            $data['error'] .= $e->getMessage();
+        }
     } else if($action_name == 'delete') {
         $data['table'] = $tableName;
         $data['action'] = $action_name;
@@ -28,7 +38,7 @@
             $data['success'] = true;
         } catch(PDOException $e) {
             $data['success'] = false;
-            $data['error'] = "Erro ao adicionar categoria";
+            $data['error'] = "Erro ao deletar campo";
             $data['error'] .= $e->getMessage();
         }
     } else {

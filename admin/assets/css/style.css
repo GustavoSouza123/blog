@@ -12,7 +12,7 @@
     --light1: #E7E5DF;
     --light2: #D3D0CB;
     --color1: #0075ba;
-    --color2: #A594F9;
+    --color2: #BE5A38;
 }
 
 body {
@@ -38,7 +38,6 @@ body {
     width: 90%;
     max-width: 400px;
     max-height: 80vh;
-    overflow: auto;
     border: 1px solid var(--light2);
     padding: 20px;
     padding-top: 60px;
@@ -149,6 +148,7 @@ header h3 {
     font-weight: 300;
 }
 
+/* desktop menu */
 header .menu {
     display: flex;
     height: 100%;
@@ -170,7 +170,7 @@ header ul.dropdown {
 }
 
 header ul.dropdown li {
-    background-color: var(--dark1);
+    background-color: var(--color2);
     height: 50px;
 }
 
@@ -192,7 +192,7 @@ header ul li.action span {
 }
 
 header ul li:hover {
-    background-color: var(--dark1);
+    opacity: .9;
 }
 
 header a {
@@ -225,7 +225,7 @@ header ul li.action > a {
     flex-direction: column;
     align-items: center;
     background-color: var(--light0);
-    padding: 30px;
+    padding: 40px;
     min-height: calc(100vh - 50px - 40px - 40px);
 }
 

@@ -54,7 +54,7 @@
                         </ul>
                     </li>
                     <li class="action" dropdown="2">
-                        <a href="">Painel</a>
+                        <a href="">Administração</a>
                         <span></span>
                         <ul class="dropdown">
                             <li><a href="" index="4">Adicionar usuário</a></li>

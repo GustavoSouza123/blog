@@ -12,7 +12,7 @@
     --light1: #E7E5DF;
     --light2: #D3D0CB;
     --color1: #0075ba;
-    --color2: #A594F9;
+    --color2: #BE5A38;
 }
 
 body {
@@ -75,13 +75,22 @@ nav .profile-photo img {
     object-fit: cover;
 }
 
+nav .profile-name {
+    margin-bottom: 2px;
+}
+
 nav ul li {
-    height: 30px;
-    border-radius: 20px;
+    height: 70%;
+    border-radius: 5px;
     list-style: none;
     margin: 0 15px;
-    background-color: var(--dark1);
     color: #000;
+    background-color: #dddddd44;
+    transition: .2s;
+}
+
+nav ul li:hover {
+    background-color: var(--dark1);
 }
 
 nav ul li:last-child {
@@ -97,6 +106,6 @@ nav ul li a {
     color: var(--light0);
     text-decoration: none;
     cursor: pointer;
-    padding: 0 15px;
+    padding: 0px 15px;
     padding-bottom: 2px;
 }

@@ -8,13 +8,13 @@ $(function() {
         $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideDown(200);
         e.stopPropagation();
     }, function() {
-        $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideUp(200);
+        $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideUp(100);
     })
 
     $('header ul.dropdown').hover(function(e) {
         e.stopPropagation();
     }, function() {
-        $(this).stop().slideUp(200);
+        $(this).stop().slideUp(100);
     })
 
     $('header ul li.action a').click(function(e) {
@@ -35,6 +35,7 @@ $(function() {
 
     let form = $('.action-window form');
     let table = $('.action-window table');
+    let index;
     $('li.action ul li a').click(async function(e) {
         let dropdown = $(this);
 
@@ -42,7 +43,7 @@ $(function() {
         $('header ul.dropdown').stop().slideUp(200);
         $('.action-window .title').text($(this).text());
 
-        let index = parseInt($(this).attr('index'));
+        index = parseInt($(this).attr('index'));
         let formName = '';
         let inputNames = [];
         let inputLabels = [];
@@ -79,6 +80,7 @@ $(function() {
 
         if(inputNames.length > 0) {
             // add forms
+            form.removeClass('edit');
             form.addClass('add'); 
             form.css('display', 'flex');
             form.html('');
@@ -150,11 +152,32 @@ $(function() {
 
             // edit and delete data
             $('body').off('click');
+
             $('body').on('click', '.action-btn a', function() {
                 let actionData = {formName: formName, actionName: $(this).attr('name'), index: $(this).attr('index')};
+
                 if(actionData.actionName == 'edit') {
-                    $('.menu ul.dropdown li a[index=0]').trigger('click');
-                    $('.action-window .title').text('Editar ' + formName);
+                    let addIndex = index-1;
+                    $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
+                    form.removeClass('add'); 
+                    form.addClass('edit');
+                    $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
+                    $.ajax({
+                        url: include_path+'ajax/editForms.php',
+                        method: 'post',
+                        dataType: 'json',
+                        data: actionData
+                    }).done(function(data) {
+                        $('form.edit').append('<input type="hidden" name="edit_form" value="true" />');
+                        $('form.edit').append(`<input type="hidden" name="index" value="${data.index}" />`);
+                        $('form.edit').append(`<input type="hidden" name="table" value="${data.table}" />`);
+                        $('form.edit input[name="form_name"]').remove();
+                        // *** FAZER VERIFICAÇÃO DA TABELA ***
+                        $('input[name="user"]').val(data.row.user);
+                        $('input[name="email"]').val(data.row.email);
+                        $('input[name="password"]').val(data.row.password);
+                        $('input[name="name"]').val(data.row.name);
+                    });
                 } else if(actionData.actionName == 'delete') {
                     if(confirm("Tem certeza que deseja excluir este campo?") == true) {
                         $.ajax({
@@ -195,6 +218,25 @@ $(function() {
                 $('p.form-message').text('Formulário enviado com sucesso!');
                 $('form.add')[0].reset();
             }*/
+        });
+    })
+
+    // ajax edit (update) forms
+    $('body').on('submit', 'form.edit', function(e) {
+        e.preventDefault();
+        let formData = new FormData($('form.edit')[0]);
+            
+        $.ajax({
+            url: include_path+'ajax/addForms.php',
+            method: 'post',
+            datatype: 'json',
+            processData: false,
+            contentType: false,
+            data: formData
+        }).done(function() {
+            alert('Campo modificado com sucesso!');
+            $('form.edit')[0].reset();
+            $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
         });
     })
 })

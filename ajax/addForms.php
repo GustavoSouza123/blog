@@ -2,13 +2,14 @@
     require '../config/config.php';
     $data = [];
     $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
+    $edit_form = (isset($_POST['edit_form'])) ? $_POST['edit_form'] : '';
     $upload_dir = 'assets/uploads/';
 
     $data['ajax'] = true;
     $data['post'] = $_POST;    
-    $data['files'] = $_FILES;    
+    $data['files'] = $_FILES;
 
-    // forms submition
+    // forms submition (add forms)
     if($form_name == 'category') {
         $data['isset'] = true;
         $name = $_POST['name'];
@@ -97,7 +98,88 @@
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
                 $data['error'] = "Erro ao adicionar usuário";
-                $data['error'] .= $e->getMessage();               
+                $data['error'] .= $e->getMessage();
+            }
+        }
+    } else if($edit_form != '') {
+        // updating tables
+        $data['edit'] = true;
+        $id = $_POST['index'];
+        $hasImage = false;
+
+        if((isset($_FILES['image']) && $_FILES['image']['name'] != '') || (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['name'] != '') || (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['name'] != '')) {
+            $hasImage = true;
+        }
+
+        $tableName = $_POST['table'];
+        if($tableName == 'tb_categories') {
+            try {
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET name = ? WHERE id = ?");
+                $sql->execute(array($_POST['name'], $id));
+                // verify if a new image was uploaded
+                if($hasImage) {
+                    $image = $upload_dir.$_FILES['image']['name'];
+                    $imageTmpName = $_FILES['image']['tmp_name'];
+                    if(move_uploaded_file($imageTmpName, '../admin/'.$image)) {
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Erro ao enviar arquivo";
+                    }
+                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET image = ? WHERE id = ?");
+                    $sql->execute(array($image, $id));
+                }
+                $data['success'] = true;
+            } catch(PDOExcetion $e) {
+                $data['success'] = false;
+                $data['error'] = "Erro ao atualizar tabela";
+                $data['error'] .= $e->getMessage();
+            }
+        } else if($tableName == 'tb_posts') {
+            try {
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET categoria_id = ?, title = ?, subtitle = ?, post = ? WHERE id = ?");
+                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $id));
+                // verify if a new image was uploaded
+                if($hasImage) {
+                    $thumbnail = $upload_dir.$_FILES['thumbnail']['name'];
+                    $thumbnailTmpName = $_FILES['thumbnail']['tmp_name'];
+                    if(move_uploaded_file($thumbnailTmpName, '../admin/'.$thumbnail)) {
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Erro ao enviar arquivo";
+                    }
+                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET thumbnail = ? WHERE id = ?");
+                    $sql->execute(array($thumbnail, $id));
+                }
+                $data['success'] = true;
+            } catch(PDOExcetion $e) {
+                $data['success'] = false;
+                $data['error'] = "Erro ao atualizar tabela";
+                $data['error'] .= $e->getMessage();
+            }
+        } else if($tableName == 'tb_admin_users') {
+            try {
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, password = ?, name = ? WHERE id = ?");
+                $sql->execute(array($_POST['user'], $_POST['email'], $_POST['password'], $_POST['name'], $id));    
+                // verify if a new image was uploaded
+                if($hasImage) {
+                    $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
+                    $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
+                    if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
+                        $data['success'] = true;
+                    } else {
+                        $data['success'] = false;
+                        $data['error'] = "Erro ao enviar arquivo";
+                    }
+                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET profile_photo = ? WHERE id = ?");
+                    $sql->execute(array($profile_photo, $id));
+                }
+                $data['success'] = true;
+            } catch(PDOExcetion $e) {
+                $data['success'] = false;
+                $data['error'] = "Erro ao atualizar tabela";
+                $data['error'] .= $e->getMessage();
             }
         }
     } else {
