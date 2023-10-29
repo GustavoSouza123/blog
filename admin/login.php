@@ -18,8 +18,12 @@
             if($_POST['user'] == '' || $_POST['password'] == '') {
                 $error = true;
             } else {
+                $sql = $pdo->prepare("SELECT password FROM `tb_admin_users` WHERE user = ? OR email = ?");
+                $sql->execute(array($_POST['user'], $_POST['user']));
+                $hash = $sql->fetchColumn();
+
                 $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE (user = ? OR email = ?) AND password = ?");
-                $sql->execute(array($_POST['user'], $_POST['user'], $_POST['password']));
+                $sql->execute(array($_POST['user'], $_POST['user'], $hash));
                 if($sql->rowCount() == 1) {
                     $info = $sql->fetch();
                     $_SESSION['myblog-login'] = true;

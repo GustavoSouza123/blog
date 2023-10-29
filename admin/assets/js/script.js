@@ -194,8 +194,14 @@ $(function() {
                             method: 'post',
                             dataType: 'json',
                             data: actionData
+                        }).done(function(data) {
+                            if(data.success) {
+                                alert('Campo excluido com sucesso!');
+                                dropdown.trigger('click');
+                            } else {
+                                alert(data.error);
+                            }
                         });
-                        dropdown.trigger('click');
                     }
                 }
 

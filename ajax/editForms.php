@@ -38,8 +38,7 @@
             $data['success'] = true;
         } catch(PDOException $e) {
             $data['success'] = false;
-            $data['error'] = "Erro ao deletar campo";
-            $data['error'] .= $e->getMessage();
+            $data['error'] = "Erro ao excluir campo";
         }
     } else {
         $data['error'] = "Erro no nome da ação";

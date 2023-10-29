@@ -79,7 +79,7 @@
         $data['isset'] = true;
         $user = $_POST['user'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // password hashing
         $name = $_POST['name'];
 
         $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
