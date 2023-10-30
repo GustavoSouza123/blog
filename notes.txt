@@ -11,7 +11,9 @@ https://www.shutterstock.com/blog/color-palettes-tech-branding-logos
 to-do:
 
 > remove some columns from the manage page (only show certain columns)
-> allow editing posts that have me as the author
+    > change table headings to the names of the columns in portuguese
+
+> allow only editing posts that have me as the author
 
 > make draft/sketch verification on the posts (confirm if I want to publish the post after writing it)
 > add user permissions (...)

@@ -7,7 +7,7 @@
     if($sql->rowCount() > 0) {
         $data['categories'] = $sql->fetchAll(PDO::FETCH_ASSOC);
     } else {
-        $data['error'] = '<p style="margin-bottom: 20px;">Nenhuma categoria cadastrada</p>';
+        $data['error'] = '<p style="margin-bottom: 20px;color:#777;">Nenhuma categoria cadastrada</p>';
     }
     
     die(json_encode($data));

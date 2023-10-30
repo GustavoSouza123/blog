@@ -33,9 +33,12 @@
                     $data['table'] .= '<th class="action-btn"></th>';
                     for($i = 0; $i < $numColumns; $i++) {
                         $meta = $sql->getColumnMeta($i);
-                        $columnNames[] = $meta['name'];
-                        $data['table'] .= '<th>'.ucfirst($meta['name']).'</th>';
+                        if($meta['name'] != 'id') {
+                            $columnNames[] = $meta['name'];
+                            $data['table'] .= '<th>'.ucfirst($meta['name']).'</th>';
+                        }
                     }
+                    $numColumns -= 1;
                     $data['table'] .= '</tr>';
                 }
                 $data['table'] .= '<tr>';

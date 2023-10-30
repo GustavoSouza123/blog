@@ -46,7 +46,7 @@
                         </ul>
                     </li>
                     <li class="action" dropdown="1">
-                        <a href="">Posts</a>
+                        <a href="">Postagens</a>
                         <span></span>
                         <ul class="dropdown">
                             <li><a href="" index="2">Adicionar postagem</a></li>
