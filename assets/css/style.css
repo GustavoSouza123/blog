@@ -33,7 +33,7 @@ header {
 
 header .content {
     width: 100%;
-    max-width: 1600px;
+    /* max-width: 1600px; */
     height: 50px;
     display: flex;
     align-items: center;
@@ -50,6 +50,10 @@ nav ul {
     align-items: center;
     justify-content: space-between;
     height: 100%;
+}
+
+nav ul.profile {
+    padding: 0 20px;
 }
 
 nav ul.profile a {

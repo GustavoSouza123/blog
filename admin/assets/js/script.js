@@ -119,12 +119,18 @@ $(function() {
                     // email inputs
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
+                } else if(inputNames[i] == 'password') {
+                    // password input
+                    form.append(`<input type="password" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                    continue;
                 } else if(inputNames[i] == 'role') {
                     // user role permission
                     form.append('<input type="text" name="role" id="role" value="Usuário" readonly />');
+                    continue;
                 } else {
                     // normal text inputs
                     form.append(`<input type="text" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                    continue;
                 }
             }
             // post textarea
@@ -135,6 +141,7 @@ $(function() {
             form.append(`<input type="hidden" name="author" value="${$('header h3 span').text()}" />`);
             // name of the form
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
+            // submit input
             form.append(`<input type="submit" value="Adicionar" />`);
         } else {
             // edit forms

@@ -78,32 +78,46 @@
     } else if($form_name == 'user') {
         $data['isset'] = true;
         $user = $_POST['user'];
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // password hashing
-        $name = $_POST['name'];
 
-        $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
-        $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
-        if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
-            $data['success'] = true;
-        } else {
-            $data['success'] = false;
-            $data['error'] = "Erro ao enviar arquivo";
+        $sql = $pdo->prepare("SELECT * FROM `tb_admin_users`");
+        $sql->execute();
+        $users = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $data['success'] = true;
+        foreach($users as $key => $value) {
+            if($value['user'] == $user) {
+                $data['success'] = false;
+                $data['error'] = "Nome de usuário inválido";
+            }
         }
 
-        $role = $_POST['role'];
-        $joined_in = date("Y-m-d H:i:s");
-
-        // adding data to database
         if($data['success']) {
-            try {
-                $sql = $pdo->prepare("INSERT INTO `tb_admin_users` VALUES (null, ?, ?, ?, ?, ?, ?, ?)");
-                $sql->execute(array($user, $email, $password, $name, $profile_photo, $role, $joined_in));
+            $email = $_POST['email'];
+            $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // password hashing
+            $name = $_POST['name'];
+
+            $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
+            $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
+            if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
                 $data['success'] = true;
-            } catch(PDOExcetion $e) {
+            } else {
                 $data['success'] = false;
-                $data['error'] = "Erro ao adicionar usuário";
-                $data['error'] .= $e->getMessage();
+                $data['error'] = "Erro ao enviar arquivo";
+            }
+
+            $role = $_POST['role'];
+            $joined_in = date("Y-m-d H:i:s");
+
+            // adding data to database
+            if($data['success']) {
+                try {
+                    $sql = $pdo->prepare("INSERT INTO `tb_admin_users` VALUES (null, ?, ?, ?, ?, ?, ?, ?)");
+                    $sql->execute(array($user, $email, $password, $name, $profile_photo, $role, $joined_in));
+                    $data['success'] = true;
+                } catch(PDOExcetion $e) {
+                    $data['success'] = false;
+                    $data['error'] = "Erro ao adicionar usuário";
+                    $data['error'] .= $e->getMessage();
+                }
             }
         }
     } else if($edit_form != '') {
