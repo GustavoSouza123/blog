@@ -216,7 +216,8 @@ $(function() {
                         $('input[name="email"]').val(data.row.email);
                         $('input[name="password"]').val(data.row.password);
                         $('input[name="name"]').val(data.row.name);
-                        $('form.edit select option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
+                        $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
+                        $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
                         $('input[name="title"]').val(data.row.title);
                         $('input[name="subtitle"]').val(data.row.subtitle);
                         $('textarea[name="post"]').text(data.row.post);

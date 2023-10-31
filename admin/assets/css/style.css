@@ -321,10 +321,6 @@ form input[type="file"] {
     border: none;
 }
 
-.action-window .submit-btns {
-    /* background-color: red; */
-}
-
 .action-window .submit-btns input {
     width: 150px !important;
     margin: 0 10px;

@@ -32,7 +32,8 @@
                     $_SESSION['myblog-password'] = $info['password'];
                     $_SESSION['myblog-name'] = $info['name'];
                     $_SESSION['myblog-profile-photo'] = $info['profile_photo'];
-                    $_SESSION['myblog-role'] = Panel::getRole($info['role']);
+                    $_SESSION['myblog-role'] = $info['role'];
+                    $_SESSION['myblog-role-name'] = Panel::getRole($info['role']);
                     header('Location: '.INCLUDE_PATH_ADMIN);
                     die();
                 } else {

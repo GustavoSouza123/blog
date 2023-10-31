@@ -46,6 +46,7 @@
             <div class="menu">
                 <ul>
                     <li><a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Painel</a></li>
+                <?php if($_SESSION['myblog-role'] == 0) { ?>
                     <li class="action" dropdown="0">
                         <a href="">Categorias</a>
                         <span></span>
@@ -70,6 +71,16 @@
                             <li><a href="" index="5">Gerenciar usuários</a></li>
                         </ul>
                     </li>
+                <?php } else if($_SESSION['myblog-role'] == 1) { ?>
+                    <li class="action" dropdown="1">
+                        <a href="">Postagens</a>
+                        <span></span>
+                        <ul class="dropdown">
+                            <li><a href="" index="2">Adicionar postagem</a></li>
+                            <li><a href="" index="3">Gerenciar postagens</a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
                     <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
@@ -80,7 +91,7 @@
             <div class="window dashboard">
                 <div class="profile-info">
                     <?php
-                        echo $_SESSION['myblog-user'].'<br>'.$_SESSION['myblog-email'].'<br>'.$_SESSION['myblog-name'].'<br>'.$_SESSION['myblog-role'];
+                        echo $_SESSION['myblog-user'].'<br>'.$_SESSION['myblog-email'].'<br>'.$_SESSION['myblog-name'].'<br>'.$_SESSION['myblog-role-name'];
                     ?>
                     <div class="profile-photo">
                         <img src="<?php echo INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />

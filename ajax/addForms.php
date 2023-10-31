@@ -192,8 +192,8 @@
             }
         } else if($tableName == 'tb_admin_users') {
             try {
-                $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, password = ?, name = ? WHERE id = ?");
-                $sql->execute(array($_POST['user'], $_POST['email'], $_POST['password'], $_POST['name'], $id));    
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, password = ?, name = ?, role = ? WHERE id = ?");
+                $sql->execute(array($_POST['user'], $_POST['email'], $_POST['password'], $_POST['name'], $_POST['role'], $id));
                 // verify if a new image was uploaded
                 if($hasImage) {
                     $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
