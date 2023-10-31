@@ -7,6 +7,9 @@ https://www.w3schools.com/php/php_file_upload.asp
 color palettes:
 https://www.shutterstock.com/blog/color-palettes-tech-branding-logos
 
+responsive dropdown menu:
+https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
+
 
 to-do:
 
@@ -19,3 +22,5 @@ to-do:
 
 > publish | save draft
 > see dev.to posts designs
+
+> work on responsiveness for the admin panel

@@ -37,11 +37,12 @@ body {
     position: relative;
     width: 90%;
     max-width: 400px;
-    max-height: 80vh;
+    max-height: 95vh;
     border: 1px solid var(--light2);
     padding: 20px;
     padding-top: 60px;
     border-radius: 5px;
+    overflow: auto;
 }
 
 p.form-message {
@@ -318,6 +319,27 @@ form input[type="file"] {
     cursor: pointer;
     margin-top: 10px;
     border: none;
+}
+
+.action-window .submit-btns {
+    /* background-color: red; */
+}
+
+.action-window .submit-btns input {
+    width: 150px !important;
+    margin: 0 10px;
+    margin-bottom: 10px;
+    transition: .2s;
+}
+
+.action-window .submit-btns input:last-child {
+    background-color: var(--light0);
+    color: var(--dark0);
+}
+
+.action-window .submit-btns input:last-child:hover {
+    background-color: var(--color2);
+    color: var(--light0);
 }
 
 .action-window table {

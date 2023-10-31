@@ -6,7 +6,7 @@
     $upload_dir = 'assets/uploads/';
 
     $data['ajax'] = true;
-    $data['post'] = $_POST;    
+    $data['post'] = $_POST;
     $data['files'] = $_FILES;
 
     // forms submition (add forms)
@@ -57,7 +57,12 @@
         $creation_date = date("Y-m-d H:i:s");
         $last_update = $creation_date;
         $read_time = ceil(str_word_count($post) / 250);
-        $published = 0;
+
+        $published = 1;
+        if($_POST['draft']) {
+            $published = 0;
+            $data['draft'] = true;
+        }
         
         $sql = $pdo->prepare("SELECT id FROM `tb_admin_users` WHERE name = ?");
         $sql->execute(array($_POST['author']));
@@ -87,6 +92,7 @@
             if($value['user'] == $user) {
                 $data['success'] = false;
                 $data['error'] = "Nome de usuário inválido";
+                break;
             }
         }
 
@@ -158,8 +164,13 @@
             try {
                 $read_time = ceil(str_word_count($_POST['post']) / 250);
                 $last_update = date("Y-m-d H:i:s");
-                $sql = $pdo->prepare("UPDATE `".$tableName."` SET category_id = ?, title = ?, subtitle = ?, post = ?, read_time = ?, last_update = ? WHERE id = ?");
-                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $read_time, $last_update, $id));
+                $published = 1;
+                if($_POST['draft']) {
+                    $published = 0;
+                    $data['draft'] = true;
+                }
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET category_id = ?, title = ?, subtitle = ?, post = ?, read_time = ?, published = ?, last_update = ? WHERE id = ?");
+                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $read_time, $published, $last_update, $id));
                 // verify if a new image was uploaded
                 if($hasImage) {
                     $thumbnail = $upload_dir.$_FILES['thumbnail']['name'];

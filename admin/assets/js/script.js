@@ -148,15 +148,23 @@ $(function() {
             }
             // post textarea
             if(inputNames[0] == 'category_id') {
-                form.append('<label for="post">Postagem</label><textarea name="post" id="post"></textarea>'); 
-                form.append('<div class="publish"><input type="checkbox" name="publish" id="publish" value="publish" /><label for="publish">Publicar</label></div>');
+                form.append('<label for="post">Postagem</label><textarea name="post" id="post"></textarea>');
             }
             // name of the author of the post
             form.append(`<input type="hidden" name="author" value="${$('header h3 span').text()}" />`);
             // name of the form
             form.append(`<input type="hidden" name="form_name" value="${formName}" />`);
-            // submit input
-            form.append(`<input type="submit" value="Adicionar" />`);
+            // submit input (save draft for add post form)
+            if(formName == 'post') {
+                form.append(`<input type="hidden" name="draft" />`);
+                form.append(`<div class="submit-btns"><input type="submit" value="Publicar" /><input type="submit" name="save_draft" value="Salvar rascunho" /></div>`);
+            } else {
+                form.append(`<input type="submit" name="submit" value="Adicionar" />`);
+            }
+            // save post as a draft
+            $('input[name="save_draft"]').click(function() {
+                $('input[name="draft"]').val('true');
+            })
         } else {
             // edit forms
 
@@ -197,6 +205,11 @@ $(function() {
                         $('form.edit').append(`<input type="hidden" name="index" value="${data.index}" />`);
                         $('form.edit').append(`<input type="hidden" name="table" value="${data.table}" />`);
                         $('form.edit input[name="form_name"]').remove();
+
+                        // save post as a draft
+                        $('input[name="save_draft"]').click(function() {
+                            $('input[name="draft"]').val('true');
+                        })
                         
                         // put data on the inputs
                         $('input[name="user"]').val(data.row.user);
@@ -244,7 +257,6 @@ $(function() {
             contentType: false,
             data: formData
         }).done(function(data) {
-            // TEMPORÁRIO!
             if(data.success) {
                 alert('Formulário enviado com sucesso!');
                 $('form.add')[0].reset();
@@ -252,13 +264,6 @@ $(function() {
             } else {
                 alert(data.error);
             }
-           
-            /*if(!data.success) {
-                $('p.form-message').text(data.error);
-            } else {
-                $('p.form-message').text('Formulário enviado com sucesso!');
-                $('form.add')[0].reset();
-            }*/
         });
     })
 
