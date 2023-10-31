@@ -83,6 +83,7 @@
     } else if($form_name == 'user') {
         $data['isset'] = true;
         $user = $_POST['user'];
+        $email = $_POST['email'];
 
         $sql = $pdo->prepare("SELECT * FROM `tb_admin_users`");
         $sql->execute();
@@ -94,10 +95,14 @@
                 $data['error'] = "Nome de usuário inválido";
                 break;
             }
+            if($value['email'] == $email) {
+                $data['success'] = false;
+                $data['error'] = "Email inválido";
+                break;
+            }
         }
 
         if($data['success']) {
-            $email = $_POST['email'];
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // password hashing
             $name = $_POST['name'];
 
@@ -192,22 +197,41 @@
             }
         } else if($tableName == 'tb_admin_users') {
             try {
-                $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, password = ?, name = ?, role = ? WHERE id = ?");
-                $sql->execute(array($_POST['user'], $_POST['email'], $_POST['password'], $_POST['name'], $_POST['role'], $id));
-                // verify if a new image was uploaded
-                if($hasImage) {
-                    $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
-                    $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
-                    if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
-                        $data['success'] = true;
-                    } else {
-                        $data['success'] = false;
-                        $data['error'] = "Erro ao enviar arquivo";
-                    }
-                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET profile_photo = ? WHERE id = ?");
-                    $sql->execute(array($profile_photo, $id));
-                }
+                $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE id <> ?");
+                $sql->execute(array($id));
+                $users = $sql->fetchAll(PDO::FETCH_ASSOC);
                 $data['success'] = true;
+                foreach($users as $key => $value) {
+                    if($value['user'] == $_POST['user']) {
+                        $data['success'] = false;
+                        $data['error'] = "Nome de usuário inválido";
+                        break;
+                    }
+                    if($value['email'] == $_POST['email']) {
+                        $data['success'] = false;
+                        $data['error'] = "Email inválido";
+                        break;
+                    }
+                }
+                
+                if($data['success']) { 
+                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, password = ?, name = ?, role = ? WHERE id = ?");
+                    $sql->execute(array($_POST['user'], $_POST['email'], $_POST['password'], $_POST['name'], $_POST['role'], $id));
+                    // verify if a new image was uploaded
+                    if($hasImage) {
+                        $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
+                        $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
+                        if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
+                            $data['success'] = true;
+                        } else {
+                            $data['success'] = false;
+                            $data['error'] = "Erro ao enviar arquivo";
+                        }
+                        $sql = $pdo->prepare("UPDATE `".$tableName."` SET profile_photo = ? WHERE id = ?");
+                        $sql->execute(array($profile_photo, $id));
+                    }
+                    $data['success'] = true;
+                }
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
                 $data['error'] = "Erro ao atualizar tabela";

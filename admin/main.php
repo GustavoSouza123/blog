@@ -72,7 +72,7 @@
                         </ul>
                     </li>
                 <?php } else if($_SESSION['myblog-role'] == 1) { ?>
-                    <li class="action" dropdown="1">
+                    <li class="action" dropdown="0">
                         <a href="">Postagens</a>
                         <span></span>
                         <ul class="dropdown">

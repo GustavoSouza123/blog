@@ -272,7 +272,7 @@ $(function() {
     $('body').on('submit', 'form.edit', function(e) {
         e.preventDefault();
         let formData = new FormData($('form.edit')[0]);
-            
+
         $.ajax({
             url: include_path+'ajax/addForms.php',
             method: 'post',
@@ -281,9 +281,13 @@ $(function() {
             contentType: false,
             data: formData
         }).done(function(data) {
-            alert('Campo modificado com sucesso!');
-            $('form.edit')[0].reset();
-            $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
+            if(data.success) {        
+                alert('Campo modificado com sucesso!');
+                $('form.edit')[0].reset();
+                $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
+            } else {
+                alert(data.error);
+            }
         });
     })
 })

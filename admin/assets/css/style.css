@@ -33,6 +33,12 @@ body {
     justify-content: center;
 }
 
+/*p.form-message {
+    position: relative;
+    bottom: 10px;
+    margin: 20px 0;
+}*/
+
 .register-box {
     position: relative;
     width: 90%;
@@ -43,12 +49,6 @@ body {
     padding-top: 60px;
     border-radius: 5px;
     overflow: auto;
-}
-
-p.form-message {
-    position: absolute;
-    top: -60px;
-    margin: 20px 0;
 }
 
 .register-box .title {
