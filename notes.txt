@@ -17,3 +17,5 @@ to-do:
 
 > make input to edit the "published" state of the posts
 
+> publish | save draft
+> see dev.to posts designs
