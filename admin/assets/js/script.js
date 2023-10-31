@@ -23,14 +23,13 @@ $(function() {
 
     // show action windows
 
-    // async function to get the categories of the blog through an ajax request
-    async function getCategories() {
-        const result = await $.ajax({
-            url: include_path+'ajax/categories.php',
+    // function to get data through an ajax request
+    function getData(url) {
+        return $.ajax({
+            url: include_path+url,
             method: 'post',
             dataType: 'json'
         });
-        return result;
     }
 
     let form = $('.action-window form');
@@ -40,7 +39,9 @@ $(function() {
         let dropdown = $(this);
 
         e.preventDefault();
-        $('header ul.dropdown').stop().slideUp(200);
+        $('header ul.dropdown').stop().slideUp(200); 
+        $('.dashboard').css('display', 'none');
+        $('.action-window').css('display', 'flex');
         $('.action-window .title').text($(this).text());
 
         index = parseInt($(this).attr('index'));
@@ -92,7 +93,7 @@ $(function() {
                     // show the categories of the blog in the form through a select field
                     async function showCategories() {
                         try {
-                            const data = await getCategories();
+                            const data = await getData('ajax/getCategories.php');
                             // console.log(data);
 
                             if(data.error != undefined) {
@@ -125,7 +126,19 @@ $(function() {
                     continue;
                 } else if(inputNames[i] == 'role') {
                     // user role permission
-                    form.append('<input type="text" name="role" id="role" value="Usuário" readonly />');
+                    async function showRoles() {
+                        try {
+                            const data = await getData('ajax/getRoles.php');
+                            form.append(`<select name="${inputNames[i]}" id="${inputNames[i]}"></select>`);
+                            let roleSelect = form.find(`select[name="${inputNames[i]}"]`);
+                            for(let j = 0; j < data.roles.length; j++) {
+                                roleSelect.append(`<option value="${j}">${data.roles[j]}</option>`);
+                            }
+                        } catch(error) {
+                            console.error('Error loading roles: ', error)
+                        }
+                    }
+                    await showRoles();
                     continue;
                 } else {
                     // normal text inputs
@@ -135,7 +148,8 @@ $(function() {
             }
             // post textarea
             if(inputNames[0] == 'category_id') {
-                form.append('<label>Postagem</label><textarea name="post"></textarea>'); 
+                form.append('<label for="post">Postagem</label><textarea name="post" id="post"></textarea>'); 
+                form.append('<div class="publish"><input type="checkbox" name="publish" id="publish" value="publish" /><label for="publish">Publicar</label></div>');
             }
             // name of the author of the post
             form.append(`<input type="hidden" name="author" value="${$('header h3 span').text()}" />`);
@@ -150,7 +164,7 @@ $(function() {
             form.css('display', 'none');
             table.css('display', 'block');
             table.html('');
-            let postData = {formName: formName};
+            let postData = {formName: formName, user_id: $('input[name="user_id"]').val()};
             $.ajax({
                 url: include_path+'ajax/showEditForms.php',
                 method: 'post',

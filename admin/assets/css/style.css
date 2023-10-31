@@ -97,7 +97,7 @@ select {
     margin-bottom: 2px;
 }
 
-.register-box form input[type="checkbox"] {
+input[type="checkbox"] {
     height: 16px;
     margin: 0;
     margin-right: 10px;
@@ -220,13 +220,36 @@ header ul li.action > a {
     padding: 40px 3%;
 }
 
-.action-window {
-    display: flex;
+.window {
     flex-direction: column;
     align-items: center;
     background-color: var(--light0);
     padding: 40px;
     min-height: calc(100vh - 50px - 40px - 40px);
+}
+
+/* dashboard */
+.dashboard {
+    display: flex;
+}
+
+.profile-info .profile-photo {
+    width: 120px;
+    height: 120px;
+        border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info .profile-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* action windows */
+.action-window {
+    display: none;
 }
 
 .action-window .title {
@@ -275,6 +298,21 @@ form input[type="file"] {
     margin-bottom: 20px;
 }
 
+.action-window .publish {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    margin: 10px 0 20px 0;
+}
+
+.action-window .publish input[type="checkbox"] {
+    margin-bottom: 0;
+}
+
+.action-window .publish label {
+    margin: 0;
+}
+
 .action-window form input[type="submit"] {
     width: 200px;
     cursor: pointer;
@@ -293,8 +331,6 @@ form input[type="file"] {
 }
 
 tr {
-    margin-bottom: 5px;
-    border-radius: 5px;
     font-size: 16px;
 }
 

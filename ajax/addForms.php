@@ -67,7 +67,7 @@
         if($data['success']) {
             try {
                 $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $sql->execute(array($author_id, $category_id, $thumbnail, $title, $subtitle, $post, $read_time, $creation_date, $last_update, $published));
+                $sql->execute(array($author_id, $category_id, $thumbnail, $title, $subtitle, $post, $read_time, $published, $creation_date, $last_update));
                 $data['success'] = true;
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
@@ -104,7 +104,7 @@
                 $data['error'] = "Erro ao enviar arquivo";
             }
 
-            $role = $_POST['role'];
+            $role = (isset($_POST['role'])) ? $_POST['role'] : '1';
             $joined_in = date("Y-m-d H:i:s");
 
             // adding data to database

@@ -7,11 +7,10 @@
         public static function logout() {
             session_destroy();
             header('Location: '.INCLUDE_PATH_ADMIN);
-    }
+        }
 
         public static function getRole($id) {
-            $roles = ['Administrador', 'Usuário'];
-            return $roles[$i];
+            return USER_ROLES[$id];
         }
     }
 ?>

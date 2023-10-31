@@ -37,9 +37,6 @@
                 <label for="profile-photo">Foto</label>
                 <input type="file" name="profile_photo" id="profile-photo" accept="image/*" />
 
-                <label for="role">Permissão</label>
-                <input type="text" name="role" id="role" value="Usuário" readonly />
-
                 <div class="change-register">Já tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>login">Entre</a></div>
 
                 <input type="hidden" name="form_name" value="user" />

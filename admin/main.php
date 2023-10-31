@@ -20,16 +20,25 @@
             Panel::logout();
         }
 
-        /* // edit data
-        $isEditing = false;
-        if(isset($_GET['edit'])) {
-            $isEditing = $_GET['edit'];
-        }*/
+        // get user id
+        try {
+            $sql = $pdo->prepare("SELECT id FROM `tb_admin_users` WHERE user = ?");
+            $sql->execute(array($_SESSION['myblog-user']));
+            $user_id = $sql->fetchColumn();
+        } catch(PDOException $e) {
+            echo 'Erro ao selecionar id do usuário<br>'.$e->getMessage();
+        }
+
+        // user permissions
+        $sql = $pdo->prepare("SELECT role")
     ?>
 
     <!-- include path -->
     <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
 
+    <!-- user id -->
+    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
+ 
     <!-- admin panel container -->
     <div class="panel-container">
         <header>
@@ -68,7 +77,19 @@
         </header>
 
         <div class="main">
-            <div class="action-window">
+            <div class="window dashboard">
+                <div class="profile-info">
+                    <?php
+                        echo $_SESSION['myblog-user'].'<br>'.$_SESSION['myblog-email'].'<br>'.$_SESSION['myblog-name'].'<br>'.$_SESSION['myblog-role'];
+                    ?>
+                    <div class="profile-photo">
+                        <img src="<?php echo INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="window action-window">
                 <div class="title"></div>
                 <form action="" method="post" enctype="multipart/form-data"></form>
                 <table></table>

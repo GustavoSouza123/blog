@@ -31,9 +31,9 @@
                     subtitle VARCHAR(255) NOT NULL,
                     post LONGTEXT NOT NULL,
                     read_time VARCHAR(10) NOT NULL,
+                    published int(1) NOT NULL,
                     creation_date DATETIME NOT NULL,
                     last_update DATETIME NOT NULL,
-                    published int(1) NOT NULL,
                     PRIMARY KEY (id),
                     FOREIGN KEY (author_id) REFERENCES tb_admin_users(id),
                     FOREIGN KEY (category_id) REFERENCES tb_categories(id)
