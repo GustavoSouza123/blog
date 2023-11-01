@@ -194,7 +194,6 @@ $(function() {
                     form.removeClass('add'); 
                     form.addClass('edit');
                     $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
-                    $('.action-window form.edit input[type="submit"]').val('Atualizar');
                     $.ajax({
                         url: include_path+'ajax/editForms.php',
                         method: 'post',
@@ -221,6 +220,10 @@ $(function() {
                         $('input[name="title"]').val(data.row.title);
                         $('input[name="subtitle"]').val(data.row.subtitle);
                         $('textarea[name="post"]').text(data.row.post);
+                        
+                        if(actionData.formName != 'post') {
+                            $('.action-window form.edit input[type="submit"]').val('Atualizar');
+                        }
                     });
                 } else if(actionData.actionName == 'delete') {
                     if(confirm("Tem certeza que deseja excluir este campo?") == true) {
@@ -276,11 +279,12 @@ $(function() {
         $.ajax({
             url: include_path+'ajax/addForms.php',
             method: 'post',
-            datatype: 'json',
+            dataType: 'json',
             processData: false,
             contentType: false,
             data: formData
         }).done(function(data) {
+            console.log(data)
             if(data.success) {        
                 alert('Campo modificado com sucesso!');
                 $('form.edit')[0].reset();

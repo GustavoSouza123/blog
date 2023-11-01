@@ -13,8 +13,6 @@ https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
 
 to-do:
 
-> add user permissions (...)
-
 > see dev.to posts designs
 
 > work on responsiveness for the admin panel
