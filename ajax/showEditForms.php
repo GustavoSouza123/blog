@@ -28,16 +28,24 @@
         // $numColumns = $sql->columnCount();
         if($sql->rowCount() == 0) {
             $data['table'] = 'Tabela vazia';
-        } else {
-            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+        } else {            
+            $rowsData = $sql->fetchAll(PDO::FETCH_ASSOC);
             $count = 0;
             $columnNames = [];
             $tableHeaderNames = [];
-            foreach($data as $key => $value) {
+            foreach($rowsData as $key => $value) {
+                // actions and table headers
                 if($count == 0) {
+                    // actions
+                    $data['actions'] = '<td class="action-btn edit"><a href="" name="edit">Editar</a></td>';
+                    if($form_name == 'user') {
+                        $data['actions'] .= '<td class="action-btn edit-password"><a href="" name="edit-password">Alterar senha</a></td>';
+                    }
+                    $data['actions'] .= '<td class="action-btn delete"><a href="" name="delete">Excluir</a></td>';
+
+                    // table headers
                     $data['table'] = '<tr>';
-                    $data['table'] .= '<th class="action-btn"></th>';
-                    $data['table'] .= '<th class="action-btn"></th>';
+                    $data['table'] .= '<th></th>';
                     /* ** adding column names dinamically **
                     for($i = 0; $i < $numColumns; $i++) {
                         $meta = $sql->getColumnMeta($i);
@@ -72,17 +80,17 @@
                     } else if($form_name == 'user') {
                         $columnNames = ['id', 'user', 'email', 'name', 'role', 'joined_in'];
                         $tableHeaderNames = ['id', 'usuário', 'email', 'nome', 'função', 'data de cadastro'];
+
                     }
-                    
                     for($i = 0; $i < count($columnNames); $i++) {
                         $data['table'] .= '<th>'.ucfirst($tableHeaderNames[$i]).'</th>';
                     }
-
                     $data['table'] .= '</tr>';
                 }
+
+                // table data
                 $data['table'] .= '<tr>';
-                $data['table'] .= '<td class="action-btn edit"><a href="" name="edit" index="'.$value['id'].'">Editar</a></td>';
-                $data['table'] .= '<td class="action-btn delete"><a href="" name="delete" index="'.$value['id'].'">Excluir</a></td>';
+                $data['table'] .= '<td><input type="checkbox" name="selected" value="'.$value['id'].'" /></td>';
                 for($i = 0; $i < count($columnNames); $i++) {
                     $data['table'] .= '<td>'.$value[$columnNames[$i]].'</td>';
                 }

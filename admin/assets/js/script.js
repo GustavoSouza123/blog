@@ -33,6 +33,7 @@ $(function() {
     }
 
     let form = $('.action-window form');
+    let actions = $('.action-window .actions');
     let table = $('.action-window table');
     let index;
     $('li.action ul li a').click(async function(e) {
@@ -86,6 +87,7 @@ $(function() {
             form.css('display', 'flex');
             form.html('');
             form.append('<p class="form-message"></p>');
+            actions.css('display', 'none');
             table.css('display', 'none');
             for(let i = 0; i < inputNames.length; i++) {
                 form.append(`<label for="${inputNames[i]}">${inputLabels[i]}</label>`);
@@ -170,80 +172,113 @@ $(function() {
 
             // show database tables using an ajax request
             form.css('display', 'none');
+            actions.css('display', 'flex');
+            actions.html('');
             table.css('display', 'block');
             table.html('');
+
             let postData = {formName: formName, user_id: $('input[name="user_id"]').val()};
-            $.ajax({
-                url: include_path+'ajax/showEditForms.php',
-                method: 'post',
-                dataType: 'json',
-                data: postData
-            }).done(function(data) {
-                table.append(data.table);
-            });
+            async function showEditForms() {
+                return $.ajax({
+                    url: include_path+'ajax/showEditForms.php',
+                    method: 'post',
+                    dataType: 'json',
+                    data: postData
+                }).done(function(data) {
+                    actions.append(data.actions);
+                    table.append(data.table);
+                });
+            }
+            await showEditForms();
+
+            actions.css('width', table.width());
+            $(window).on('resize', function() {
+                actions.css('width', table.width());
+            })
+
+            // uncheck table checkboxes when clicking on a checkbox
+            let selectedIndex = -1;
+            $('.action-window input[type="checkbox"]').click(function() {
+                if($(this).prop('checked') == true) {
+                    let checkbox = $('.action-window input[type="checkbox"]');
+                    selectedIndex = $(this).attr('value');
+                    for(let i = 0; i < checkbox.length; i++) {
+                        checkbox.eq(i).prop('checked', false);
+                    }
+                    $(this).prop('checked', true);
+                } else {
+                    selectedIndex = -1;
+                }
+            })
 
             // edit and delete data
             $('body').off('click');
 
             $('body').on('click', '.action-btn a', function() {
-                let actionData = {formName: formName, actionName: $(this).attr('name'), index: $(this).attr('index')};
+                if(selectedIndex < 0) {
+                    alert('Selecione um registro para editar ou excluir');
+                    return false;
+                } else {
+                    let actionData = {formName: formName, actionName: $(this).attr('name'), index: selectedIndex};
 
-                if(actionData.actionName == 'edit') {
-                    let addIndex = index-1;
-                    $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
-                    form.removeClass('add'); 
-                    form.addClass('edit');
-                    $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
-                    $.ajax({
-                        url: include_path+'ajax/editForms.php',
-                        method: 'post',
-                        dataType: 'json',
-                        data: actionData
-                    }).done(function(data) {
-                        $('form.edit').append('<input type="hidden" name="edit_form" value="true" />');
-                        $('form.edit').append(`<input type="hidden" name="index" value="${data.index}" />`);
-                        $('form.edit').append(`<input type="hidden" name="table" value="${data.table}" />`);
-                        $('form.edit input[name="form_name"]').remove();
-
-                        // save post as a draft
-                        $('input[name="save_draft"]').click(function() {
-                            $('input[name="draft"]').val('true');
-                        })
-                        
-                        // put data on the inputs
-                        $('input[name="user"]').val(data.row.user);
-                        $('input[name="email"]').val(data.row.email);
-                        $('input[name="password"]').val(data.row.password);
-                        $('input[name="name"]').val(data.row.name);
-                        $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
-                        $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
-                        $('input[name="title"]').val(data.row.title);
-                        $('input[name="subtitle"]').val(data.row.subtitle);
-                        $('textarea[name="post"]').text(data.row.post);
-                        
-                        if(actionData.formName != 'post') {
-                            $('.action-window form.edit input[type="submit"]').val('Atualizar');
-                        }
-                    });
-                } else if(actionData.actionName == 'delete') {
-                    if(confirm("Tem certeza que deseja excluir este campo?") == true) {
+                    if(actionData.actionName == 'edit') {
+                        let addIndex = index-1;
+                        $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
+                        form.removeClass('add'); 
+                        form.addClass('edit');
+                        $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
                         $.ajax({
                             url: include_path+'ajax/editForms.php',
                             method: 'post',
                             dataType: 'json',
                             data: actionData
                         }).done(function(data) {
-                            if(data.success) {
-                                alert('Campo excluido com sucesso!');
-                                dropdown.trigger('click');
-                            } else {
-                                alert(data.error);
+                            $('form.edit').append('<input type="hidden" name="edit_form" value="true" />');
+                            $('form.edit').append(`<input type="hidden" name="index" value="${data.index}" />`);
+                            $('form.edit').append(`<input type="hidden" name="table" value="${data.table}" />`);
+                            $('form.edit input[name="form_name"]').remove();
+
+                            // save post as a draft
+                            $('input[name="save_draft"]').click(function() {
+                                $('input[name="draft"]').val('true');
+                            })
+                            
+                            // put data on the inputs
+                            $('input[name="user"]').val(data.row.user);
+                            $('input[name="email"]').val(data.row.email);
+                            $('input[name="password"]').val(data.row.password);
+                            $('input[name="name"]').val(data.row.name);
+                            $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
+                            $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
+                            $('input[name="title"]').val(data.row.title);
+                            $('input[name="subtitle"]').val(data.row.subtitle);
+                            $('textarea[name="post"]').text(data.row.post);
+                            
+                            if(actionData.formName != 'post') {
+                                $('.action-window form.edit input[type="submit"]').val('Atualizar');
                             }
                         });
+                    } else if(actionData.actionName == 'delete') {
+                        if(confirm("Tem certeza que deseja excluir este campo?") == true) {
+                            $.ajax({
+                                url: include_path+'ajax/editForms.php',
+                                method: 'post',
+                                dataType: 'json',
+                                data: actionData
+                            }).done(function(data) {
+                                if(data.success) {
+                                    alert('Campo excluido com sucesso!');
+                                    dropdown.trigger('click');
+                                } else {
+                                    alert(data.error);
+                                }
+                            });
+                        }
                     }
-                }
+                    selectedIndex = -1;
 
-                return false;
+                    return false;
+                }
             })
         }
     })
@@ -262,7 +297,7 @@ $(function() {
             data: formData
         }).done(function(data) {
             if(data.success) {
-                alert('Formulário enviado com sucesso!');
+                alert('Campos adicionados com sucesso!');
                 $('form.add')[0].reset();
                 $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
             } else {
@@ -286,7 +321,7 @@ $(function() {
         }).done(function(data) {
             console.log(data)
             if(data.success) {        
-                alert('Campo modificado com sucesso!');
+                alert('Campos modificados com sucesso!');
                 $('form.edit')[0].reset();
                 $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
             } else {

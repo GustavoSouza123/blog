@@ -103,6 +103,7 @@
             <div class="window action-window">
                 <div class="title"></div>
                 <form action="" method="post" enctype="multipart/form-data"></form>
+                <div class="actions"></div>
                 <table></table>
             </div>
         </div>

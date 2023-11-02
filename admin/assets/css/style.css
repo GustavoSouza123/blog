@@ -334,8 +334,16 @@ form input[type="file"] {
 }
 
 .action-window .submit-btns input:last-child:hover {
-    background-color: var(--color2);
-    color: var(--light0);
+    background-color: #eee;
+}
+
+.action-window .actions {
+    max-width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #f6f6f6;
 }
 
 .action-window table {
@@ -345,7 +353,10 @@ form input[type="file"] {
     align-items: center;
     overflow: auto;
     border-collapse: collapse;
-    border-radius: 5px;
+}
+
+.action-window table input[type="checkbox"] {
+    margin: 0;
 }
 
 tr {
@@ -369,18 +380,25 @@ th {
 
 .action-btn {
     border: none;
+    padding-right: 10px;
+    padding-left: 0;
 }
 
-.action-btn:first-child {
-    padding-right: 0;
+.action-btn.delete {
+    padding-right: 20px;
 }
 
 .action-btn a {
     color: #000;
     text-decoration: none;
-    border: 1px solid var(--light2);
+    /*border: 1px solid var(--light2);*/
     padding: 5px 15px;
     border-radius: 5px;
+    transition: .2s;
+}
+
+.action-btn a:hover {
+    background-color: #eee;
 }
 
 .action-btn.delete a {
