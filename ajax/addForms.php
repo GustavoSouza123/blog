@@ -3,6 +3,7 @@
     $data = [];
     $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
     $edit_form = (isset($_POST['edit_form'])) ? $_POST['edit_form'] : '';
+    $edit_password = (isset($_POST['edit_password'])) ? $_POST['edit_password'] : '';
     $upload_dir = 'assets/uploads/';
 
     $data['ajax'] = true;
@@ -237,6 +238,41 @@
                 $data['error'] = "Erro ao atualizar tabela";
                 $data['error'] .= $e->getMessage();
             }
+        }
+    } else if($edit_password != '') {
+        // changing user password
+        $data['editPassword'] = true;
+        $id = $_POST['index']; 
+        $table = $_POST['table'];
+
+        try { 
+            $sql = $pdo->prepare("SELECT * FROM `".$table."` WHERE id = ?");
+            $sql->execute(array($id));
+            $info = $sql->fetch();
+            $hash = $info['password'];
+            if(password_verify($_POST['current_password'], $hash)) {
+                $newPassword = $_POST['new_password'];
+                $confirmPassword = $_POST['confirm_password'];
+                if(empty($newPassword) || empty($confirmPassword) || strlen($newPassword) < 4) {
+                    $data['success'] = false;
+                    $data['error'] = "Digite uma senha com 4 ou mais caracteres";
+                } else if($newPassword != $confirmPassword) {
+                    $data['success'] = false;
+                    $data['error'] = 'Confirme sua nova senha corretamente';
+                } else {
+                    $password = password_hash($newPassword, PASSWORD_BCRYPT); // password hashing
+                    $sql = $pdo->prepare("UPDATE `".$table."` SET password = ? WHERE id = ?");
+                    $sql->execute(array($password, $id));
+                    $data['success'] = true; 
+                }
+            } else {
+                $data['success'] = false;
+                $data['error'] = 'Sua senha atual está incorreta';
+            }
+        } catch(PDOExcetion $e) {
+            $data['success'] = false;
+            $data['error'] = "Erro ao atualizar tabela";
+            $data['error'] .= $e->getMessage();
         }
     } else {
         $data['success'] = false;

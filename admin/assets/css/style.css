@@ -299,19 +299,19 @@ form input[type="file"] {
     margin-bottom: 20px;
 }
 
+.action-window .user-info {
+    margin-bottom: 10px;
+}
+
+.action-window .user-info.last {
+    margin-bottom: 20px;
+}
+
 .action-window .publish {
     display: flex;
     align-items: center;
     height: 20px;
     margin: 10px 0 20px 0;
-}
-
-.action-window .publish input[type="checkbox"] {
-    margin-bottom: 0;
-}
-
-.action-window .publish label {
-    margin: 0;
 }
 
 .action-window form input[type="submit"] {

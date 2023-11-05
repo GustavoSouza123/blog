@@ -20,7 +20,7 @@
                 echo "<script>alert('Usuário ou senha incorretos')</script>";
             } else {
                 $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? OR email = ?");
-                $sql->execute(array($_POST['user'], $_POST['user'])); 
+                $sql->execute(array($_POST['user'], $_POST['user']));
                 if($sql->rowCount() == 1) {
                     $info = $sql->fetch();
                     $hash = $info['password'];

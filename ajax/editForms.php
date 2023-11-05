@@ -14,10 +14,11 @@
         $tableName = 'tb_admin_users';
     }
 
-    if($action_name == 'edit') {
-        $data['table'] = $tableName;
-        $data['action'] = $action_name;
-        $data['index'] = $index;
+    $data['table'] = $tableName;
+    $data['action'] = $action_name;
+    $data['index'] = $index;
+
+    if($action_name == 'edit' || $action_name == 'edit-password') {
         try {
             $sql = $pdo->prepare("SELECT * FROM `".$tableName."` WHERE id = ?");     
             $sql->execute(array($index));
@@ -29,9 +30,6 @@
             $data['error'] .= $e->getMessage();
         }
     } else if($action_name == 'delete') {
-        $data['table'] = $tableName;
-        $data['action'] = $action_name;
-        $data['index'] = $index;
         try {
             $sql = $pdo->prepare("DELETE FROM `".$tableName."` WHERE id = ?");
             $sql->execute(array($index));

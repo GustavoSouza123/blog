@@ -63,8 +63,8 @@ $(function() {
                 break;
             case 4:
                 formName = 'user';
-                inputNames = ['user', 'email', 'password', 'name', 'profile_photo', 'role'];
-                inputLabels = ['Usuário', 'Email', 'Senha', 'Nome', 'Foto', 'Permissão'];
+                inputNames = ['user', 'email', 'name', 'profile_photo', 'role'];
+                inputLabels = ['Usuário', 'Email', 'Nome', 'Foto', 'Permissão'];
                 break;
             // edit forms
             case 1:
@@ -121,10 +121,6 @@ $(function() {
                 } else if(inputNames[i] == 'email') {
                     // email inputs
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
-                    continue;
-                } else if(inputNames[i] == 'password') {
-                    // password input
-                    form.append(`<input type="password" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
                 } else if(inputNames[i] == 'role') {
                     // user role permission
@@ -227,6 +223,7 @@ $(function() {
                         form.removeClass('add'); 
                         form.addClass('edit');
                         $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
+
                         $.ajax({
                             url: include_path+'ajax/editForms.php',
                             method: 'post',
@@ -258,6 +255,39 @@ $(function() {
                                 $('.action-window form.edit input[type="submit"]').val('Atualizar');
                             }
                         });
+                    } else if(actionData.actionName == 'edit-password') {
+                        actions.css('display', 'none');
+                        table.css('display', 'none');
+                        $('.action-window .title').text('Alterar senha');
+                        form.css('display', 'flex');
+                        form.html('');
+                        form.removeClass('add'); 
+                        form.addClass('edit');
+
+                        $.ajax({
+                            url: include_path+'ajax/editForms.php',
+                            method: 'post',
+                            dataType: 'json',
+                            data: actionData
+                        }).done(function(data) {
+                            form.append('<p class="form-message"></p>');
+
+                            form.append(`<div class="user-info">Usuário: ${data.row.user}</div>`);
+                            form.append(`<div class="user-info">Email: ${data.row.email}</div>`);
+                            form.append(`<div class="user-info last">Nome: ${data.row.name}</div>`);
+
+                            form.append(`<label for="current_password">Senha atual</label>`);
+                            form.append(`<input type="password" name="current_password" id="current_password" />`);
+                            form.append(`<label for="new_password">Nova senha</label>`);
+                            form.append(`<input type="password" name="new_password" id="new_password" />`);
+                            form.append(`<label for="confirm_password">Confirme a nova senha</label>`);
+                            form.append(`<input type="password" name="confirm_password" id="confirm_password" />`);
+
+                            form.append('<input type="hidden" name="edit_password" value="true" />');
+                            form.append(`<input type="hidden" name="index" value="${data.index}" />`);
+                            form.append(`<input type="hidden" name="table" value="${data.table}" />`);
+                            form.append(`<input type="submit" name="submit" value="Adicionar" />`);
+                        })
                     } else if(actionData.actionName == 'delete') {
                         if(confirm("Tem certeza que deseja excluir este campo?") == true) {
                             $.ajax({
@@ -329,4 +359,4 @@ $(function() {
             }
         });
     })
-})
+})  
