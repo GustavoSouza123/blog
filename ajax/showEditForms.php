@@ -94,7 +94,10 @@
                 $data['table'] .= '<td><input type="checkbox" name="selected" value="'.$value['id'].'" /></td>';
                 for($i = 0; $i < count($columnNames); $i++) {
                     // manipulating ids and booleans
-                    if($columnNames[$i] == 'category_id') {
+                    if($columnNames[$i] == 'image') {
+                        $photoSrc = $value[$columnNames[$i]];
+                        $data['table'] .= '<td class="photo"><img src="'.INCLUDE_PATH_ADMIN.$photoSrc.'" alt="foto da categoria" /></td>';
+                    } else if($columnNames[$i] == 'category_id') {
                         $categoryId = $value['category_id'];
                         $sql = $pdo->prepare("SELECT name FROM `tb_categories` WHERE id = ?");
                         $sql->execute(array($categoryId));

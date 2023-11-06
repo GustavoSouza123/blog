@@ -181,7 +181,11 @@ $(function() {
                     dataType: 'json',
                     data: postData
                 }).done(function(data) {
-                    actions.append(data.actions);
+                    if(data.actions == undefined) {
+                        $('.action-window .actions').css('display', 'none');
+                    } else {
+                        actions.append(data.actions);
+                    }
                     table.append(data.table);
                 });
             }

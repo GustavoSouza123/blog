@@ -13,7 +13,6 @@ https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
 
 to-do:
 
-> change password form
 > add back arrow on the edit forms
 > add preview image on add and edit forms
 
