@@ -9,6 +9,7 @@
     <meta name="keywords" content="palavras,chave,do,meu,website"> <!-- seo -->
     <link rel="icon" type="image/x-icon" href=""> <!-- website icon -->
     <link href="<?php echo INCLUDE_PATH; ?>assets/css/style.css" rel="stylesheet"> <!-- css file -->
+    <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
     <title>My Blog</title> <!-- title -->
 </head>
 <body>

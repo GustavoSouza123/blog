@@ -10,7 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet"> <!-- css file -->
+    <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
     <title>Painel de Controle | My Blog</title>
 </head>
 <body>
@@ -64,7 +65,7 @@
                         </ul>
                     </li>
                     <li class="action" dropdown="2">
-                        <a href="">Administração</a>
+                        <a href="">Usuários</a>
                         <span></span>
                         <ul class="dropdown">
                             <li><a href="" index="4">Adicionar usuário</a></li>
@@ -109,8 +110,8 @@
         </div>
     </div>
 
-    <script src="<?php echo INCLUDE_PATH; ?>assets/js/jquery.js"></script>
-    <script src="<?php echo INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script> 
+    <script src="<?php echo INCLUDE_PATH; ?>assets/js/jquery.js"></script> <!-- jquery file -->
+    <script src="<?php echo INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script> <!-- main javascript file --> 
 </body>
 </html>
 

@@ -19,3 +19,6 @@ to-do:
 
 > see dev.to posts designs
 > work on responsiveness for the admin panel
+
+
+> make a report with all the features I added to this admin panel

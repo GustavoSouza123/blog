@@ -75,16 +75,17 @@
                         $columnNames = ['id', 'name', 'image', 'creation_date'];
                         $tableHeaderNames = ['id', 'nome', 'imagem', 'data de criação'];
                     } else if($form_name == 'post') {
-                        $columnNames = ['category_id', 'title', 'subtitle', 'read_time', 'published', 'creation_date', 'last_update'];
-                        $tableHeaderNames = ['categoria', 'título', 'subtítulo', 'tempo de leitura', 'publicado', 'data de criação', 'última modificação'];
+                        $columnNames = ['category_id', 'title', 'subtitle', 'published'];
+                        $tableHeaderNames = ['categoria', 'título', 'subtítulo', 'publicado'];
                     } else if($form_name == 'user') {
-                        $columnNames = ['id', 'user', 'email', 'name', 'role', 'joined_in'];
-                        $tableHeaderNames = ['id', 'usuário', 'email', 'nome', 'função', 'data de cadastro'];
+                        $columnNames = ['profile_photo', 'user', 'email', 'name', 'role', 'joined_in'];
+                        $tableHeaderNames = ['foto', 'usuário', 'email', 'nome', 'função', 'data de cadastro'];
 
                     }
                     for($i = 0; $i < count($columnNames); $i++) {
                         $data['table'] .= '<th>'.ucfirst($tableHeaderNames[$i]).'</th>';
                     }
+                    $data['table'] .= '<th>Ação</th>';
                     $data['table'] .= '</tr>';
                 }
 
@@ -92,8 +93,31 @@
                 $data['table'] .= '<tr>';
                 $data['table'] .= '<td><input type="checkbox" name="selected" value="'.$value['id'].'" /></td>';
                 for($i = 0; $i < count($columnNames); $i++) {
-                    $data['table'] .= '<td>'.$value[$columnNames[$i]].'</td>';
+                    // manipulating ids and booleans
+                    if($columnNames[$i] == 'category_id') {
+                        $categoryId = $value['category_id'];
+                        $sql = $pdo->prepare("SELECT name FROM `tb_categories` WHERE id = ?");
+                        $sql->execute(array($categoryId));
+                        $categoryNames = $sql->fetchColumn();
+                        $data['table'] .= '<td>'.$categoryNames.'</td>';
+                    } else if($columnNames[$i] == 'published') {
+                        if($value[$columnNames[$i]] == 0) {
+                            $published = '<i class="fa-solid fa-xmark fa-lg" style="color: #e23232;"></i>';
+                        } else if($value[$columnNames[$i]] == 1) {
+                            $published = '<i class="fa-solid fa-check fa-lg" style="color: #2ebd73;"></i>';
+                        }
+                        $data['table'] .= '<td>'.$published.'</td>';
+                    } else if($columnNames[$i] == 'profile_photo') {
+                        $photoSrc = $value[$columnNames[$i]];
+                        $data['table'] .= '<td class="photo"><img src="'.INCLUDE_PATH_ADMIN.$photoSrc.'" alt="foto de perfil" /></td>';
+                    } else if($columnNames[$i] == 'role') {
+                        $roleId = $value['role'];
+                        $data['table'] .= '<td>'.Panel::getRole($roleId).'</td>';
+                    } else {
+                        $data['table'] .= '<td>'.$value[$columnNames[$i]].'</td>';
+                    }
                 }
+                $data['table'] .= '<td class="action-btn edit"><a href="" name="edit" index="'.$value['id'].'">Editar</a></td>';
                 $data['table'] .= '</tr>';
                 
                 $count++;

@@ -208,9 +208,108 @@ $(function() {
             })
 
             // edit and delete data
+            function editField(actionData) {
+                let addIndex = index-1;
+                $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
+                form.removeClass('add'); 
+                form.addClass('edit');
+                $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]); 
+
+                $.ajax({
+                    url: include_path+'ajax/editForms.php',
+                    method: 'post',
+                    dataType: 'json',
+                    data: actionData
+                }).done(function(data) {
+                    form.append('<input type="hidden" name="edit_form" value="true" />');
+                    form.append(`<input type="hidden" name="index" value="${data.index}" />`);
+                    form.append(`<input type="hidden" name="table" value="${data.table}" />`);
+                    $('input[name="form_name"]').remove();
+
+                    // creation date and last update on edit post form
+                    if(actionData.formName == 'post') {
+                        form.prepend(`<div class="info last">Última atualização: ${data.row.last_update}</div>`);
+                        form.prepend(`<div class="info">Data de criação: ${data.row.creation_date}</div>`);
+                    }
+
+                    // save post as a draft
+                    $('input[name="save_draft"]').click(function() {
+                        $('input[name="draft"]').val('true');
+                    })
+
+                    // put data on the inputs
+                    $('input[name="user"]').val(data.row.user);
+                    $('input[name="email"]').val(data.row.email);
+                    $('input[name="password"]').val(data.row.password);
+                    $('input[name="name"]').val(data.row.name);
+                    $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
+                    $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
+                    $('input[name="title"]').val(data.row.title);
+                    $('input[name="subtitle"]').val(data.row.subtitle);
+                    $('textarea[name="post"]').text(data.row.post);
+
+                    if(actionData.formName != 'post') {
+                        $('.action-window form.edit input[type="submit"]').val('Atualizar');
+                    }
+                });
+            }
+
+            function changePassword(actionData) {
+                actions.css('display', 'none');
+                table.css('display', 'none');
+                $('.action-window .title').text('Alterar senha');
+                form.css('display', 'flex');
+                form.html('');
+                form.removeClass('add'); 
+                form.addClass('edit');
+
+                $.ajax({
+                    url: include_path+'ajax/editForms.php',
+                    method: 'post',
+                    dataType: 'json',
+                    data: actionData
+                }).done(function(data) {
+                    form.append('<p class="form-message"></p>');
+
+                    form.append(`<div class="info">Usuário: ${data.row.user}</div>`);
+                    form.append(`<div class="info">Email: ${data.row.email}</div>`);
+                    form.append(`<div class="info last">Nome: ${data.row.name}</div>`);
+
+                    form.append(`<label for="current_password">Senha atual</label>`);
+                    form.append(`<input type="password" name="current_password" id="current_password" />`);
+                    form.append(`<label for="new_password">Nova senha</label>`);
+                    form.append(`<input type="password" name="new_password" id="new_password" />`);
+                    form.append(`<label for="confirm_password">Confirme a nova senha</label>`);
+                    form.append(`<input type="password" name="confirm_password" id="confirm_password" />`);
+
+                    form.append('<input type="hidden" name="edit_password" value="true" />');
+                    form.append(`<input type="hidden" name="index" value="${data.index}" />`);
+                    form.append(`<input type="hidden" name="table" value="${data.table}" />`);
+                    form.append(`<input type="submit" name="submit" value="Adicionar" />`);
+                })
+            }
+
+            function deleteField(actionData) {
+                if(confirm("Tem certeza que deseja excluir este campo?") == true) {
+                    $.ajax({
+                        url: include_path+'ajax/editForms.php',
+                        method: 'post',
+                        dataType: 'json',
+                        data: actionData
+                    }).done(function(data) {
+                        if(data.success) {
+                            alert('Campo excluido com sucesso!');
+                            dropdown.trigger('click');
+                        } else {
+                            alert(data.error);
+                        }
+                    });
+                }
+            }
+
             $('body').off('click');
 
-            $('body').on('click', '.action-btn a', function() {
+            $('body').on('click', '.actions .action-btn a', function() {
                 if(selectedIndex < 0) {
                     alert('Selecione um registro para editar ou excluir');
                     return false;
@@ -218,97 +317,22 @@ $(function() {
                     let actionData = {formName: formName, actionName: $(this).attr('name'), index: selectedIndex};
 
                     if(actionData.actionName == 'edit') {
-                        let addIndex = index-1;
-                        $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
-                        form.removeClass('add'); 
-                        form.addClass('edit');
-                        $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]);
-
-                        $.ajax({
-                            url: include_path+'ajax/editForms.php',
-                            method: 'post',
-                            dataType: 'json',
-                            data: actionData
-                        }).done(function(data) {
-                            $('form.edit').append('<input type="hidden" name="edit_form" value="true" />');
-                            $('form.edit').append(`<input type="hidden" name="index" value="${data.index}" />`);
-                            $('form.edit').append(`<input type="hidden" name="table" value="${data.table}" />`);
-                            $('form.edit input[name="form_name"]').remove();
-
-                            // save post as a draft
-                            $('input[name="save_draft"]').click(function() {
-                                $('input[name="draft"]').val('true');
-                            })
-                            
-                            // put data on the inputs
-                            $('input[name="user"]').val(data.row.user);
-                            $('input[name="email"]').val(data.row.email);
-                            $('input[name="password"]').val(data.row.password);
-                            $('input[name="name"]').val(data.row.name);
-                            $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
-                            $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
-                            $('input[name="title"]').val(data.row.title);
-                            $('input[name="subtitle"]').val(data.row.subtitle);
-                            $('textarea[name="post"]').text(data.row.post);
-                            
-                            if(actionData.formName != 'post') {
-                                $('.action-window form.edit input[type="submit"]').val('Atualizar');
-                            }
-                        });
+                        editField(actionData);
                     } else if(actionData.actionName == 'edit-password') {
-                        actions.css('display', 'none');
-                        table.css('display', 'none');
-                        $('.action-window .title').text('Alterar senha');
-                        form.css('display', 'flex');
-                        form.html('');
-                        form.removeClass('add'); 
-                        form.addClass('edit');
-
-                        $.ajax({
-                            url: include_path+'ajax/editForms.php',
-                            method: 'post',
-                            dataType: 'json',
-                            data: actionData
-                        }).done(function(data) {
-                            form.append('<p class="form-message"></p>');
-
-                            form.append(`<div class="user-info">Usuário: ${data.row.user}</div>`);
-                            form.append(`<div class="user-info">Email: ${data.row.email}</div>`);
-                            form.append(`<div class="user-info last">Nome: ${data.row.name}</div>`);
-
-                            form.append(`<label for="current_password">Senha atual</label>`);
-                            form.append(`<input type="password" name="current_password" id="current_password" />`);
-                            form.append(`<label for="new_password">Nova senha</label>`);
-                            form.append(`<input type="password" name="new_password" id="new_password" />`);
-                            form.append(`<label for="confirm_password">Confirme a nova senha</label>`);
-                            form.append(`<input type="password" name="confirm_password" id="confirm_password" />`);
-
-                            form.append('<input type="hidden" name="edit_password" value="true" />');
-                            form.append(`<input type="hidden" name="index" value="${data.index}" />`);
-                            form.append(`<input type="hidden" name="table" value="${data.table}" />`);
-                            form.append(`<input type="submit" name="submit" value="Adicionar" />`);
-                        })
+                        changePassword(actionData);
                     } else if(actionData.actionName == 'delete') {
-                        if(confirm("Tem certeza que deseja excluir este campo?") == true) {
-                            $.ajax({
-                                url: include_path+'ajax/editForms.php',
-                                method: 'post',
-                                dataType: 'json',
-                                data: actionData
-                            }).done(function(data) {
-                                if(data.success) {
-                                    alert('Campo excluido com sucesso!');
-                                    dropdown.trigger('click');
-                                } else {
-                                    alert(data.error);
-                                }
-                            });
-                        }
+                        deleteField(actionData);
                     }
-                    selectedIndex = -1;
 
+                    selectedIndex = -1;
                     return false;
                 }
+            })
+
+            $('body').on('click', 'table .action-btn a', function() {
+                let actionData = {formName: formName, actionName: $(this).attr('name'), index: $(this).attr('index')};
+                editField(actionData);
+                return false;
             })
         }
     })
@@ -349,11 +373,12 @@ $(function() {
             contentType: false,
             data: formData
         }).done(function(data) {
-            console.log(data)
+            console.log(index);
             if(data.success) {        
                 alert('Campos modificados com sucesso!');
                 $('form.edit')[0].reset();
-                $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
+                if(data.edit) index++;
+                $(`.menu ul.dropdown li a[index=${index}]`).trigger('click');
             } else {
                 alert(data.error);
             }
