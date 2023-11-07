@@ -11,7 +11,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet"> <!-- css file -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
+    <script src="https://cdn.tiny.cloud/1/4lj4mvfi4znfzdptgzp5yjmk2o8iwz5eppug7ae1kmjtdqsv/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> <!-- TinyMCE editor -->
+    <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script> <!-- TinyMCE jQuery integration -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
+
     <title>Painel de Controle | My Blog</title>
 </head>
 <body>
@@ -109,8 +114,7 @@
             </div>
         </div>
     </div>
-
-    <script src="<?php echo INCLUDE_PATH; ?>assets/js/jquery.js"></script> <!-- jquery file -->
+    
     <script src="<?php echo INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script> <!-- main javascript file --> 
 </body>
 </html>

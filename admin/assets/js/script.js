@@ -60,6 +60,7 @@ $(function() {
                 formName = 'post';
                 inputNames = ['category_id', 'thumbnail', 'title', 'subtitle'];
                 inputLabels = ['Categoria', 'Imagem principal', 'Título', 'Subtítulo'];
+                localStorage.setItem('editing', 'false');
                 break;
             case 4:
                 formName = 'user';
@@ -147,6 +148,26 @@ $(function() {
             // post textarea
             if(inputNames[0] == 'category_id') {
                 form.append('<label for="post">Postagem</label><textarea name="post" id="post"></textarea>');
+                // TinyMCE editor
+                $('textarea#post').tinymce({
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                    'anchor', 'searchreplace', 'visualblocks', 'fullscreen',
+                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                    ],
+                    toolbar: 'undo redo | blocks | bold italic backcolor | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist outdent indent | removeformat | help',
+                    setup: function(editor) {
+                        editor.on('init', function(e) {
+                            if(localStorage.getItem('editing') == 'true') {
+                                editor.setContent(localStorage.getItem('post'));
+                            }
+                        });
+                    }
+                });
             }
             // name of the author of the post
             form.append(`<input type="hidden" name="author" value="${$('header h3 span').text()}" />`);
@@ -250,7 +271,9 @@ $(function() {
                     $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
                     $('input[name="title"]').val(data.row.title);
                     $('input[name="subtitle"]').val(data.row.subtitle);
-                    $('textarea[name="post"]').text(data.row.post);
+                    
+                    localStorage.setItem('editing', 'true');
+                    localStorage.setItem('post', data.row.post); // post html for the TinyMCE editor
 
                     if(actionData.formName != 'post') {
                         $('.action-window form.edit input[type="submit"]').val('Atualizar');

@@ -278,7 +278,7 @@ header ul li.action > a {
 .action-window form input,
 .action-window form textarea {
     margin-bottom: 20px;
-    width: 80%;
+    width: 95%;
     max-width: 400px;
     border: 1px solid var(--light2);
     border-radius: 5px;
@@ -286,9 +286,8 @@ header ul li.action > a {
 }
 
 .action-window form textarea {
-    width: 90%;
     max-width: 1200px;
-    height: 325px;
+    height: 500px;
     padding: 10px;
     resize: none;
 }
@@ -322,6 +321,10 @@ form input[type="file"] {
     cursor: pointer;
     margin-top: 10px;
     border: none;
+}
+
+.action-window .submit-btns {
+    margin-top: 20px;
 }
 
 .action-window .submit-btns input {
@@ -404,10 +407,13 @@ td.photo {
 }
 
 td.photo img {
-    width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+td.category.photo img {
+    border-radius: 0;
 }
 
 .action-btn {

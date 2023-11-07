@@ -9,7 +9,10 @@
     <meta name="keywords" content="palavras,chave,do,meu,website"> <!-- seo -->
     <link rel="icon" type="image/x-icon" href=""> <!-- website icon -->
     <link href="<?php echo INCLUDE_PATH; ?>assets/css/style.css" rel="stylesheet"> <!-- css file -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
+
     <title>My Blog</title> <!-- title -->
 </head>
 <body>
@@ -26,7 +29,6 @@
         }
     ?>
 
-    <script src="<?php echo INCLUDE_PATH;?>assets/js/jquery.js"></script> <!-- jquery file -->
     <script src="<?php echo INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
 </body>
 </html>
