@@ -116,3 +116,82 @@ nav ul li a {
     padding: 0px 15px;
     padding-bottom: 2px;
 }
+
+/* posts */
+
+main {
+    width: 100%;
+    padding: 0 3%;
+}
+
+section.posts {
+    width: 100%;
+    background-color: #ddd;
+    padding: 30px 20px;
+}
+
+section.posts > .title {
+    font-weight: 600;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.posts-content {
+    width: 100%;
+    background-color: #ccc;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.posts-content .post {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background-color: #bbb;
+    padding: 
+}
+
+.posts-content .post .category {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    background-color: #000;
+    color: #fff;
+}
+
+.posts-content .post .image {
+    width: 100%;
+    height: 150px;
+    background-color: red
+}
+
+.posts-content .post .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.posts-content .post .creation-date {
+    margin-top: 10px; 
+}
+
+.posts-content .post .title {
+    margin: 10px 0;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.posts-content .post .subtitle {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    white-space: pre-wrap;
+    background-color: yellow;
+}
+
+.posts-content .post .read-more {
+    position: absolute;
+    bottom: 0;
+}
