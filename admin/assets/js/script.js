@@ -118,7 +118,7 @@ $(function() {
                 if(inputNames[i] == 'image' || inputNames[i] == 'thumbnail' || inputNames[i] == 'profile_photo') {
                     // file inputs for uploading photos
                     form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);    
-                    form.append(`<div class="preview-image ${inputNames[i]}"></div>`)
+                    form.append(`<div class="preview-image ${inputNames[i]}"></div>`);
                     continue;
                 } else if(inputNames[i] == 'email') {
                     // email inputs
