@@ -17,7 +17,7 @@
         $data['error'] = 'Erro no nome da tabela';
     } else {
         // only get the posts that were made by the current user
-        if($form_name == 'post') {
+        if($form_name == 'post' && $_POST['user_role'] != '0') {
             $sql = $pdo->prepare("SELECT * FROM `".$tableName."` WHERE author_id = ?");
             $sql->execute(array($_POST['user_id']));
         } else {

@@ -53,7 +53,7 @@
     <!-- login container -->
     <div class="register-container">
         <!--<?php //if($error) echo '<p class="form-message">Erro ao enviar o formulário</p>'; ?>-->
-        <div class="register-box">
+        <div class="register-box login">
             <div class="title">
                 <h3>Entre</h3>
             </div>

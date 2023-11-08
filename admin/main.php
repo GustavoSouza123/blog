@@ -14,7 +14,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
     <script src="https://cdn.tiny.cloud/1/4lj4mvfi4znfzdptgzp5yjmk2o8iwz5eppug7ae1kmjtdqsv/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> <!-- TinyMCE editor -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script> <!-- TinyMCE jQuery integration --> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script> <!-- TinyMCE jQuery integration -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
 
     <title>Painel de Controle | My Blog</title>
@@ -28,9 +28,9 @@
 
         // get user id
         try {
-            $sql = $pdo->prepare("SELECT id FROM `tb_admin_users` WHERE user = ?");
+            $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE user = ?");
             $sql->execute(array($_SESSION['myblog-user']));
-            $user_id = $sql->fetchColumn();
+            $user_id = $sql->fetch();
         } catch(PDOException $e) {
             echo 'Erro ao selecionar id do usuário<br>'.$e->getMessage();
         }
@@ -42,8 +42,9 @@
     <!-- include path -->
     <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
 
-    <!-- user id -->
-    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>" />
+    <!-- user id and role -->
+    <input type="hidden" name="user_id" value="<?php echo $user_id['id']; ?>" />
+    <input type="hidden" name="user_role" value="<?php echo $user_id['role']; ?>" /> <!-- NOT WORKING, STOPPED HERE -->
  
     <!-- admin panel container -->
     <div class="panel-container">

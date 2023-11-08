@@ -16,7 +16,7 @@
 
     <!-- signup container -->
     <div class="register-container">
-        <div class="register-box">
+        <div class="register-box signup">
             <p class="form-message"></p>
             <div class="title">
                 <h3>Cadastre-se</h3>
@@ -32,13 +32,11 @@
                 <input type="password" name="password" id="password" required />
 
                 <label for="name">Nome</label>
-                <input type="text" name="name" id="name" required /> 
-
-                <label for="profile-photo">Foto</label>
-                <input type="file" name="profile_photo" id="profile-photo" accept="image/*" />
+                <input type="text" name="name" id="name" required />
 
                 <div class="change-register">Já tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>login">Entre</a></div>
 
+                <input type="hidden" name="signup" value="true" />
                 <input type="hidden" name="form_name" value="user" />
                 <input type="submit" name="register" value="Login" />
             </form>

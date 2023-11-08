@@ -117,8 +117,8 @@ $(function() {
                 }
                 if(inputNames[i] == 'image' || inputNames[i] == 'thumbnail' || inputNames[i] == 'profile_photo') {
                     // file inputs for uploading photos
-                    form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);    
-                    form.append(`<div class="preview-image ${inputNames[i]}"></div>`);
+                    form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" class="hidden" />`);
+                    form.append(`<div class="preview-image ${inputNames[i]}"><label for="${inputNames[i]}" class="image-label"><i class="fa-solid fa-upload fa-xl" style="color: #be5a38;"></i></label></div>`);
                     continue;
                 } else if(inputNames[i] == 'email') {
                     // email inputs

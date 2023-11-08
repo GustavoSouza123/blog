@@ -2,6 +2,7 @@
     require '../config/config.php';
     $data = [];
     $form_name = (isset($_POST['form_name'])) ? $_POST['form_name'] : '';
+    $signup = (isset($_POST['signup'])) ? $_POST['signup'] : '';
     $edit_form = (isset($_POST['edit_form'])) ? $_POST['edit_form'] : '';
     $edit_password = (isset($_POST['edit_password'])) ? $_POST['edit_password'] : '';
     $upload_dir = 'assets/uploads/';
@@ -107,13 +108,17 @@
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // password hashing
             $name = $_POST['name'];
 
-            $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
-            $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
-            if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
-                $data['success'] = true;
+            if($signup == 'true') {
+                $profile_photo = 'assets/images/no-profile-photo.svg';
             } else {
-                $data['success'] = false;
-                $data['error'] = "Erro ao enviar arquivo";
+                $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
+                $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];
+                if(move_uploaded_file($profilePhotoTmpName, '../admin/'.$profile_photo)) {
+                    $data['success'] = true;
+                } else {
+                    $data['success'] = false;
+                    $data['error'] = "Erro ao enviar arquivo";
+                }
             }
 
             $role = (isset($_POST['role'])) ? $_POST['role'] : '1';
@@ -216,8 +221,8 @@
                 }
                 
                 if($data['success']) { 
-                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, password = ?, name = ?, role = ? WHERE id = ?");
-                    $sql->execute(array($_POST['user'], $_POST['email'], $_POST['password'], $_POST['name'], $_POST['role'], $id));
+                    $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, name = ?, role = ? WHERE id = ?");
+                    $sql->execute(array($_POST['user'], $_POST['email'], $_POST['name'], $_POST['role'], $id));
                     // verify if a new image was uploaded
                     if($hasImage) {
                         $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
