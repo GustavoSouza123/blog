@@ -118,6 +118,7 @@ $(function() {
                 if(inputNames[i] == 'image' || inputNames[i] == 'thumbnail' || inputNames[i] == 'profile_photo') {
                     // file inputs for uploading photos
                     form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" />`);    
+                    form.append(`<div class="preview-image ${inputNames[i]}"></div>`)
                     continue;
                 } else if(inputNames[i] == 'email') {
                     // email inputs
@@ -149,22 +150,24 @@ $(function() {
             if(inputNames[0] == 'category_id') {
                 form.append('<label for="post">Postagem</label><textarea name="post" id="post"></textarea>');
                 // TinyMCE editor
-                $('textarea#post').tinymce({
+                tinymce.init({
+                    selector: 'textarea#post',
                     height: 500,
-                    menubar: false,
                     plugins: [
-                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                    'anchor', 'searchreplace', 'visualblocks', 'fullscreen',
-                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                        'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor',
+                        'pagebreak', 'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code',
+                        'fullscreen', 'insertdatetime', 'media', 'table', 'emoticons', 'template', 'help'
                     ],
-                    toolbar: 'undo redo | blocks | bold italic backcolor | ' +
+                    toolbar: 'undo redo | styles | bold italic backcolor | ' + 
                     'alignleft aligncenter alignright alignjustify | ' +
-                    'bullist numlist outdent indent | removeformat | help',
+                    'bullist numlist outdent indent | link image media emoticons help',
+                    menubar: 'edit view insert format tools table',
                     setup: function(editor) {
                         editor.on('init', function(e) {
                             if(localStorage.getItem('editing') == 'true') {
                                 editor.setContent(localStorage.getItem('post'));
                             }
+                            //console.log($('.tox .tox-mbtn').innerWidth());
                         });
                     }
                 });
