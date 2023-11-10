@@ -59,7 +59,7 @@
             </div>
             <form action="" method="post">
                 <label for="user">Usuário ou email</label>
-                <input type="text" name="user" id="user" required />
+                <input type="text" name="user" id="user" autofocus required />
                 <label for="password">Senha</label>
                 <input type="password" name="password" id="password" required />
                 <div class="remember">

@@ -23,7 +23,7 @@
             </div>
             <form action="" method="post" enctype="multipart/form-data" class="add">
                 <label for="user">Usuário</label>
-                <input type="text" name="user" id="user" required />
+                <input type="text" name="user" id="user" autofocus required />
 
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" required />
