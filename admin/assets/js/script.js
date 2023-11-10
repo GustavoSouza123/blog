@@ -258,7 +258,6 @@ $(function() {
                     dataType: 'json',
                     data: actionData
                 }).done(function(data) {
-                    console.log(data)
                     form.append('<input type="hidden" name="edit_form" value="true" />');
                     form.append(`<input type="hidden" name="index" value="${data.index}" />`);
                     form.append(`<input type="hidden" name="table" value="${data.table}" />`);
@@ -268,7 +267,7 @@ $(function() {
                     if(actionData.formName == 'post') {
                         form.prepend(`<div class="info last">Última atualização: ${data.row.last_update}</div>`);
                         form.prepend(`<div class="info">Data de criação: ${data.row.creation_date}</div>`);
-                        form.prepend(`<div class="info">Autor: ${data.row.author_id}</div>`); /*COLOCAR NOME E FOTO DO AUTOR AQUI*/
+                        form.prepend(`<div class="info info-author"><img src="${include_path+'admin/'+data.author.profile_photo}" alt="Foto de perfil do autor" />${data.author.name}</div>`);
                     }
 
                     // save post as a draft

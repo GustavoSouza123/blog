@@ -21,9 +21,17 @@
 
     if($action_name == 'edit' || $action_name == 'edit-password') {
         try {
-            $sql = $pdo->prepare("SELECT * FROM `".$tableName."` WHERE id = ?");     
+            $sql = $pdo->prepare("SELECT * FROM `".$tableName."` WHERE id = ?");
             $sql->execute(array($index));
-            $data['row'] = $sql->fetch(PDO::FETCH_ASSOC);
+            $row = $sql->fetch(PDO::FETCH_ASSOC);
+            $data['row'] = $row;
+
+            if($form_name == 'post') {
+                $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE id = ?");
+                $sql->execute(array($row['author_id']));
+                $data['author'] = $sql->fetch(PDO::FETCH_ASSOC);
+            }
+
             $data['success'] = true;
         } catch(PDOException $e) {
             $data['success'] = false;

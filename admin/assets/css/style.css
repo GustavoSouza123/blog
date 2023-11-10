@@ -316,11 +316,27 @@ form input[type="file"] {
 }
 
 .action-window .info {
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
 }
 
 .action-window .info.last {
     margin-bottom: 20px;
+}
+
+.action-window form .info-author {
+    margin-bottom: 20px;
+}
+
+.action-window form .info img,
+.action-window table .info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 2px;
+    margin-right: 10px;
 }
 
 /* file inputs and preview uploaded image */
