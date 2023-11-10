@@ -110,6 +110,7 @@
 
             if($signup == 'true') {
                 $profile_photo = 'assets/images/no-profile-photo.svg';
+                $data['signup'] = true;
             } else {
                 $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
                 $profilePhotoTmpName = $_FILES['profile_photo']['tmp_name'];

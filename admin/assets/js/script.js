@@ -117,8 +117,17 @@ $(function() {
                 }
                 if(inputNames[i] == 'image' || inputNames[i] == 'thumbnail' || inputNames[i] == 'profile_photo') {
                     // file inputs for uploading photos
-                    form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept="image/*" class="hidden" />`);
+                    form.append(`<input type="file" name="${inputNames[i]}" id="${inputNames[i]}" accept=".jpg, .jpeg, .png" class="image-input hidden" />`);
                     form.append(`<div class="preview-image ${inputNames[i]}"><label for="${inputNames[i]}" class="image-label"><i class="fa-solid fa-upload fa-xl" style="color: #be5a38;"></i></label></div>`);
+
+                    // show uploaded photo
+                    $('input.image-input').on('change', async function(event) {
+                        let src = URL.createObjectURL(event.target.files[0]);
+                        $('.preview-image label').empty();
+                        $('.preview-image .preview-image-content').remove();
+                        $('.preview-image').append(`<div class="preview-image-content"><img src="${src}" alt="Prévia da imagem" /></div>`);
+                    });
+
                     continue;
                 } else if(inputNames[i] == 'email') {
                     // email inputs
@@ -249,6 +258,7 @@ $(function() {
                     dataType: 'json',
                     data: actionData
                 }).done(function(data) {
+                    console.log(data)
                     form.append('<input type="hidden" name="edit_form" value="true" />');
                     form.append(`<input type="hidden" name="index" value="${data.index}" />`);
                     form.append(`<input type="hidden" name="table" value="${data.table}" />`);
@@ -274,6 +284,15 @@ $(function() {
                     $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
                     $('input[name="title"]').val(data.row.title);
                     $('input[name="subtitle"]').val(data.row.subtitle);
+                    
+                    // preview image
+                    let imagePath = '';
+                    if(data.formName == 'category') imagePath = data.row.image;
+                    else if(data.formName == 'post') imagePath = data.row.thumbnail;
+                    else if(data.formName == 'user') imagePath = data.row.profile_photo;
+                    $('.preview-image label').empty();
+                    $('.preview-image .preview-image-content').remove();
+                    $('.preview-image').append(`<div class="preview-image-content"><img src="${include_path+'admin/'+imagePath}" alt="Prévia da imagem" /></div>`);
                     
                     localStorage.setItem('editing', 'true');
                     localStorage.setItem('post', data.row.post); // post html for the TinyMCE editor
@@ -384,6 +403,9 @@ $(function() {
                 alert('Campos adicionados com sucesso!');
                 $('form.add')[0].reset();
                 $(`.menu ul.dropdown li a[index=${index+1}]`).trigger('click');
+                if(data.signup) {
+                    window.location.replace(include_path+'admin/login.php');
+                }
             } else {
                 alert(data.error);
             }

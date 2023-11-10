@@ -5,6 +5,7 @@
     $action_name = (isset($_POST['actionName'])) ? $_POST['actionName'] : '';
     $index = (isset($_POST['index'])) ? $_POST['index'] : '';
 
+    $data['formName'] = $form_name;
     $tableName = '';
     if($form_name == 'category') {
         $tableName = 'tb_categories';
