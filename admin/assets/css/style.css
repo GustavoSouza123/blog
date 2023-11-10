@@ -389,14 +389,15 @@ label.image-label {
 }
 
 .preview-image img {
-    width: auto;
+    max-width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .preview-image.profile_photo img {
     width: 100%;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .action-window .publish {

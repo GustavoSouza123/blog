@@ -425,7 +425,6 @@ $(function() {
             contentType: false,
             data: formData
         }).done(function(data) {
-            console.log(index);
             if(data.success) {        
                 alert('Campos modificados com sucesso!');
                 $('form.edit')[0].reset();
