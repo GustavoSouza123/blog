@@ -30,7 +30,7 @@
         try {
             $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE user = ?");
             $sql->execute(array($_SESSION['myblog-user']));
-            $user_id = $sql->fetch();
+            $user = $sql->fetch();
         } catch(PDOException $e) {
             echo 'Erro ao selecionar id do usuário<br>'.$e->getMessage();
         }
@@ -43,8 +43,8 @@
     <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
 
     <!-- user id and role -->
-    <input type="hidden" name="user_id" value="<?php echo $user_id['id']; ?>" />
-    <input type="hidden" name="user_role" value="<?php echo $user_id['role']; ?>" /> <!-- NOT WORKING, STOPPED HERE -->
+    <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>" />
+    <input type="hidden" name="user_role" value="<?php echo $user['role']; ?>" />
  
     <!-- admin panel container -->
     <div class="panel-container">

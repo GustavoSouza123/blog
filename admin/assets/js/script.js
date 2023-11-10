@@ -144,7 +144,7 @@ $(function() {
                                 roleSelect.append(`<option value="${j}">${data.roles[j]}</option>`);
                             }
                         } catch(error) {
-                            console.error('Error loading roles: ', error)
+                            console.error('Error loading roles: ', error);
                         }
                     }
                     await showRoles();
@@ -206,7 +206,7 @@ $(function() {
             table.css('display', 'block');
             table.html('');
 
-            let postData = {formName: formName, user_id: $('input[name="user_id"]').val()};
+            let postData = {formName: formName, user_id: $('input[name="user_id"]').val(), user_role: $('input[name="user_role"]').val()};
             async function showEditForms() {
                 return $.ajax({
                     url: include_path+'ajax/showEditForms.php',
@@ -268,6 +268,7 @@ $(function() {
                     if(actionData.formName == 'post') {
                         form.prepend(`<div class="info last">Última atualização: ${data.row.last_update}</div>`);
                         form.prepend(`<div class="info">Data de criação: ${data.row.creation_date}</div>`);
+                        form.prepend(`<div class="info">Autor: ${data.row.author_id}</div>`); /*COLOCAR NOME E FOTO DO AUTOR AQUI*/
                     }
 
                     // save post as a draft
