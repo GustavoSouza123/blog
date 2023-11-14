@@ -39,10 +39,10 @@
                             <img src="'.INCLUDE_PATH_ADMIN.$value['thumbnail'].'" alt="" />
                         </div>
                         <div class="content">
-                            <div class="category">'.$category.'</div>
                             <div class="title">'.$value['title'].'</div>
                             <div class="subtitle">'.$value['subtitle'].'</div>
                             <div class="read-more"><a href="article?id='.$value['id'].'">Ler mais</a></div>
+                            <div class="category">'.$category.'</div>
                         </div>
                     </div>
                     ';
