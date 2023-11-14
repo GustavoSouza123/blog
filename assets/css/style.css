@@ -9,8 +9,9 @@
     --dark0: #000000;
     --dark1: #393e41;
     --light0: #ffffff;
-    --light1: #e7e5df;
-    --light2: #d3d0cb;
+    --light1: #f2f3f6;
+    --light2: #e7e5df;
+    --light3: #d3d0cb;
     --blue1: #0075ba;
     --blue2: #ccecff;
     --blue3: #e0f4ff;
@@ -126,58 +127,79 @@ main {
 
 section.posts {
     width: 100%;
-    background-color: #ddd;
+    /* background-color: #ddd; */
     padding: 30px 20px;
 }
 
 section.posts > .title {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 32px;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .posts-content {
     width: 100%;
-    background-color: #ccc;
+    /* background-color: #ccc; */
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    justify-content: center;
+    gap: 40px;
 }
 
 .posts-content .post {
     position: relative;
-    width: 300px;
+    width: 350px;
     height: 400px;
-    background-color: #bbb;
-    padding: 
-}
-
-.posts-content .post .category {
-    position: absolute; 
-    top: 10px;
-    right: 10px;
-    background-color: #000;
-    color: #fff;
+    background-color: var(--light1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .posts-content .post .image {
-    width: 100%;
-    height: 150px;
-    background-color: red
+    width: 102%;
+    height: 50%;
+    border-radius: 20px;
+    transition: .2s;
 }
 
 .posts-content .post .image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 20px;
+}
+
+.posts-content .post:hover .image {
+    width: 105%;
+}
+
+.posts-content .post .content {
+    width: 100%;
+    height: 50%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 20px;
+}
+
+.posts-content .post .category {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+    background-color: var(--light0);
+    color: var(--dark0);
+    padding: 2px 5px;
+    border-radius: 5px;
 }
 
 .posts-content .post .creation-date {
-    margin-top: 10px; 
+    /* margin-top: 10px;  */
 }
 
 .posts-content .post .title {
-    margin: 10px 0;
+    margin-bottom: 10px;
     font-weight: 600;
     font-size: 24px;
 }
@@ -188,10 +210,18 @@ section.posts > .title {
     -webkit-line-clamp: 3;
     overflow: hidden;
     white-space: pre-wrap;
-    background-color: yellow;
 }
 
 .posts-content .post .read-more {
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
+}
+
+.posts-content .post .read-more a {
+    color: var(--dark0);
+    transition: .2s;
+}
+
+.posts-content .post .read-more a:hover {
+    color: var(--blue1);
 }
