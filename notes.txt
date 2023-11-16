@@ -14,9 +14,6 @@ https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
 to-do:
 
 > add back arrow on the edit forms
-
-> see dev.to posts designs
 > work on responsiveness for the admin panel
 
-
-> make a report with all the features I added to this admin panel
+> replace font awesome icons with svg images
