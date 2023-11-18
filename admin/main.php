@@ -92,6 +92,11 @@
                     <li><a href="?logout">Sair</a></li>
                 </ul>
             </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </header>
 
         <div class="main">

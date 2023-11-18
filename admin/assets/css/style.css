@@ -9,7 +9,7 @@
     --dark0: #000000;
     --dark1: #393e41;
     --light0: #ffffff;
-    --light1: #f2f3f6;
+    --light1: #fafafa;
     --light2: #e7e5df;
     --light3: #d3d0cb;
     --blue1: #0075ba;
@@ -53,6 +53,7 @@ body {
     padding-top: 60px;
     border-radius: 5px;
     overflow: auto;
+    box-shadow: 0px 0px 10px 2px #eee;
 }
 
 .register-box .title {
@@ -61,7 +62,7 @@ body {
     left: 0;
     right: 0;
     height: 50px;
-    background-color: var(--blue4);
+    background-color: var(--light1);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
@@ -112,22 +113,12 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
-.register-box form input[type="file"] {
-    margin-bottom: 20px;
-}
-
-.change-register {
-    margin-bottom: 20px;
-}
-
-.register-box.signup .change-register {
-    margin-top: 10px;
-}
-
 input[type="submit"] {
     cursor: pointer;
     background-color: var(--blue1);
     color: var(--light0);
+    margin-top: 10px;
+    border: none;
 }
 
 /* control panel page */
@@ -158,7 +149,7 @@ header {
 
 header h3 {
     color: var(--light0);
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /* desktop menu */
@@ -222,6 +213,136 @@ header ul li.action > a {
     padding: 0;
     padding-left: 20px;
 }
+
+/* mobile menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+    width: 28px;
+    height: 20px;
+    cursor: pointer
+}
+
+.menu-toggle span {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light0);
+    transition: .2s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    top: 9px;
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    top: -9px;
+    transform: rotate(-45deg);
+}
+
+header .menu.mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 350px;
+    height: calc(100vh - 50px);
+    background-color: #fff;
+    border-left: 1px solid #eee;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: -350px;
+
+}
+
+header .menu.mobile ul {
+    height: 50%;
+    flex-direction: column;
+}
+
+header .menu.mobile ul li {
+    width: 100%;
+}
+
+header .menu.mobile ul li span {
+    display: none;
+}
+
+header .menu.mobile ul li a {
+    width: 100%;
+    color: var(--dark0);
+}
+
+header .menu.mobile ul li.action > a {
+    padding: 0 20px;
+}
+
+
+
+/*header .menu.mobile ul.dropdown {
+    position: absolute;
+    top: 50px;
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    height: auto;
+}
+
+header .menu.mobile ul.dropdown li {
+    background-color: var(--brown1);
+    height: 50px;
+}
+
+header .menu.mobile ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    transition: .2s;
+}
+
+header .menu.mobile ul li.action span {
+    width: 0px;
+    height: 0px;
+    border-top: 6px solid #fff;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    margin: 4px 20px 0px 10px;
+}
+
+header .menu.mobile ul li:hover {
+    opacity: .9;
+}
+
+header .menu.mobile a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-decoration: none;
+    height: 100%;
+    padding: 0 20px;
+}
+
+header .menu.mobile ul li.action > a {
+    padding: 0;
+    padding-left: 20px;
+}*/
+
+
+
+
+
+
+
+/* window */
 
 .main {
     position: absolute;
@@ -547,4 +668,16 @@ table tr .action-btn {
     background-color: var(--blue1);
     color: var(--light0);
     border: 0;
+}
+
+/* responsiveness */
+
+@media only screen and (max-width: 880px) {
+    header .menu {
+        display: none;
+    } 
+
+    .menu-toggle {
+        display: flex;
+    }
 }

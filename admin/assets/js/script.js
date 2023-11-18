@@ -21,6 +21,52 @@ $(function() {
         e.preventDefault();
     })
 
+    // mobile menu
+    function openNav() {
+        $('main').css('background', 'rgba(0,0,0,.5)');
+        $('header .menu').toggleClass('mobile');
+        $('header .menu').animate({ right: '0' }, 300);
+    }
+
+    function closeNav() {
+        $('main').css('background', '#fff');
+        $('header .menu').animate({ right: '-350px' }, 300);
+        setTimeout(function() {
+            $('header .menu').toggleClass('mobile');
+        }, 300);
+
+    }
+
+    var isNavOpen = false;
+    $('.menu-toggle').click(function(e) {
+        e.stopPropagation();
+        $(this).toggleClass('active');
+
+        isNavOpen = (isNavOpen) ? false : true;
+        if(isNavOpen) {
+            openNav();
+        } else {
+            closeNav();
+        }
+    })
+
+    // click on the body to close the mobile menu
+    $('header').click(function(e) {
+        e.stopPropagation();
+    })
+
+    $('header .menu').click(function(e) {
+        e.stopPropagation();
+    })
+
+    $('body').click(function(e) {
+        if(isNavOpen) {
+            $('.menu-toggle').removeClass('active');
+            closeNav();
+            isNavOpen = false;
+        }
+    })
+
     // show action windows
 
     // function to get data through an ajax request

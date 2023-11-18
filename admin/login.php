@@ -66,8 +66,8 @@
                     <input type="checkbox" name="remember" id="remember" />
                     <label for="remember">Lembrar Senha</label>
                 </div>
-                <div class="change-register">Não tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
                 <input type="submit" name="register" value="Login" />
+                <div class="change-register">Não tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
             </form>
         </div>
     </div>
