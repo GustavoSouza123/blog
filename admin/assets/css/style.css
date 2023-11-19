@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* my color palette */
@@ -304,6 +305,10 @@ header .menu.mobile ul li.action > a {
     padding: 0 20px;
 }
 
+
+header .menu.mobile ul.dropdown {
+    top: 0;
+}
 
 
 
@@ -700,5 +705,11 @@ table tr .action-btn {
 
     .menu-toggle {
         display: flex;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    header .menu.mobile {
+        width: 100%;
     }
 }

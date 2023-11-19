@@ -2,8 +2,11 @@ $(function() {
     // include path
     const include_path = $('input[name="include_path"]').val();
 
-    // show dropdown menu
+    // desktop dropdown menu
     function showDropdownMenu() {
+        $('header ul li.action').off('click');
+        $('header ul.dropdown').off('click');
+
         $('header ul li.action').hover(function(e) {
             $('header ul.dropdown').hide();
             $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideDown(200);
@@ -24,10 +27,21 @@ $(function() {
     }
     showDropdownMenu();
 
-    // remove hover events used to show the dropdown menu
+    // mobile dropdown menu
     function removeHoverEvent() {
         $('header ul li.action').off('mouseenter mouseleave');
         $('header ul.dropdown').off('mouseenter mouseleave');
+
+        $('header ul li.action').on('click', function() {
+            let dropdown = $('header ul.dropdown').eq($(this).attr('dropdown'));
+            $('header ul.dropdown').hide();
+            dropdown.stop().slideDown(200);
+            dropdown.css('top', 150+75*$('header ul li.action').attr('dropdown'));
+        })
+
+        $('header ul.dropdown').on('click', function() {
+
+        })
     }
 
     // mobile menu
