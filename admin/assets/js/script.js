@@ -3,38 +3,48 @@ $(function() {
     const include_path = $('input[name="include_path"]').val();
 
     // show dropdown menu
-    $('header ul li.action').hover(function(e) {
-        $('header ul.dropdown').hide();
-        $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideDown(200);
-        e.stopPropagation();
-    }, function() {
-        $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideUp(100);
-    })
+    function showDropdownMenu() {
+        $('header ul li.action').hover(function(e) {
+            $('header ul.dropdown').hide();
+            $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideDown(200);
+            e.stopPropagation();
+        }, function() {
+            $('header ul.dropdown').eq($(this).attr('dropdown')).stop().slideUp(100);
+        })
 
-    $('header ul.dropdown').hover(function(e) {
-        e.stopPropagation();
-    }, function() {
-        $(this).stop().slideUp(100);
-    })
+        $('header ul.dropdown').hover(function(e) {
+            e.stopPropagation();
+        }, function() {
+            $(this).stop().slideUp(100);
+        })
 
-    $('header ul li.action a').click(function(e) {
-        e.preventDefault();
-    })
+        $('header ul li.action a').click(function(e) {
+            e.preventDefault();
+        })
+    }
+    showDropdownMenu();
+
+    // remove hover events used to show the dropdown menu
+    function removeHoverEvent() {
+        $('header ul li.action').off('mouseenter mouseleave');
+        $('header ul.dropdown').off('mouseenter mouseleave');
+    }
 
     // mobile menu
     function openNav() {
-        $('main').css('background', 'rgba(0,0,0,.5)');
+        $('.background').fadeIn(200);
         $('header .menu').toggleClass('mobile');
         $('header .menu').animate({ right: '0' }, 300);
+        removeHoverEvent();
     }
 
     function closeNav() {
-        $('main').css('background', '#fff');
+        $('.background').fadeOut(200);
         $('header .menu').animate({ right: '-350px' }, 300);
         setTimeout(function() {
             $('header .menu').toggleClass('mobile');
         }, 300);
-
+        showDropdownMenu();
     }
 
     var isNavOpen = false;

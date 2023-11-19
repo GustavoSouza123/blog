@@ -34,9 +34,6 @@
         } catch(PDOException $e) {
             echo 'Erro ao selecionar id do usuário<br>'.$e->getMessage();
         }
-
-        // user permissions
-        $sql = $pdo->prepare("SELECT role")
     ?>
 
     <!-- include path -->
@@ -45,6 +42,9 @@
     <!-- user id and role -->
     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>" />
     <input type="hidden" name="user_role" value="<?php echo $user['role']; ?>" />
+
+    <!-- background -->
+    <div class="background"></div>
  
     <!-- admin panel container -->
     <div class="panel-container">
