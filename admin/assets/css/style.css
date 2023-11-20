@@ -276,11 +276,10 @@ header .menu.mobile {
     top: 50px;
     bottom: 0;
     right: -350px;
-
 }
 
 header .menu.mobile ul {
-    height: 50%;
+    height: auto;
     flex-direction: column;
 }
 
@@ -294,16 +293,13 @@ header .menu.mobile ul li.mobile {
 }
 
 header .menu.mobile ul li.action {
-    border-top: 1px solid var(--light2);
+    /* border-top: 1px solid var(--light2); */
     /* font-weight: 600; */
-}
-
-header .menu.mobile ul li.blog {
-    border-top: 1px solid var(--light2);
+    background-color: #eee;
 }
 
 header .menu.mobile ul li:hover {
-    background-color: var(--light2);
+    background-color: #eee;
 }
 
 header .menu.mobile ul li.action span {
@@ -313,10 +309,8 @@ header .menu.mobile ul li.action span {
 header .menu.mobile ul li a {
     width: 100%;
     color: var(--dark0);
-}
-
-header .menu.mobile ul li.action > a {
-    padding: 0 20px;
+    justify-content: flex-start;
+    padding: 0;
 }
 
 header .menu.mobile ul.dropdown {

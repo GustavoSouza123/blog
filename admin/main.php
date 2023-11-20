@@ -96,7 +96,7 @@
                     <li class="mobile"><a href="" index="2">Adicionar postagem</a></li>
                     <li class="mobile"><a href="" index="3">Gerenciar postagens</a></li>
                 <?php } ?>
-                    <li class="blog"><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
             </div>
