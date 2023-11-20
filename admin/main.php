@@ -62,6 +62,8 @@
                             <li><a href="" index="1">Gerenciar categorias</a></li>
                         </ul>
                     </li>
+                    <li class="mobile"><a href="" index="0">Adicionar categoria</a></li>
+                    <li class="mobile"><a href="" index="1">Gerenciar categorias</a></li>
                     <li class="action" dropdown="1">
                         <a href="">Postagens</a>
                         <span></span>
@@ -70,6 +72,8 @@
                             <li><a href="" index="3">Gerenciar postagens</a></li>
                         </ul>
                     </li>
+                    <li class="mobile"><a href="" index="2">Adicionar postagem</a></li>
+                    <li class="mobile"><a href="" index="3">Gerenciar postagens</a></li>
                     <li class="action" dropdown="2">
                         <a href="">Usuários</a>
                         <span></span>
@@ -78,6 +82,8 @@
                             <li><a href="" index="5">Gerenciar usuários</a></li>
                         </ul>
                     </li>
+                    <li class="mobile"><a href="" index="4">Adicionar usuário</a></li>
+                    <li class="mobile"><a href="" index="5">Gerenciar usuários</a></li>
                 <?php } else if($_SESSION['myblog-role'] == 1) { ?>
                     <li class="action" dropdown="0">
                         <a href="">Postagens</a>
@@ -87,8 +93,10 @@
                             <li><a href="" index="3">Gerenciar postagens</a></li>
                         </ul>
                     </li>
+                    <li class="mobile"><a href="" index="2">Adicionar postagem</a></li>
+                    <li class="mobile"><a href="" index="3">Gerenciar postagens</a></li>
                 <?php } ?>
-                    <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
+                    <li class="blog"><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
             </div>

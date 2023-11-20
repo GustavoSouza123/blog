@@ -198,6 +198,10 @@ header ul li {
     transition: .2s;
 }
 
+header ul li.mobile {
+    display: none;
+}
+
 header ul li.action span {
     width: 0px;
     height: 0px;
@@ -263,7 +267,6 @@ header ul li.action > a {
 header .menu.mobile {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 350px;
     height: calc(100vh - 50px);
     background-color: #fff;
@@ -283,6 +286,20 @@ header .menu.mobile ul {
 
 header .menu.mobile ul li {
     width: 100%;
+    padding: 15px;
+}
+
+header .menu.mobile ul li.mobile {
+    display: block;
+}
+
+header .menu.mobile ul li.action {
+    border-top: 1px solid var(--light2);
+    /* font-weight: 600; */
+}
+
+header .menu.mobile ul li.blog {
+    border-top: 1px solid var(--light2);
 }
 
 header .menu.mobile ul li:hover {
@@ -290,10 +307,7 @@ header .menu.mobile ul li:hover {
 }
 
 header .menu.mobile ul li.action span {
-    position: absolute;
-    right: 25%;
-    border-top-color: #000;
-    /* display: none; */
+    display: none;
 }
 
 header .menu.mobile ul li a {
@@ -305,9 +319,8 @@ header .menu.mobile ul li.action > a {
     padding: 0 20px;
 }
 
-
 header .menu.mobile ul.dropdown {
-    top: 0;
+    display: none;
 }
 
 

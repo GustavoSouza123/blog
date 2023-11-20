@@ -3,7 +3,7 @@ $(function() {
     const include_path = $('input[name="include_path"]').val();
 
     // desktop dropdown menu
-    function showDropdownMenu() {
+    function desktopMenu() {
         $('header ul li.action').off('click');
         $('header ul.dropdown').off('click');
 
@@ -25,18 +25,14 @@ $(function() {
             e.preventDefault();
         })
     }
-    showDropdownMenu();
+    desktopMenu();
 
     // mobile dropdown menu
-    function removeHoverEvent() {
+    function mobileMenu() {
         $('header ul li.action').off('mouseenter mouseleave');
         $('header ul.dropdown').off('mouseenter mouseleave');
 
         $('header ul li.action').on('click', function() {
-            let dropdown = $('header ul.dropdown').eq($(this).attr('dropdown'));
-            $('header ul.dropdown').hide();
-            dropdown.stop().slideDown(200);
-            dropdown.css('top', 150+75*$('header ul li.action').attr('dropdown'));
         })
 
         $('header ul.dropdown').on('click', function() {
@@ -49,7 +45,7 @@ $(function() {
         $('.background').fadeIn(200);
         $('header .menu').toggleClass('mobile');
         $('header .menu').animate({ right: '0' }, 300);
-        removeHoverEvent();
+        mobileMenu();
     }
 
     function closeNav() {
@@ -58,7 +54,7 @@ $(function() {
         setTimeout(function() {
             $('header .menu').toggleClass('mobile');
         }, 300);
-        showDropdownMenu();
+        desktopMenu();
     }
 
     var isNavOpen = false;
