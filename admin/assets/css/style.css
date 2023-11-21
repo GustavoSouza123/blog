@@ -31,7 +31,7 @@ body {
 .register-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,9 +46,9 @@ body {
 
 .register-box {
     position: relative;
-    width: 90%;
+    width: 85%;
     max-width: 400px;
-    max-height: 95vh;
+    max-height: 95dvh;
     border: 1px solid var(--light1);
     padding: 20px;
     padding-top: 60px;
@@ -126,7 +126,7 @@ input[type="submit"] {
 
 .background {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 99;
     top: 0;
     bottom: 0;
@@ -137,7 +137,7 @@ input[type="submit"] {
 
 .panel-container {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     color: var(--dark1);
 }
@@ -156,7 +156,7 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 3%;
+    padding: 0 30px;
 }
 
 header h3 {
@@ -268,7 +268,7 @@ header .menu.mobile {
     display: flex;
     flex-direction: column;
     width: 350px;
-    height: calc(100vh - 50px);
+    height: calc(100dvh - 50px);
     background-color: #fff;
     border-left: 1px solid #eee;
     position: absolute;
@@ -285,7 +285,6 @@ header .menu.mobile ul {
 
 header .menu.mobile ul li {
     width: 100%;
-    padding: 15px;
 }
 
 header .menu.mobile ul li.mobile {
@@ -293,7 +292,6 @@ header .menu.mobile ul li.mobile {
 }
 
 header .menu.mobile ul li.action {
-    /* border-top: 1px solid var(--light2); */
     /* font-weight: 600; */
     background-color: #eee;
 }
@@ -310,81 +308,26 @@ header .menu.mobile ul li a {
     width: 100%;
     color: var(--dark0);
     justify-content: flex-start;
-    padding: 0;
+    padding: 15px;
+}
+
+header .menu.mobile ul li.action > a {
+    cursor: default;
 }
 
 header .menu.mobile ul.dropdown {
     display: none;
 }
 
-
-
-/*header .menu.mobile ul.dropdown {
-    position: absolute;
-    top: 50px;
-    z-index: 999;
-    display: none;
-    flex-direction: column;
-    height: auto;
-}
-
-header .menu.mobile ul.dropdown li {
-    background-color: var(--brown1);
-    height: 50px;
-}
-
-header .menu.mobile ul li {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    height: 100%;
-    transition: .2s;
-}
-
-header .menu.mobile ul li.action span {
-    width: 0px;
-    height: 0px;
-    border-top: 6px solid #fff;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    margin: 4px 20px 0px 10px;
-}
-
-header .menu.mobile ul li:hover {
-    opacity: .9;
-}
-
-header .menu.mobile a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
-    text-decoration: none;
-    height: 100%;
-    padding: 0 20px;
-}
-
-header .menu.mobile ul li.action > a {
-    padding: 0;
-    padding-left: 20px;
-}*/
-
-
-
-
-
-
-
 /* window */
-
 .main {
     position: absolute;
     top: 50px;
     width: 100%;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100dvh - 50px);
     background-color: var(--light1);
     color: #000;
-    padding: 40px 3%;
+    padding: 40px 30px;
 }
 
 .window {
@@ -392,7 +335,7 @@ header .menu.mobile ul li.action > a {
     align-items: center;
     background-color: var(--light0);
     padding: 40px;
-    min-height: calc(100vh - 50px - 40px - 40px);
+    min-height: calc(100dvh - 50px - 40px - 40px);
     border-radius: 10px;
     box-shadow: 0px 0px 10px 2px #eee;
 }
@@ -601,6 +544,11 @@ label.image-label {
     border-bottom: 2px solid var(--light0);
 }
 
+.action-window .actions td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .action-window table {
     display: none;
     max-width: 100%;
@@ -608,6 +556,10 @@ label.image-label {
     align-items: center;
     overflow: auto;
     border-collapse: collapse;
+}
+
+.action-window table .info {
+    margin: 0;
 }
 
 .action-window table input[type="checkbox"] {
@@ -647,6 +599,10 @@ th {
 th:first-child,
 td:first-child {
     border-left: none;
+}
+
+td.author {
+    padding: 0 20px;
 }
 
 td.photo {
@@ -715,8 +671,32 @@ table tr .action-btn {
     }
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 750px) {
+    .main {
+        padding: 0;
+    }
+
+    .window {
+        min-height: calc(100dvh - 50px);
+    }
+}
+    
+@media only screen and (max-width: 500px) {
     header .menu.mobile {
-        width: 100%;
+        width: 70%;
+    }
+
+    .window {
+        padding: 30px 20px;
+    }
+
+    .action-window .submit-btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-window .submit-btns input:last-child {
+        margin-bottom: 0;
     }
 }

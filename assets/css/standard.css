@@ -1,5 +1,9 @@
 /* my color palette */
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 :root {
     --dark0: #000000;
     --dark1: #393e41;

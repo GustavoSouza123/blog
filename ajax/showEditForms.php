@@ -103,12 +103,12 @@
                         $sql->execute(array($categoryId));
                         $categoryNames = $sql->fetchColumn();
                         $data['table'] .= '<td>'.$categoryNames.'</td>';
-                    } else if($columnNames[$i] == 'author') { /************************************************************/
+                    } else if($columnNames[$i] == 'author') { 
                         $sql = $pdo->prepare("SELECT * FROM `tb_admin_users` WHERE id = ?");
                         $sql->execute(array($value['author_id']));
                         $author = $sql->fetch(PDO::FETCH_ASSOC);
-                        $data['table'] .= '<td><div class="info"><img src="'.INCLUDE_PATH_ADMIN.$author['profile_photo'].'" alt="Foto de perfil do autor" />'.$author['name'].'</div></td>';
-                    } else if($columnNames[$i] == 'published') { /************************************************************/
+                        $data['table'] .= '<td class="author"><div class="info"><img src="'.INCLUDE_PATH_ADMIN.$author['profile_photo'].'" alt="Foto de perfil do autor" />'.$author['name'].'</div></td>';
+                    } else if($columnNames[$i] == 'published') {
                         if($value[$columnNames[$i]] == 0) {
                             $published = '<i class="fa-solid fa-xmark fa-lg" style="color: #e23232;"></i>';
                         } else if($value[$columnNames[$i]] == 1) {

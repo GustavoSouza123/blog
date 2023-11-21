@@ -4,13 +4,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* posts cards */
 
 main {
     width: 100%;
-    padding: 0 3%;
+    padding: 0 30px;
 }
 
 section.posts {

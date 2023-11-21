@@ -2,16 +2,13 @@
 
 main.article {
     background-color: var(--light1);
-    min-height: calc(100vh - 70px);
-    padding: 40px 3%;
+    min-height: calc(100dvh - 50px);
 }
 
 main.article .content {
     background-color: var(--light0);
-    min-height: calc(100vh - 50px - 40px - 40px);
+    min-height: calc(100dvh - 50px - 40px - 40px);
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 2px #eee;
 }
 
 main.article .content h1:first-child {

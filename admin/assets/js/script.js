@@ -2,7 +2,7 @@ $(function() {
     // include path
     const include_path = $('input[name="include_path"]').val();
 
-    // desktop dropdown menu
+    // desktop nav 
     function desktopMenu() {
         $('header ul li.action').off('click');
         $('header ul.dropdown').off('click');
@@ -27,16 +27,13 @@ $(function() {
     }
     desktopMenu();
 
-    // mobile dropdown menu
+    // mobile nav
     function mobileMenu() {
         $('header ul li.action').off('mouseenter mouseleave');
         $('header ul.dropdown').off('mouseenter mouseleave');
 
-        $('header ul li.action').on('click', function() {
-        })
-
-        $('header ul.dropdown').on('click', function() {
-
+        $('header ul li.mobile a').on('click', function(e) {
+            e.preventDefault();
         })
     }
 
@@ -102,11 +99,12 @@ $(function() {
     let actions = $('.action-window .actions');
     let table = $('.action-window table');
     let index;
-    $('li.action ul li a').click(async function(e) {
+    $('li.action ul li a, li.mobile a').click(async function(e) {
         let dropdown = $(this);
 
         e.preventDefault();
         $('header ul.dropdown').stop().slideUp(200); 
+        if(isNavOpen) $('.menu-toggle').trigger('click');
         $('.dashboard').css('display', 'none');
         $('.action-window').css('display', 'flex');
         $('.action-window .title').text($(this).text());
