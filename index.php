@@ -12,13 +12,10 @@
     <!-- css files -->
     <?php
         $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
-
-        $cssName = 'blog';
-        if($url == 'article') {
-            $cssName = 'article';
-        }
+        $cssName = ($url == 'article') ? 'article' : 'blog';
     ?>
     <link href="<?php echo INCLUDE_PATH; ?>assets/css/standard.css" rel="stylesheet"> 
+    <link href="<?php echo INCLUDE_PATH_PORTFOLIO; ?>assets/css/header.css" rel="stylesheet">
     <link href="<?php echo INCLUDE_PATH.'assets/css/'.$cssName.'.css'; ?>" rel="stylesheet"> 
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
@@ -29,6 +26,9 @@
 <body>
     <!-- include path --> 
     <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
+
+    <!-- background -->
+    <div class="background"></div>
     
     <?php
         // friendly url
@@ -40,5 +40,6 @@
     ?>
 
     <script src="<?php echo INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
+    <script src="<?php echo INCLUDE_PATH_PORTFOLIO;?>assets/js/script.js"></script> <!-- main javascript file -->
 </body>
 </html>
