@@ -3,10 +3,8 @@
     date_default_timezone_set('America/Sao_Paulo');
 
     /* website path */
-    // define('INCLUDE_PATH', 'http://localhost/blog/');
-    define('INCLUDE_PATH', 'http://localhost/portfolio/blog/');
-    // define('INCLUDE_PATH_ADMIN', 'http://localhost/blog/admin/');
-    define('INCLUDE_PATH_ADMIN', 'http://localhost/portfolio/blog/admin/');
+    define('INCLUDE_PATH', 'http://localhost/blog/');
+    define('INCLUDE_PATH_ADMIN', 'http://localhost/blog/admin/');
     define('INCLUDE_PATH_PORTFOLIO', 'http://localhost/portfolio/');
 
     /* database connection */
