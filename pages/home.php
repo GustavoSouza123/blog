@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include '../../pages/header.php'; ?>
 
 <main>
     <section class="posts">
