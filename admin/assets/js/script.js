@@ -499,4 +499,25 @@ $(function() {
             }
         });
     })
-})  
+
+    // dashboard charts
+    let categoriesArr = [];
+    $.ajax({
+        url: include_path+'ajax/getCategories.php',
+        method: 'post',
+        dataType: 'json'
+    }).done(function(data) {
+        for(let i = 0; i < data.categories.length; i++) {
+            categoriesArr.push(data.categories[i].name);
+        }
+    });
+    console.log(categoriesArr)
+
+    new Chart($('.charts .chart1'), {
+        labels: categoriesArr,
+        datasets: [{
+            label: 'Postagens',
+            data: [1, 5, 3, 6, 0, 0, 1]
+        }]
+    })
+})

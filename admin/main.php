@@ -16,7 +16,8 @@
     <script src="https://cdn.tiny.cloud/1/4lj4mvfi4znfzdptgzp5yjmk2o8iwz5eppug7ae1kmjtdqsv/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> <!-- TinyMCE editor -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@2/dist/tinymce-jquery.min.js"></script> <!-- TinyMCE jQuery integration -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- chart.js -->
+    
     <title>Painel de Controle | My Blog</title>
 </head>
 <body>
@@ -116,7 +117,9 @@
                     <div class="profile-photo">
                         <img src="<?php echo INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />
                     </div>
-
+                </div>
+                <div class="charts">
+                    <div class="chart1"></div>
                 </div>
             </div>
 
