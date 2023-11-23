@@ -48,14 +48,22 @@
     <div class="background"></div>
  
     <!-- admin panel container -->
+
+   
+    <?php
+        $display = 'none';
+        if($_SESSION['myblog-role'] == 0) {
+            $display = 'flex';
+        }
+    ?>
+
     <div class="panel-container">
         <header>
             <h3><?php echo 'Olá, <span>'.$_SESSION['myblog-name'].'</span>!'; ?></h3>
             <div class="menu">
                 <ul>
                     <li><a href="<?php echo INCLUDE_PATH_ADMIN; ?>">Painel</a></li>
-                <?php if($_SESSION['myblog-role'] == 0) { ?>
-                    <li class="action" dropdown="0">
+                    <li style="display:<?php echo $display; ?>;" class="action" dropdown="0">
                         <a href="">Categorias</a>
                         <span></span>
                         <ul class="dropdown">
@@ -63,8 +71,8 @@
                             <li><a href="" index="1">Gerenciar categorias</a></li>
                         </ul>
                     </li>
-                    <li class="mobile"><a href="" index="0">Adicionar categoria</a></li>
-                    <li class="mobile"><a href="" index="1">Gerenciar categorias</a></li>
+                    <li class="mobile <?php echo $display; ?>"><a href="" index="0">Adicionar categoria</a></li>
+                    <li class="mobile <?php echo $display; ?>"><a href="" index="1">Gerenciar categorias</a></li>
                     <li class="action" dropdown="1">
                         <a href="">Postagens</a>
                         <span></span>
@@ -75,7 +83,7 @@
                     </li>
                     <li class="mobile"><a href="" index="2">Adicionar postagem</a></li>
                     <li class="mobile"><a href="" index="3">Gerenciar postagens</a></li>
-                    <li class="action" dropdown="2">
+                    <li style="display:<?php echo $display; ?>;" class="action" dropdown="2">
                         <a href="">Usuários</a>
                         <span></span>
                         <ul class="dropdown">
@@ -83,20 +91,8 @@
                             <li><a href="" index="5">Gerenciar usuários</a></li>
                         </ul>
                     </li>
-                    <li class="mobile"><a href="" index="4">Adicionar usuário</a></li>
-                    <li class="mobile"><a href="" index="5">Gerenciar usuários</a></li>
-                <?php } else if($_SESSION['myblog-role'] == 1) { ?>
-                    <li class="action" dropdown="0">
-                        <a href="">Postagens</a>
-                        <span></span>
-                        <ul class="dropdown">
-                            <li><a href="" index="2">Adicionar postagem</a></li>
-                            <li><a href="" index="3">Gerenciar postagens</a></li>
-                        </ul>
-                    </li>
-                    <li class="mobile"><a href="" index="2">Adicionar postagem</a></li>
-                    <li class="mobile"><a href="" index="3">Gerenciar postagens</a></li>
-                <?php } ?>
+                    <li class="mobile <?php echo $display; ?>"><a href="" index="4">Adicionar usuário</a></li>
+                    <li class="mobile <?php echo $display; ?>"><a href="" index="5">Gerenciar usuários</a></li>
                     <li><a href="<?php echo INCLUDE_PATH; ?>">Blog</a></li>
                     <li><a href="?logout">Sair</a></li>
                 </ul>
@@ -111,17 +107,46 @@
         <div class="main">
             <div class="window dashboard">
                 <div class="profile-info">
-                    <?php
-                        echo $_SESSION['myblog-user'].'<br>'.$_SESSION['myblog-email'].'<br>'.$_SESSION['myblog-name'].'<br>'.$_SESSION['myblog-role-name'];
-                    ?>
                     <div class="profile-photo">
                         <img src="<?php echo INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />
                     </div>
+                    <div class="info">
+                        <?php
+                            echo '<div>Nome: '.$_SESSION['myblog-name'].'</div><br>';
+                            echo '<div>Nome de usuário: '.$_SESSION['myblog-user'].'</div><br>';
+                            echo '<div>Email: '.$_SESSION['myblog-email'].'</div><br>';
+                            echo '<div>Permissão: '.$_SESSION['myblog-role-name'].'</div>';
+                        ?>
+                    </div>
+                    <div class="action-btn edit"><a href="" name="edit" index="<?php echo $_SESSION['myblog-id']; ?>">Editar</a></div>
                 </div>
-                <div class="charts">
-                    <div class="chart1"></div>
+                <div class="statistics">
+                    <div class="totals">
+                        <div class="total-categories">
+                            Categorias:
+                            <?php
+                                $sql = $pdo->prepare("SELECT COUNT(*) FROM `tb_categories`");    
+                                $sql->execute();
+                                echo $sql->fetchColumn();
+                            ?>
+                        </div>
+                        <div class="total-posts">
+                            Postagens:
+                            <?php
+                                $sql = $pdo->prepare("SELECT COUNT(*) FROM `tb_posts`");    
+                                $sql->execute();
+                                echo $sql->fetchColumn();
+                            ?>
+                        </div>
+                    </div>
+                    <div class="charts">
+                        <div class="chart1">
+                            <div class="title">Total de postagens por categoria</div>
+                            <canvas id="myChart1">
+                        </div>
+                    </div>
                 </div>
-            </div>
+           </div>
 
             <div class="window action-window">
                 <div class="title"></div>

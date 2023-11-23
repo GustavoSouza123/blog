@@ -84,7 +84,7 @@ $(function() {
         }
     })
 
-    // show action windows
+    // action windows
 
     // function to get data through an ajax request
     function getData(url) {
@@ -95,10 +95,133 @@ $(function() {
         });
     }
 
+    // event variables
     let form = $('.action-window form');
     let actions = $('.action-window .actions');
     let table = $('.action-window table');
     let index;
+
+    // functions to edit and delete data
+    function editField(actionData) {
+        index = (index == undefined) ? 5 : index;
+        let addIndex = index-1;
+        $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
+        form.removeClass('add'); 
+        form.addClass('edit');
+        $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]); 
+
+        $.ajax({
+            url: include_path+'ajax/editForms.php',
+            method: 'post',
+            dataType: 'json',
+            data: actionData
+        }).done(function(data) {
+            form.append('<input type="hidden" name="edit_form" value="true" />');
+            form.append(`<input type="hidden" name="index" value="${data.index}" />`);
+            form.append(`<input type="hidden" name="table" value="${data.table}" />`);
+            form.append(`<input type="hidden" name="dashboard" value="${data.dashboard}" />`);
+            $('input[name="form_name"]').remove();
+
+            // creation date and last update on edit post form
+            if(actionData.formName == 'post') {
+                form.prepend(`<div class="info last">Última atualização: ${data.row.last_update}</div>`);
+                form.prepend(`<div class="info">Data de criação: ${data.row.creation_date}</div>`);
+                form.prepend(`<div class="info info-author"><img src="${include_path+'admin/'+data.author.profile_photo}" alt="Foto de perfil do autor" />${data.author.name}</div>`);
+            }
+
+            // save post as a draft
+            $('input[name="save_draft"]').click(function() {
+                $('input[name="draft"]').val('true');
+            })
+
+            // put data on the inputs
+            $('input[name="user"]').val(data.row.user);
+            $('input[name="email"]').val(data.row.email);
+            $('input[name="password"]').val(data.row.password);
+            $('input[name="name"]').val(data.row.name);
+
+            console.log(data.row.role)
+            $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
+            if(data.dashboard) {
+                $('form.edit select[name="role"]').attr('disabled', 'disabled');
+                form.append(`<input type="hidden" name="role" value="${data.row.role}" />`);
+            }
+
+            $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
+            $('input[name="title"]').val(data.row.title);
+            $('input[name="subtitle"]').val(data.row.subtitle);
+            
+            // preview image
+            let imagePath = '';
+            if(data.formName == 'category') imagePath = data.row.image;
+            else if(data.formName == 'post') imagePath = data.row.thumbnail;
+            else if(data.formName == 'user') imagePath = data.row.profile_photo;
+            $('.preview-image label').empty();
+            $('.preview-image .preview-image-content').remove();
+            $('.preview-image').append(`<div class="preview-image-content"><img src="${include_path+'admin/'+imagePath}" alt="Prévia da imagem" /></div>`);
+            
+            localStorage.setItem('editing', 'true');
+            localStorage.setItem('post', data.row.post); // post html for the TinyMCE editor
+
+            if(actionData.formName != 'post') {
+                $('.action-window form.edit input[type="submit"]').val('Atualizar');
+            }
+        });
+    }
+
+    function changePassword(actionData) {
+        actions.css('display', 'none');
+        table.css('display', 'none');
+        $('.action-window .title').text('Alterar senha');
+        form.css('display', 'flex');
+        form.html('');
+        form.removeClass('add'); 
+        form.addClass('edit');
+
+        $.ajax({
+            url: include_path+'ajax/editForms.php',
+            method: 'post',
+            dataType: 'json',
+            data: actionData
+        }).done(function(data) {
+            form.append('<p class="form-message"></p>');
+
+            form.append(`<div class="info">Usuário: ${data.row.user}</div>`);
+            form.append(`<div class="info">Email: ${data.row.email}</div>`);
+            form.append(`<div class="info last">Nome: ${data.row.name}</div>`);
+
+            form.append(`<label for="current_password">Senha atual</label>`);
+            form.append(`<input type="password" name="current_password" id="current_password" />`);
+            form.append(`<label for="new_password">Nova senha</label>`);
+            form.append(`<input type="password" name="new_password" id="new_password" />`);
+            form.append(`<label for="confirm_password">Confirme a nova senha</label>`);
+            form.append(`<input type="password" name="confirm_password" id="confirm_password" />`);
+
+            form.append('<input type="hidden" name="edit_password" value="true" />');
+            form.append(`<input type="hidden" name="index" value="${data.index}" />`);
+            form.append(`<input type="hidden" name="table" value="${data.table}" />`);
+            form.append(`<input type="submit" name="submit" value="Adicionar" />`);
+        })
+    }
+
+    function deleteField(actionData, dropdown) {
+        if(confirm("Tem certeza que deseja excluir este campo?") == true) {
+            $.ajax({
+                url: include_path+'ajax/editForms.php',
+                method: 'post',
+                dataType: 'json',
+                data: actionData
+            }).done(function(data) {
+                if(data.success) {
+                    alert('Campo excluido com sucesso!');
+                    dropdown.trigger('click');
+                } else {
+                    alert(data.error);
+                }
+            });
+        }
+    }
+
     $('li.action ul li a, li.mobile a').click(async function(e) {
         let dropdown = $(this);
 
@@ -308,118 +431,6 @@ $(function() {
                 }
             })
 
-            // edit and delete data
-            function editField(actionData) {
-                let addIndex = index-1;
-                $(`.menu ul.dropdown li a[index=${addIndex}]`).trigger('click');
-                form.removeClass('add'); 
-                form.addClass('edit');
-                $('.action-window .title').text('Editar '+$(`ul.dropdown li a[index=${addIndex}]`).text().split(' ')[1]); 
-
-                $.ajax({
-                    url: include_path+'ajax/editForms.php',
-                    method: 'post',
-                    dataType: 'json',
-                    data: actionData
-                }).done(function(data) {
-                    form.append('<input type="hidden" name="edit_form" value="true" />');
-                    form.append(`<input type="hidden" name="index" value="${data.index}" />`);
-                    form.append(`<input type="hidden" name="table" value="${data.table}" />`);
-                    $('input[name="form_name"]').remove();
-
-                    // creation date and last update on edit post form
-                    if(actionData.formName == 'post') {
-                        form.prepend(`<div class="info last">Última atualização: ${data.row.last_update}</div>`);
-                        form.prepend(`<div class="info">Data de criação: ${data.row.creation_date}</div>`);
-                        form.prepend(`<div class="info info-author"><img src="${include_path+'admin/'+data.author.profile_photo}" alt="Foto de perfil do autor" />${data.author.name}</div>`);
-                    }
-
-                    // save post as a draft
-                    $('input[name="save_draft"]').click(function() {
-                        $('input[name="draft"]').val('true');
-                    })
-
-                    // put data on the inputs
-                    $('input[name="user"]').val(data.row.user);
-                    $('input[name="email"]').val(data.row.email);
-                    $('input[name="password"]').val(data.row.password);
-                    $('input[name="name"]').val(data.row.name);
-                    $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
-                    $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
-                    $('input[name="title"]').val(data.row.title);
-                    $('input[name="subtitle"]').val(data.row.subtitle);
-                    
-                    // preview image
-                    let imagePath = '';
-                    if(data.formName == 'category') imagePath = data.row.image;
-                    else if(data.formName == 'post') imagePath = data.row.thumbnail;
-                    else if(data.formName == 'user') imagePath = data.row.profile_photo;
-                    $('.preview-image label').empty();
-                    $('.preview-image .preview-image-content').remove();
-                    $('.preview-image').append(`<div class="preview-image-content"><img src="${include_path+'admin/'+imagePath}" alt="Prévia da imagem" /></div>`);
-                    
-                    localStorage.setItem('editing', 'true');
-                    localStorage.setItem('post', data.row.post); // post html for the TinyMCE editor
-
-                    if(actionData.formName != 'post') {
-                        $('.action-window form.edit input[type="submit"]').val('Atualizar');
-                    }
-                });
-            }
-
-            function changePassword(actionData) {
-                actions.css('display', 'none');
-                table.css('display', 'none');
-                $('.action-window .title').text('Alterar senha');
-                form.css('display', 'flex');
-                form.html('');
-                form.removeClass('add'); 
-                form.addClass('edit');
-
-                $.ajax({
-                    url: include_path+'ajax/editForms.php',
-                    method: 'post',
-                    dataType: 'json',
-                    data: actionData
-                }).done(function(data) {
-                    form.append('<p class="form-message"></p>');
-
-                    form.append(`<div class="info">Usuário: ${data.row.user}</div>`);
-                    form.append(`<div class="info">Email: ${data.row.email}</div>`);
-                    form.append(`<div class="info last">Nome: ${data.row.name}</div>`);
-
-                    form.append(`<label for="current_password">Senha atual</label>`);
-                    form.append(`<input type="password" name="current_password" id="current_password" />`);
-                    form.append(`<label for="new_password">Nova senha</label>`);
-                    form.append(`<input type="password" name="new_password" id="new_password" />`);
-                    form.append(`<label for="confirm_password">Confirme a nova senha</label>`);
-                    form.append(`<input type="password" name="confirm_password" id="confirm_password" />`);
-
-                    form.append('<input type="hidden" name="edit_password" value="true" />');
-                    form.append(`<input type="hidden" name="index" value="${data.index}" />`);
-                    form.append(`<input type="hidden" name="table" value="${data.table}" />`);
-                    form.append(`<input type="submit" name="submit" value="Adicionar" />`);
-                })
-            }
-
-            function deleteField(actionData) {
-                if(confirm("Tem certeza que deseja excluir este campo?") == true) {
-                    $.ajax({
-                        url: include_path+'ajax/editForms.php',
-                        method: 'post',
-                        dataType: 'json',
-                        data: actionData
-                    }).done(function(data) {
-                        if(data.success) {
-                            alert('Campo excluido com sucesso!');
-                            dropdown.trigger('click');
-                        } else {
-                            alert(data.error);
-                        }
-                    });
-                }
-            }
-
             $('body').off('click');
 
             $('body').on('click', '.actions .action-btn a', function() {
@@ -434,7 +445,7 @@ $(function() {
                     } else if(actionData.actionName == 'edit-password') {
                         changePassword(actionData);
                     } else if(actionData.actionName == 'delete') {
-                        deleteField(actionData);
+                        deleteField(actionData, dropdown);
                     }
 
                     selectedIndex = -1;
@@ -446,8 +457,15 @@ $(function() {
                 let actionData = {formName: formName, actionName: $(this).attr('name'), index: $(this).attr('index')};
                 editField(actionData);
                 return false;
-            })
+            }) 
         }
+    })
+
+    // edit profile on admin panel dashboard
+    $('body').on('click', '.profile-info .action-btn a', function() {
+        let actionData = {formName: 'user', actionName: $(this).attr('name'), index: $(this).attr('index'), dashboard: true};
+        editField(actionData);
+        return false;
     })
 
     // ajax add forms
@@ -493,7 +511,11 @@ $(function() {
                 alert('Campos modificados com sucesso!');
                 $('form.edit')[0].reset();
                 if(data.edit) index++;
-                $(`.menu ul.dropdown li a[index=${index}]`).trigger('click');
+                if(data.dashboard) {
+                    location.reload();
+                } else {
+                    $(`.menu ul.dropdown li a[index=${index}]`).trigger('click');
+                }
             } else {
                 alert(data.error);
             }
@@ -511,13 +533,30 @@ $(function() {
             categoriesArr.push(data.categories[i].name);
         }
     });
-    console.log(categoriesArr)
 
-    new Chart($('.charts .chart1'), {
-        labels: categoriesArr,
-        datasets: [{
-            label: 'Postagens',
-            data: [1, 5, 3, 6, 0, 0, 1]
-        }]
-    })
+    let numPosts = [];
+    $.ajax({
+        url: include_path+'ajax/getNumPosts.php',
+        method: 'post',
+        dataType: 'json'
+    }).done(function(data) {
+        if(data.success) {
+            numPosts = data.posts;
+        }
+    });
+
+    setTimeout(function() {
+        new Chart($('#myChart1'), {
+            type: 'pie',
+            data: {
+                labels: categoriesArr,
+                datasets: [{
+                    label: 'Postagens',
+                    data: numPosts,
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            }
+        })
+    }, 1000);
 })
