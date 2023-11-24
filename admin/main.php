@@ -46,10 +46,8 @@
 
     <!-- background -->
     <div class="background"></div>
- 
-    <!-- admin panel container -->
 
-   
+    <!-- header links verification by user role -->
     <?php
         $display = 'none';
         if($_SESSION['myblog-role'] == 0) {
@@ -57,6 +55,7 @@
         }
     ?>
 
+    <!-- admin panel container -->
     <div class="panel-container">
         <header>
             <h3><?php echo 'Olá, <span>'.$_SESSION['myblog-name'].'</span>!'; ?></h3>
@@ -107,6 +106,7 @@
         <div class="main">
             <div class="window dashboard">
                 <div class="profile-info">
+                    <div class="section-title">Meu perfil</div>
                     <div class="profile-photo">
                         <img src="<?php echo INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />
                     </div>
@@ -121,6 +121,7 @@
                     <div class="action-btn edit"><a href="" name="edit" index="<?php echo $_SESSION['myblog-id']; ?>">Editar</a></div>
                 </div>
                 <div class="statistics">
+                    <div class="section-title">Estatísticas</div>
                     <div class="totals">
                         <div class="total-categories">
                             Categorias:
@@ -138,10 +139,18 @@
                                 echo $sql->fetchColumn();
                             ?>
                         </div>
+                        <div class="total-users">
+                            Usuários:
+                            <?php
+                                $sql = $pdo->prepare("SELECT COUNT(*) FROM `tb_admin_users`");    
+                                $sql->execute();
+                                echo $sql->fetchColumn();
+                            ?>
+                        </div>
                     </div>
                     <div class="charts">
                         <div class="chart1">
-                            <div class="title">Total de postagens por categoria</div>
+                            <div class="title">Postagens por categoria:</div>
                             <canvas id="myChart1">
                         </div>
                     </div>

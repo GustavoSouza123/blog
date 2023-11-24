@@ -121,6 +121,8 @@ $(function() {
             form.append(`<input type="hidden" name="table" value="${data.table}" />`);
             form.append(`<input type="hidden" name="dashboard" value="${data.dashboard}" />`);
             $('input[name="form_name"]').remove();
+            $('label[for="password"]').remove();
+            $('input[name="password"]').remove();
 
             // creation date and last update on edit post form
             if(actionData.formName == 'post') {
@@ -251,8 +253,8 @@ $(function() {
                 break;
             case 4:
                 formName = 'user';
-                inputNames = ['user', 'email', 'name', 'profile_photo', 'role'];
-                inputLabels = ['Usuário', 'Email', 'Nome', 'Foto', 'Permissão'];
+                inputNames = ['name', 'user', 'email', 'password', 'profile_photo', 'role'];
+                inputLabels = ['Nome', 'Usuário', 'Email', 'Senha', 'Foto', 'Permissão'];
                 break;
             // edit forms
             case 1:
@@ -319,6 +321,9 @@ $(function() {
                 } else if(inputNames[i] == 'email') {
                     // email inputs
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
+                    continue;
+                } else if(inputNames[i] == 'password') {
+                    form.append(`<input type="password" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
                 } else if(inputNames[i] == 'role') {
                     // user role permission
