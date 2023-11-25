@@ -1,17 +1,29 @@
 /* article styles */
 
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
 header * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-header {
-    width: auto;
+main {
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    background-color: var(--light0);
+    padding: 0 3%;
+    padding-top: 70px;
+    transition: .2s;
+}
+
+main .content {
+    width: 100%;
+    max-width: 1280px;
+    background-color: var(--light0);
+    padding: 30px 0;
+}
+
+main .content h1:first-child {
+    margin-top: 0;
 }
 
 .thumbnail {
@@ -34,7 +46,7 @@ header {
 .info {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin: 20px 0;
 }
 
 .info img {
@@ -45,23 +57,6 @@ header {
     margin-top: 2px;
     margin-right: 10px;
 }
-
-/* article */
-main.article {
-    background-color: var(--light1);
-    min-height: calc(100dvh - 50px);
-}
-
-main.article .content {
-    background-color: var(--light0);
-    min-height: calc(100dvh - 50px - 40px - 40px);
-    padding: 40px;
-}
-
-main.article .content h1:first-child {
-    margin-top: 0;
-}
-
 
 /* annoying bugs fix */
 

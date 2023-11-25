@@ -1,6 +1,7 @@
 /* my color palette */
 
 * {
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -18,7 +19,7 @@
     --brown1: #be5a38;
 }
 
-/* standard body styles */
+/* standard styles */
 
 body {
     font-family: 'Segoe UI';
