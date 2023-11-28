@@ -22,11 +22,14 @@ main .content {
     padding: 30px 0;
 }
 
-main .content h1:first-child {
+main .content > h1:first-child {
     font-size: 48px;
-    font-weight: 600;
     margin-bottom: 30px;
     text-align: center;
+}
+
+main .content h1 {
+    font-weight: 600;
 }
 
 .thumbnail {
