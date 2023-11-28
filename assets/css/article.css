@@ -23,7 +23,10 @@ main .content {
 }
 
 main .content h1:first-child {
-    margin-top: 0;
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .thumbnail {
@@ -43,19 +46,40 @@ main .content h1:first-child {
 }
 
 /* author profile photo and name */
-.info {
+
+.post-info {
+    height: 45px;
+    margin: 30px 0;
     display: flex;
     align-items: center;
-    margin: 20px 0;
 }
 
-.info img {
+.post-info .info {
+    display: flex;
+    align-items: center;
+}
+
+.post-info .info img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: 2px;
     margin-right: 10px;
+}
+
+.post-info > span {
+    width: 1px;
+    height: 70%;
+    background-color: #ccc;
+    margin: 0 10px;
+}
+
+/* post */
+
+.post ol li,
+.post ul li {
+    /* list-style-position: inside; */
+    margin-left: 20px;
 }
 
 /* annoying bugs fix */
@@ -65,9 +89,24 @@ nav .profile-name {
 }
 
 nav ul li a {
-    padding-bottom: 0;
+    padding-bottom: 2px !important;
 }
 
 /* TinyMCE content.min.css file */
 
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;line-height:1.4;}table{border-collapse:collapse}table:not([cellpadding]) td,table:not([cellpadding]) th{padding:.4rem}table[border]:not([border="0"]):not([style*=border-width]) td,table[border]:not([border="0"]):not([style*=border-width]) th{border-width:1px}table[border]:not([border="0"]):not([style*=border-style]) td,table[border]:not([border="0"]):not([style*=border-style]) th{border-style:solid}table[border]:not([border="0"]):not([style*=border-color]) td,table[border]:not([border="0"]):not([style*=border-color]) th{border-color:#ccc}figure{display:table;margin:1rem auto}figure figcaption{color:#999;display:block;margin-top:.25rem;text-align:center}hr{border-color:#ccc;border-style:solid;border-width:1px 0 0 0}code{background-color:#e8e8e8;border-radius:3px;padding:.1rem .2rem}.mce-content-body:not([dir=rtl]) blockquote{border-left:2px solid #ccc;margin-left:1.5rem;padding-left:1rem}.mce-content-body[dir=rtl] blockquote{border-right:2px solid #ccc;margin-right:1.5rem;padding-right:1rem}
+
+/* responsiveness */
+
+@media only screen and (max-width: 670px) {
+    main .content h1:first-child {
+        font-size: 36px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .post-info .creation {
+        display: flex;
+        flex-direction: column;
+    }
+}

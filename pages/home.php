@@ -3,7 +3,7 @@
 <main>
     <div class="content">
         <section class="posts">
-            <h1 class="title">Meus últimos posts</h1>
+            <h1 class="title">Meu Blog</h1>
             <div class="posts-content">
             <?php
                 $sql = $pdo->prepare("SELECT * FROM `tb_posts` WHERE published = 1");
