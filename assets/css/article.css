@@ -79,6 +79,10 @@ main .content h1 {
 
 /* post */
 
+.post h1:first-child {
+    margin-bottom: 20px;
+}
+
 .post ol li,
 .post ul li {
     /* list-style-position: inside; */
