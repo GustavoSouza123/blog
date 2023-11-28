@@ -23,7 +23,7 @@ main .content {
 }
 
 main .content > h1:first-child {
-    font-size: 48px;
+    font-size: 54px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -107,8 +107,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubunt
 /* responsiveness */
 
 @media only screen and (max-width: 670px) {
-    main .content h1:first-child {
-        font-size: 36px;
+    main .content > h1:first-child {
+        font-size: 44px;
     }
 }
 
