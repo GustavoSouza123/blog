@@ -75,8 +75,9 @@
                         $columnNames = ['id', 'name', 'image', 'creation_date'];
                         $tableHeaderNames = ['id', 'nome', 'imagem', 'data de criação'];
                     } else if($form_name == 'post') {
-                        $columnNames = ['author', 'category_id', 'title', 'subtitle', 'published'];
-                        $tableHeaderNames = ['autor', 'categoria', 'título', 'subtítulo', 'publicado'];
+                        $columnNames = ['author', 'category_id', 'title', 'published'];
+                        $tableHeaderNames = ['autor', 'categoria', 'título', 'publicado'];
+                    
                     } else if($form_name == 'user') {
                         $columnNames = ['profile_photo', 'user', 'email', 'name', 'role', 'joined_in'];
                         $tableHeaderNames = ['foto', 'usuário', 'email', 'nome', 'função', 'data de cadastro'];
