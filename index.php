@@ -1,4 +1,11 @@
-<?php require 'config/config.php'; ?>
+<?php
+    require 'config/config.php';
+
+    // get website content
+    $json = file_get_contents(INCLUDE_PATH_PORTFOLIO.'json/english.json');
+    $content = json_decode($_COOKIE['portfolioContent']);
+    setcookie('portfolioContent', $json, time()+60*60*24, '/');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
