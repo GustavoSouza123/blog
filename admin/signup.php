@@ -7,12 +7,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
+    <link href="<?= INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
     <title>Cadastre-se | My Blog</title>
 </head>
 <body>
     <!-- include path --> 
-    <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
+    <input type="hidden" name="include_path" value="<?= INCLUDE_PATH; ?>" />
 
     <!-- signup container -->
     <div class="register-container">
@@ -38,13 +38,13 @@
                 <input type="hidden" name="form_name" value="user" />
                 <input type="submit" name="register" value="Login" />
 
-                <div class="change-register">Já tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>login">Entre</a></div>
+                <div class="change-register">Já tem uma conta? <a href="<?= INCLUDE_PATH_ADMIN; ?>login">Entre</a></div>
             </form>
         </div>
     </div>
 
     
-    <script src="<?php echo INCLUDE_PATH; ?>assets/js/jquery.js"></script>
-    <script src="<?php echo INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script>
+    <script src="<?= INCLUDE_PATH; ?>assets/js/jquery.js"></script>
+    <script src="<?= INCLUDE_PATH_ADMIN; ?>assets/js/script.js"></script>
 </body>
 </html>

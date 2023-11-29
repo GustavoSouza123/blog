@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?php echo INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
+    <link href="<?= INCLUDE_PATH_ADMIN; ?>assets/css/style.css" rel="stylesheet">
     <title>Entre | My Blog</title>
 </head>
 <body>
@@ -49,7 +49,7 @@
     ?>
 
     <!-- include path --> 
-    <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
+    <input type="hidden" name="include_path" value="<?= INCLUDE_PATH; ?>" />
 
     <!-- login container -->
     <div class="register-container">
@@ -68,7 +68,7 @@
                     <label for="remember">Lembrar Senha</label>
                 </div>
                 <input type="submit" name="register" value="Login" />
-                <div class="change-register">Não tem uma conta? <a href="<?php echo INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
+                <div class="change-register">Não tem uma conta? <a href="<?= INCLUDE_PATH_ADMIN; ?>signup">Cadastre-se</a></div>
             </form>
         </div>
     </div>

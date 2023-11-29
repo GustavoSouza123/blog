@@ -6,7 +6,7 @@ header * {
 }
 
 main {
-    min-height: 100dvh;
+    min-height: calc(100dvh - 71px);
     display: flex;
     justify-content: center;
     background-color: var(--light0);

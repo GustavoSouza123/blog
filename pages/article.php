@@ -17,15 +17,15 @@
 
 <main class="article">
     <div class="content">
-        <h1><?php echo $post['title']; ?></h1>
-        <div class="thumbnail"><img src="<?php echo INCLUDE_PATH_ADMIN.$post['thumbnail']; ?>" alt="Post thumbnail" /></div>
+        <h1><?= $post['title']; ?></h1>
+        <div class="thumbnail"><img src="<?= INCLUDE_PATH_ADMIN.$post['thumbnail']; ?>" alt="Post thumbnail" /></div>
         <div class="post-info">
-            <div class="info"><img src="<?php echo INCLUDE_PATH_ADMIN.$author['profile_photo']; ?>" alt="Foto de perfil do autor" /><?php echo $author['name']; ?></div>
+            <div class="info"><img src="<?= INCLUDE_PATH_ADMIN.$author['profile_photo']; ?>" alt="Foto de perfil do autor" /><?= $author['name']; ?></div>
             <span></span>
-            <div class="creation">Publicado em: <span><?php echo $post['creation_date']; ?></span></div>
+            <div class="creation">Publicado em: <span><?= $post['creation_date']; ?></span></div>
         </div>
         <div class="post">
-            <?php echo $post['post']; ?>
+            <?= $post['post']; ?>
         </div>
     </div>
 </main>

@@ -3,11 +3,11 @@
         <nav class="register">
         <?php if(Panel::isLogged()) { ?>
             <ul class="profile">
-                <a href="<?php echo INCLUDE_PATH_ADMIN; ?>">
+                <a href="<?= INCLUDE_PATH_ADMIN; ?>">
                     <div class="profile-photo">
-                        <img src="<?php echo INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />
+                        <img src="<?= INCLUDE_PATH_ADMIN.$_SESSION['myblog-profile-photo']; ?>" alt="Foto de perfil" />
                     </div>
-                    <div class="profile-name"><?php echo $_SESSION['myblog-name']; ?></div>
+                    <div class="profile-name"><?= $_SESSION['myblog-name']; ?></div>
                 </a>
             </ul>
         <?php } else { ?>

@@ -14,19 +14,19 @@
         $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
         $cssName = ($url == 'article') ? 'article' : 'blog';
     ?>
-    <link href="<?php echo INCLUDE_PATH; ?>assets/css/standard.css" rel="stylesheet"> <!-- standard css file --> 
-    <link href="<?php echo INCLUDE_PATH_PORTFOLIO; ?>assets/css/header.css" rel="stylesheet"> <!-- header css file -->
-    <link href="<?php echo INCLUDE_PATH.'assets/css/'.$cssName.'.css'; ?>" rel="stylesheet"> <!-- main css file -->
-    <link href="<?php echo INCLUDE_PATH_PORTFOLIO; ?>assets/css/footer.css" rel="stylesheet"> <!-- footer css file -->
+    <link href="<?= INCLUDE_PATH; ?>assets/css/standard.css" rel="stylesheet"> <!-- standard css file --> 
+    <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/header.css" rel="stylesheet"> <!-- header css file -->
+    <link href="<?= INCLUDE_PATH.'assets/css/'.$cssName.'.css'; ?>" rel="stylesheet"> <!-- main css file -->
+    <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/footer.css" rel="stylesheet"> <!-- footer css file -->
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
 
-    <title>My Blog</title> <!-- title -->
+    <title>Meu Blog</title> <!-- title -->
 </head>
 <body>
     <!-- include path --> 
-    <input type="hidden" name="include_path" value="<?php echo INCLUDE_PATH; ?>" />
+    <input type="hidden" name="include_path" value="<?= INCLUDE_PATH; ?>" />
 
     <!-- background -->
     <div class="background"></div>
@@ -40,7 +40,7 @@
         }
     ?>
 
-    <script src="<?php echo INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
-    <script src="<?php echo INCLUDE_PATH_PORTFOLIO;?>assets/js/script.js"></script> <!-- main javascript file -->
+    <script src="<?= INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
+    <script src="<?= INCLUDE_PATH_PORTFOLIO;?>assets/js/script.js"></script> <!-- main javascript file -->
 </body>
 </html>
