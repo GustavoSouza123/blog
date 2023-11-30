@@ -2,7 +2,8 @@
     require 'config/config.php';
 
     // get website content
-    $json = file_get_contents(INCLUDE_PATH_PORTFOLIO.'json/english.json');
+    $activeLanguage = $_COOKIE['activeLanguage'];
+    $json = file_get_contents(INCLUDE_PATH_PORTFOLIO.'json/'.$activeLanguage.'.json');
     $content = json_decode($_COOKIE['portfolioContent']);
     setcookie('portfolioContent', $json, time()+60*60*24, '/');
 ?>
@@ -34,6 +35,7 @@
 <body>
     <!-- include path --> 
     <input type="hidden" name="include_path" value="<?= INCLUDE_PATH; ?>" />
+    <input type="hidden" name="include_path_portfolio" value="<?= INCLUDE_PATH_PORTFOLIO; ?>" />
 
     <!-- background -->
     <div class="background"></div>

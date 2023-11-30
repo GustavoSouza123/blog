@@ -6,6 +6,10 @@
             <a href="https://twitter.com/gustavosouza456" target="_blank"><img src="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/images/twitter.svg" alt="Twitter logo" /></a>
         </div>
         <nav>
+            <div class="languages">
+                <div language="en" <?php if($_COOKIE['activeLanguage'] == 'en') echo 'class="active"'; ?>>EN</div>
+                <div language="pt-br" <?php if($_COOKIE['activeLanguage'] == 'pt-br') echo 'class="active"'; ?>>PT-BR</div>
+            </div>
             <ul>
                 <li><a href="<?= INCLUDE_PATH_PORTFOLIO; ?>"><?= $content->nav1 ?></a></li>
                 <li><a href=""><?= $content->nav2 ?></a></li>
