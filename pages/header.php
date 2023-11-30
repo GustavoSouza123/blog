@@ -12,10 +12,10 @@
             </div>
             <ul>
                 <li><a href="<?= INCLUDE_PATH_PORTFOLIO; ?>"><?= $content->nav1 ?></a></li>
-                <li><a href=""><?= $content->nav2 ?></a></li>
-                <li><a href=""><?= $content->nav3 ?></a></li>
-                <li><a class="active" href="<?= INCLUDE_PATH; ?>"><?= $content->nav4 ?></a></li>
-                <li><a href=""><?= $content->nav5 ?></a></li>
+                <li><a href="<?= INCLUDE_PATH_PORTFOLIO.'#'.stripAccents($content->nav2) ?>"><?= $content->nav2 ?></a></li>
+                <li><a href="<?= INCLUDE_PATH_PORTFOLIO.'#'.stripAccents($content->nav3) ?>"><?= $content->nav3 ?></a></li>
+                <li><a class="active" href="<?= INCLUDE_PATH ?>"><?= $content->nav4 ?></a></li>
+                <li><a href="<?= INCLUDE_PATH_PORTFOLIO.'#'.stripAccents($content->nav5) ?>"><?= $content->nav5 ?></a></li>
             </ul>
         </nav> 
         <div class="menu-toggle">
