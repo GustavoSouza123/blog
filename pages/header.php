@@ -7,8 +7,8 @@
         </div>
         <nav class="blog">
             <div class="languages">
-                <div language="en" <?php if($_COOKIE['activeLanguage'] == 'en') echo 'class="active"'; ?>>EN</div>
-                <div language="pt-br" <?php if($_COOKIE['activeLanguage'] == 'pt-br') echo 'class="active"'; ?>>PT-BR</div>
+                <div language="en" <?php if($activeLanguage == 'en') echo 'class="active"'; ?>>EN</div>
+                <div language="pt-br" <?php if($activeLanguage == 'pt-br') echo 'class="active"'; ?>>PT-BR</div>
             </div>
             <ul>
                 <li><a href="<?= INCLUDE_PATH_PORTFOLIO ?>"><?= $content->nav1 ?></a></li>

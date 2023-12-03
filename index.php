@@ -2,7 +2,7 @@
     require 'config/config.php';
 
     // get website content
-    $activeLanguage = $_COOKIE['activeLanguage'];
+    $activeLanguage = (isset($_COOKIE['activeLanguage'])) ? $_COOKIE['activeLanguage'] : 'en';
     $json = file_get_contents(INCLUDE_PATH_PORTFOLIO.'json/'.$activeLanguage.'.json');
     $content = json_decode($_COOKIE['portfolioContent']);
     setcookie('portfolioContent', $json, time()+60*60*24, '/');
