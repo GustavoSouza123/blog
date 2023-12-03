@@ -25,4 +25,14 @@ $(function() {
             location.reload();
         });
     })
+
+    // toggle social media logos
+    let themeToggle = $('.theme-toggle')
+    let theme = $('input[name="theme"]').val();
+    themeToggle.click(function() {
+        theme = (theme == 'light') ? 'dark' : 'light';
+        $('header .social a img').eq(0).attr('src', `${include_path_portfolio}assets/images/github-${theme}.svg`);
+        $('header .social a img').eq(1).attr('src', `${include_path_portfolio}assets/images/linkedin-${theme}.svg`);
+        $('header .social a img').eq(2).attr('src', `${include_path_portfolio}assets/images/twitter-${theme}.svg`);
+    })
 })

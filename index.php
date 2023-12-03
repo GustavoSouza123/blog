@@ -12,6 +12,9 @@
         $newStr = strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
         return strtolower($newStr);
     }
+
+    // website theme
+    $theme = (isset($_COOKIE['portfolioTheme'])) ? $_COOKIE['portfolioTheme'] : 'light';
 ?>
 
 <!DOCTYPE html>
@@ -42,10 +45,16 @@
     <!-- include path --> 
     <input type="hidden" name="include_path" value="<?= INCLUDE_PATH; ?>" />
     <input type="hidden" name="include_path_portfolio" value="<?= INCLUDE_PATH_PORTFOLIO; ?>" />
-
-    <!-- background -->
-    <div class="background"></div>
     
+    <!-- website theme -->
+    <input type="hidden" name="theme" value="<?= $theme ?>" />
+
+    <!-- loading container -->
+    <div class="loading">
+        <img src="<?= INCLUDE_PATH_PORTFOLIO ?>assets/images/loading-<?= $theme ?>.svg" alt="loading spinner" />
+    </div>
+
+    <!-- content -->
     <?php
         // friendly url
         if(file_exists('pages/'.$url.'.php')) {
@@ -55,7 +64,21 @@
         }
     ?>
 
-    <script src="<?= INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
+    <script>
+        // page loading
+        window.addEventListener('beforeunload', function() {
+            document.querySelector('.loading').style.display = 'flex';
+        });
+
+        window.addEventListener('load', function() {
+            document.querySelector('.loading').style.display = 'none';
+            setTimeout(() => {
+                document.querySelector('.theme-toggle').style.transition = '.2s';
+                document.querySelector('.theme-toggle span').style.transition = '.2s';
+            }, 200)
+        });
+    </script>
     <script src="<?= INCLUDE_PATH_PORTFOLIO;?>assets/js/script.js"></script> <!-- main javascript file -->
+    <script src="<?= INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
 </body>
 </html>

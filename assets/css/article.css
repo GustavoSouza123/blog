@@ -9,7 +9,6 @@ main {
     min-height: calc(100dvh - 71px);
     display: flex;
     justify-content: center;
-    background-color: var(--light0);
     padding: 0 3%;
     padding-top: 70px;
     transition: .2s;
@@ -18,7 +17,7 @@ main {
 main .content {
     width: 100%;
     max-width: 1280px;
-    background-color: var(--light0);
+    background-color: var(--body-bg);
     padding: 30px 0;
 }
 
@@ -40,7 +39,7 @@ main .content h1 {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #eee;
+    background-color: var(--thumbnail);
 }
 
 .thumbnail img {
@@ -74,7 +73,7 @@ main .content h1 {
 .post-info > span {
     width: 1px;
     height: 70%;
-    background-color: #ccc;
+    background-color: var(--article-division);
     margin: 0 10px;
 }
 
