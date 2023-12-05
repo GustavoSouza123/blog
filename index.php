@@ -25,8 +25,8 @@
     <meta name="description" content="Descrição do meu website"> <!-- seo -->
     <meta name="keywords" content="palavras,chave,do,meu,website"> <!-- seo -->
     <link rel="icon" type="image/x-icon" href=""> <!-- website icon -->
-
-    <!-- css files -->
+    <!-- css -->
+    <style>.hidden {visibility: hidden; background: <?php if($theme == 'dark') echo '#222'; else echo '#fff'; ?>;}</style>
     <?php
         $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
         $cssName = ($url == 'article') ? 'article' : 'blog';
@@ -35,15 +35,20 @@
     <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/header.css" rel="stylesheet"> <!-- header css file -->
     <link href="<?= INCLUDE_PATH.'assets/css/'.$cssName.'.css'; ?>" rel="stylesheet"> <!-- main css file -->
     <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/footer.css" rel="stylesheet"> <!-- footer css file -->
-
+    <!-- javascript -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
-    <script>
+   <script>
         // page loading
-        $(window).on('load', function() {
+        /*$(window).on('load', function() {
             $('.loading').fadeOut(200);
+        })*/
+
+        $('html').addClass('hidden')
+        $(window).on('load', function() {
+            $('html').removeClass('hidden');
         })
-    </script>
+    </script> 
 
     <title>Meu Blog</title> <!-- title -->
 </head>
