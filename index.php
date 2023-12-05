@@ -26,7 +26,12 @@
     <meta name="keywords" content="palavras,chave,do,meu,website"> <!-- seo -->
     <link rel="icon" type="image/x-icon" href=""> <!-- website icon -->
     <!-- css -->
-    <style>.hidden {visibility: hidden; background: <?php if($theme == 'dark') echo '#222'; else echo '#fff'; ?>;}</style>
+    <style>
+        .hidden {
+            visibility: hidden;
+            background: <?php if($theme == 'dark') echo '#222'; else echo '#fff'; ?>;
+        }
+    </style>
     <?php
         $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
         $cssName = ($url == 'article') ? 'article' : 'blog';
@@ -47,9 +52,10 @@
         $('html').addClass('hidden')
         $(window).on('load', function() {
             $('html').removeClass('hidden');
+            $('header nav .languages div').css('transition', '.2s');
+            $('header nav ul li a').css('transition', '.2s');
         })
     </script> 
-
     <title>Meu Blog</title> <!-- title -->
 </head>
 <body>
