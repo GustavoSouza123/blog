@@ -40,10 +40,6 @@
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
     <script>
         // page loading
-        $(document).ready(function() {
-            $('.loading').css('display', 'flex').hide().fadeIn(0);
-        })
-
         $(window).on('load', function() {
             $('.loading').fadeOut(200);
         })
