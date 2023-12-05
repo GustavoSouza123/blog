@@ -38,6 +38,16 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
+    <script>
+        // page loading
+        $(document).ready(function() {
+            $('.loading').css('display', 'flex').hide().fadeIn(0);
+        })
+
+        $(window).on('load', function() {
+            $('.loading').fadeOut(200);
+        })
+    </script>
 
     <title>Meu Blog</title> <!-- title -->
 </head>
@@ -64,20 +74,6 @@
         }
     ?>
 
-    <script>
-        // page loading
-        window.addEventListener('beforeunload', function() {
-            document.querySelector('.loading').style.display = 'flex';
-        });
-
-        window.addEventListener('load', function() {
-            document.querySelector('.loading').style.display = 'none';
-            setTimeout(() => {
-                document.querySelector('.theme-toggle').style.transition = '.2s';
-                document.querySelector('.theme-toggle span').style.transition = '.2s';
-            }, 200)
-        });
-    </script>
     <script src="<?= INCLUDE_PATH_PORTFOLIO;?>assets/js/script.js"></script> <!-- main javascript file -->
     <script src="<?= INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
 </body>
