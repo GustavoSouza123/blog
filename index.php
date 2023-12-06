@@ -4,7 +4,7 @@
     // get website content
     $activeLanguage = (isset($_COOKIE['activeLanguage'])) ? $_COOKIE['activeLanguage'] : 'en';
     $json = file_get_contents(INCLUDE_PATH_PORTFOLIO.'json/'.$activeLanguage.'.json');
-    $content = json_decode($_COOKIE['portfolioContent']);
+    $content = json_decode($json);
     setcookie('portfolioContent', $json, time()+60*60*24, '/');
 
     // strip accents from a string
