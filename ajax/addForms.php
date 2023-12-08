@@ -225,6 +225,7 @@
                 if($data['success']) { 
                     $sql = $pdo->prepare("UPDATE `".$tableName."` SET user = ?, email = ?, name = ?, role = ? WHERE id = ?");
                     $sql->execute(array($_POST['user'], $_POST['email'], $_POST['name'], $_POST['role'], $id));
+
                     // verify if a new image was uploaded
                     if($hasImage) {
                         $profile_photo = $upload_dir.$_FILES['profile_photo']['name'];
@@ -238,6 +239,14 @@
                         $sql = $pdo->prepare("UPDATE `".$tableName."` SET profile_photo = ? WHERE id = ?");
                         $sql->execute(array($profile_photo, $id));
                     }
+
+                    // updating sessions
+                    $_SESSION['myblog-user'] = $_POST['user'];
+                    $_SESSION['myblog-email'] = $_POST['email'];
+                    $_SESSION['myblog-name'] = $_POST['name'];
+                    $_SESSION['myblog-profile-photo'] = ($profile_photo != "") ? $profile_photo : $_SESSION['myblog-profile-photo'];
+                
+                    $data['sessions'] = true;
                     $data['success'] = true;
                 }
             } catch(PDOExcetion $e) {
