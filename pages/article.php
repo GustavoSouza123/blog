@@ -20,12 +20,16 @@
         <h1><?= $post['title']; ?></h1>
         <div class="thumbnail"><img src="<?= INCLUDE_PATH_ADMIN.$post['thumbnail']; ?>" alt="Post thumbnail" /></div>
         <div class="post-info">
-            <div class="info"><img src="<?= INCLUDE_PATH_ADMIN.$author['profile_photo']; ?>" alt="Foto de perfil do autor" /><?= $author['name']; ?></div>
-            <span></span>
-            <div class="creation">Publicado em: <span><?= $post['creation_date']; ?></span></div>
+            <div class="post-info-content">
+                <div class="info"><img src="<?= INCLUDE_PATH_ADMIN.$author['profile_photo']; ?>" alt="Foto de perfil do autor" /><?= $author['name']; ?></div>
+                <span></span>
+                <div class="creation">Publicado em: <span><?= $post['creation_date']; ?></span></div>
+            </div>
         </div>
         <div class="post">
-            <?= $post['post']; ?>
+            <div class="post-content">
+                <?= $post['post']; ?>
+            </div>
         </div>
     </div>
 </main>

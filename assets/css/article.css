@@ -70,10 +70,17 @@ main .content h1 {
     height: 45px;
     margin: 30px 0;
     display: flex;
+    justify-content: center;
+}
+
+.post-info .post-info-content {
+    width: 700px; 
+    display: flex;
     align-items: center;
 }
 
 .post-info .info {
+    height: 100%;
     display: flex;
     align-items: center;
 }
@@ -86,14 +93,23 @@ main .content h1 {
     margin-right: 10px;
 }
 
-.post-info > span {
+.post-info .post-info-content > span {
     width: 1px;
     height: 70%;
-    background-color: var(--article-division);
     margin: 0 10px;
+    background-color: var(--article-division);
 }
 
 /* post */
+
+.post {
+    display: flex;
+    justify-content: center;
+}
+
+.post .post-content {
+    width: 700px;
+}
 
 .post h1:first-child {
     margin-bottom: 20px;
