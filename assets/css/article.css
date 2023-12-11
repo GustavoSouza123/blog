@@ -148,7 +148,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubunt
 }
 
 @media only screen and (max-width: 500px) {
-    .post-info .creation {
+    .post-info .creation,
+    .post-info .read-time {
         display: flex;
         flex-direction: column;
         font-size: 14px;

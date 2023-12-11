@@ -28,6 +28,8 @@
                 <div class="info"><img src="<?= INCLUDE_PATH_ADMIN.$author['profile_photo']; ?>" alt="Foto de perfil do autor" /><?= $author['name']; ?></div>
                 <span></span>
                 <div class="creation">Publicado em: <span><?= $post['creation_date']; ?></span></div>
+                <span></span>
+                <div class="read-time"><?= $post['read_time'] ?> minuto(s) de leitura</div>
             </div>
         </div>
         <div class="post">
