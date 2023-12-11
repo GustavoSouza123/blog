@@ -35,6 +35,7 @@ html {
     --footer-border: #eee; 
     --thumbnail: #eee;
     --post-box-shadow: #eee;
+    --post-border: #eee;
     --category-bg: #fafafa;
     --category-color: #000;
     --article-division: #ccc;
@@ -56,6 +57,7 @@ html.dark {
     --footer-border: #333; 
     --thumbnail: #333;
     --post-box-shadow: #2c2c2c;
+    --post-border: #2c2c2c;
     --category-bg: #111;
     --category-color: #eee;
     --article-division: #444;

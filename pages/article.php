@@ -11,7 +11,11 @@
         $author = $sql->fetch(PDO::FETCH_ASSOC);
 
         $creation = strtotime($post['creation_date']);
-        $post['creation_date'] = date('d/m/Y H:i a', $creation);
+        if($activeLanguage == 'en') {
+            $post['creation_date'] = date('F j, Y, g:i a', $creation);
+        } else if($activeLanguage == 'pt-br') {
+            $post['creation_date'] = date('d/m/Y H:i', $creation);
+        }
     }
 ?>
 
