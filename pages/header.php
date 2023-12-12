@@ -7,11 +7,13 @@
         </div>
         <nav class="blog">
             <div class="theme-toggle">
-                <span></span>
+                <a href="">
+                    <span></span>
+                </a>
             </div>
             <div class="languages">
-                <div language="en" <?php if($activeLanguage == 'en') echo 'class="active"'; ?>>EN</div>
-                <div language="pt-br" <?php if($activeLanguage == 'pt-br') echo 'class="active"'; ?>>PT-BR</div>
+                <div language="en" <?php if($activeLanguage == 'en') echo 'class="active"'; ?>><a href="">EN</a></div>
+                <div language="pt-br" <?php if($activeLanguage == 'pt-br') echo 'class="active"'; ?>><a href="">PT-BR</a></div>
             </div>
             <ul>
                 <li><a href="<?= INCLUDE_PATH_PORTFOLIO ?>"><?= $content->nav1 ?></a></li>
