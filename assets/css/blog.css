@@ -75,7 +75,7 @@ section.posts > .title {
 
 .posts-content .post:hover {
     /* scale: 1.05; */
-    box-shadow: 0px 0px 10px 2px var(--post-box-shadow);
+    box-shadow: 0px 7px 29px 0px var(--post-box-shadow);
 }
 
 .posts-content .post .image {
