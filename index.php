@@ -22,8 +22,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Descrição do meu website"> <!-- seo -->
-    <meta name="keywords" content="palavras,chave,do,meu,website"> <!-- seo -->
+    <meta name="description" content="My tech blog | Gustavo Souza"> <!-- seo -->
+    <meta name="keywords" content="my,tech,blog,web,programming,coding"> <!-- seo -->
     <link rel="icon" type="image/x-icon" href=""> <!-- website icon -->
     <!-- css -->
     <style>
@@ -58,7 +58,7 @@
             }, 100)
         })
     </script> 
-    <title>Meu Blog</title> <!-- title -->
+    <title><?= $content->blogTitle ?> | Gustavo Souza</title> 
 </head>
 <body>
     <!-- include path --> 
