@@ -52,8 +52,10 @@
         $('html').addClass('hidden')
         $(window).on('load', function() {
             $('html').removeClass('hidden');
-            $('header nav .languages div').css('transition', '.2s');
-            $('header nav ul li a').css('transition', '.2s');
+            setTimeout(function() {
+                $('header nav .languages div').css('transition', '.2s');
+                $('header nav ul li a').css('transition', '.2s');
+            }, 100)
         })
     </script> 
     <title>Meu Blog</title> <!-- title -->

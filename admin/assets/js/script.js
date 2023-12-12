@@ -142,7 +142,6 @@ $(function() {
             $('input[name="password"]').val(data.row.password);
             $('input[name="name"]').val(data.row.name);
 
-            console.log(data.row.role)
             $('form.edit select[name="role"] option[value="'+data.row.role+'"]').attr('selected', 'selected');
             if(data.dashboard) {
                 $('form.edit select[name="role"]').attr('disabled', 'disabled');
@@ -152,6 +151,10 @@ $(function() {
             $('form.edit select[name="category_id"] option[value="'+data.row.category_id+'"]').attr('selected', 'selected');
             $('input[name="title"]').val(data.row.title);
             $('input[name="subtitle"]').val(data.row.subtitle);
+
+            if(data.row.featured == 1) {
+                $('input[name="featured"]').click();
+            }
             
             // preview image
             let imagePath = '';
@@ -323,6 +326,7 @@ $(function() {
                     form.append(`<input type="email" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
                 } else if(inputNames[i] == 'password') {
+                    // password inputs
                     form.append(`<input type="password" name="${inputNames[i]}" id="${inputNames[i]}" />`);
                     continue;
                 } else if(inputNames[i] == 'role') {
@@ -347,8 +351,12 @@ $(function() {
                     continue;
                 }
             }
-            // post textarea
+            // checkbox input for featured field and post textarea
             if(inputNames[0] == 'category_id') {
+                // checkbox input
+                form.append(`<div class="featured"><label for="featured">Em destaque</label><input type="checkbox" name="featured" id="featured" /></div>`)
+
+                // post textarea
                 form.append('<label for="post">Postagem</label><textarea name="post" id="post"></textarea>');
                 // TinyMCE editor
                 tinymce.init({

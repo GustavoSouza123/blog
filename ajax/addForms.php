@@ -65,6 +65,8 @@
             $published = 0;
             $data['draft'] = true;
         }
+ 
+        $featured = isset($_POST['featured']) ? 1 : 0;
         
         $sql = $pdo->prepare("SELECT id FROM `tb_admin_users` WHERE name = ?");
         $sql->execute(array($_POST['author']));
@@ -73,8 +75,8 @@
         // adding data to database
         if($data['success']) {
             try {
-                $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $sql->execute(array($author_id, $category_id, $thumbnail, $title, $subtitle, $post, $read_time, $published, $creation_date, $last_update));
+                $sql = $pdo->prepare("INSERT INTO `tb_posts` VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $sql->execute(array($author_id, $category_id, $thumbnail, $title, $subtitle, $post, $read_time, $published, $featured, $creation_date, $last_update));
                 $data['success'] = true;
             } catch(PDOExcetion $e) {
                 $data['success'] = false;
@@ -182,8 +184,9 @@
                     $published = 0;
                     $data['draft'] = true;
                 }
-                $sql = $pdo->prepare("UPDATE `".$tableName."` SET category_id = ?, title = ?, subtitle = ?, post = ?, read_time = ?, published = ?, last_update = ? WHERE id = ?");
-                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $read_time, $published, $last_update, $id));
+                $featured = isset($_POST['featured']) ? 1 : 0;
+                $sql = $pdo->prepare("UPDATE `".$tableName."` SET category_id = ?, title = ?, subtitle = ?, post = ?, read_time = ?, published = ?, featured = ?, last_update = ? WHERE id = ?");
+                $sql->execute(array($_POST['category_id'], $_POST['title'], $_POST['subtitle'], $_POST['post'], $read_time, $published, $featured, $last_update, $id));
                 // verify if a new image was uploaded
                 if($hasImage) {
                     $thumbnail = $upload_dir.$_FILES['thumbnail']['name'];

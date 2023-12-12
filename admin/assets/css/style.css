@@ -453,7 +453,7 @@ header .menu.mobile ul.dropdown {
     margin-bottom: 10px;
 }
 
-.action-window form input,
+.action-window form input:not([type="checkbox"]),
 .action-window form textarea {
     width: 95%;
     max-width: 400px;
@@ -470,11 +470,26 @@ header .menu.mobile ul.dropdown {
     resize: none;
 }
 
+/* checkbox input for featured field */
+.featured {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid var(--light2);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.featured label {
+    margin: 0;
+    margin-right: 10px;
+}
+
 /* TinyMCE editor styles */
 .tox .tox-mbtn {
     padding: 0 10px;
 }
-
 
 form input[type="file"] {
     padding-top: 7px;
@@ -765,6 +780,10 @@ table tr .action-btn {
         flex-direction: column;
         align-items: center;
     }
+
+    .action-window .submit-btns input:first-child {
+        margin-bottom: 10px;
+    } 
 
     .action-window .submit-btns input:last-child {
         margin-bottom: 0;

@@ -75,8 +75,8 @@
                         $columnNames = ['id', 'name', 'image', 'creation_date'];
                         $tableHeaderNames = ['id', 'nome', 'imagem', 'data de criação'];
                     } else if($form_name == 'post') {
-                        $columnNames = ['author', 'category_id', 'title', 'published'];
-                        $tableHeaderNames = ['autor', 'categoria', 'título', 'publicado'];
+                        $columnNames = ['author', 'category_id', 'title', 'published', 'featured'];
+                        $tableHeaderNames = ['autor', 'categoria', 'título', 'publicado', 'destaque'];
                     
                     } else if($form_name == 'user') {
                         $columnNames = ['profile_photo', 'user', 'email', 'name', 'role', 'joined_in'];
@@ -116,7 +116,14 @@
                             $published = '<i class="fa-solid fa-check fa-lg" style="color: #2ebd73;"></i>';
                         }
                         $data['table'] .= '<td>'.$published.'</td>';
-                    } else if($columnNames[$i] == 'profile_photo') {
+                    } else if($columnNames[$i] == 'featured') {
+                        if($value[$columnNames[$i]] == 0) {
+                            $featured = '<i class="fa-solid fa-xmark fa-lg" style="color: #e23232;"></i>';
+                        } else if($value[$columnNames[$i]] == 1) {
+                            $featured = '<i class="fa-solid fa-check fa-lg" style="color: #2ebd73;"></i>';
+                        }
+                        $data['table'] .= '<td>'.$featured.'</td>';
+                    }  else if($columnNames[$i] == 'profile_photo') {
                         $photoSrc = $value[$columnNames[$i]];
                         $data['table'] .= '<td class="photo"><img src="'.INCLUDE_PATH_ADMIN.$photoSrc.'" alt="foto de perfil" /></td>';
                     } else if($columnNames[$i] == 'role') {
