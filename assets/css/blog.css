@@ -46,7 +46,7 @@ section.posts {
 
 section.posts > .title {
     font-weight: 600;
-    font-size: 32px;
+    font-size: 40px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -68,7 +68,7 @@ section.posts > .title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: scale .2s, box-shadow .2s;
+    transition: box-shadow .2s;
     cursor: pointer;
     border: 1px solid var(--post-border);
 }
@@ -125,4 +125,10 @@ section.posts > .title {
     color: var(--category-color);
     border-radius: 5px;
     padding: 5px 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    section.posts > .title {
+        font-size: 32px;
+    }
 }

@@ -28,6 +28,7 @@ main {
     justify-content: center;
     padding: 0 3%;
     padding-top: 70px;
+    overflow-x: hidden;
 }
 
 main .content {

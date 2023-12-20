@@ -21,7 +21,7 @@
 
 <main class="article">
     <div class="content">
-        <h1><?= $post['title']; ?></h1>
+        <h1 class="title"><?= $post['title']; ?></h1>
         <div class="thumbnail"><img src="<?= INCLUDE_PATH_ADMIN.$post['thumbnail']; ?>" alt="Post thumbnail" /></div>
         <div class="post-info">
             <div class="post-info-content">

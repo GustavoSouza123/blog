@@ -40,10 +40,11 @@
     <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/header.css" rel="stylesheet"> <!-- header css file -->
     <link href="<?= INCLUDE_PATH.'assets/css/'.$cssName.'.css'; ?>" rel="stylesheet"> <!-- main css file -->
     <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/footer.css" rel="stylesheet"> <!-- footer css file -->
+    <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/animations.css" rel="stylesheet" /> <!-- animations css file -->
     <!-- javascript -->
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> <!-- jQuery API -->
     <script src="https://kit.fontawesome.com/52201d9086.js" crossorigin="anonymous"></script> <!-- font awesome icons -->
-   <script>
+    <script>
         // page loading
         /*$(window).on('load', function() {
             $('.loading').fadeOut(200);
@@ -85,5 +86,6 @@
 
     <script src="<?= INCLUDE_PATH_PORTFOLIO;?>assets/js/script.js"></script> <!-- main javascript file -->
     <script src="<?= INCLUDE_PATH;?>assets/js/script.js"></script> <!-- main javascript file -->
+    <script src="<?= INCLUDE_PATH_PORTFOLIO;?>assets/js/animations.js"></script> <!-- animations javascript file -->
 </body>
 </html>
