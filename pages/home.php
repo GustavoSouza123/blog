@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 
-<main>
+<main class="blog">
     <div class="content">
         <section class="posts">
             <h1 class="title"><?= $content->blogTitle ?></h1>
