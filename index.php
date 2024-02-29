@@ -36,6 +36,9 @@
         $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
         $cssName = ($url == 'article') ? 'article' : 'blog';
     ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- google fonts api -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- google fonts api -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"> <!-- Open Sans from google fonts api -->
     <link href="<?= INCLUDE_PATH; ?>assets/css/standard.css" rel="stylesheet"> <!-- standard css file --> 
     <link href="<?= INCLUDE_PATH_PORTFOLIO; ?>assets/css/header.css" rel="stylesheet"> <!-- header css file -->
     <link href="<?= INCLUDE_PATH.'assets/css/'.$cssName.'.css'; ?>" rel="stylesheet"> <!-- main css file -->
