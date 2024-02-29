@@ -16,9 +16,9 @@
 
         $creation = strtotime($post['creation_date']);
         if($activeLanguage == 'en') {
-            $post['creation_date'] = date('F j, Y, g:i a', $creation);
+            $post['creation_date'] = date('F j, Y', $creation);
         } else if($activeLanguage == 'pt-br') {
-            $post['creation_date'] = date('d/m/Y H:i', $creation);
+            $post['creation_date'] = date('d/m/Y', $creation);
         }
     }
 ?>
@@ -31,7 +31,7 @@
             <div class="post-info-content">
                 <div class="info"><img src="<?= INCLUDE_PATH_ADMIN.$author['profile_photo']; ?>" alt="Foto de perfil do autor" /><?= $author['name']; ?></div>
                 <span></span>
-                <div class="creation"><?= $content->articlePublished ?>: <span><?= $post['creation_date']; ?></span></div>
+                <div class="creation"><span><?= $post['creation_date']; ?></span></div>
                 <span></span>
                 <div class="read-time"><?= $post['read_time'].' '.$content->articleReadTime ?></div>
                 <span></span>
