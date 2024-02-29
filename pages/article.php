@@ -10,6 +10,10 @@
         $sql->execute(array($post['author_id']));
         $author = $sql->fetch(PDO::FETCH_ASSOC);
 
+        $sql = $pdo->prepare("SELECT * FROM `tb_categories` WHERE id = ?");
+        $sql->execute(array($post['category_id']));
+        $category = $sql->fetch(PDO::FETCH_ASSOC);
+
         $creation = strtotime($post['creation_date']);
         if($activeLanguage == 'en') {
             $post['creation_date'] = date('F j, Y, g:i a', $creation);
@@ -30,6 +34,8 @@
                 <div class="creation"><?= $content->articlePublished ?>: <span><?= $post['creation_date']; ?></span></div>
                 <span></span>
                 <div class="read-time"><?= $post['read_time'].' '.$content->articleReadTime ?></div>
+                <span></span>
+                <div class="category"><?= $category['name'] ?></div>
             </div>
         </div>
         <div class="post">

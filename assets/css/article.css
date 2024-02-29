@@ -94,6 +94,14 @@ main .content h1 {
     margin-right: 10px;
 }
 
+.post-info .category {
+    background-color: var(--category-bg);
+    color: var(--category-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 .post-info .post-info-content > span {
     width: 1px;
     height: 70%;
