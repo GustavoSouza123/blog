@@ -51,6 +51,28 @@ section.posts > .title {
     text-align: center;
 }
 
+section.posts .browse-categories {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+}
+
+section.posts .browse-categories a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 100%;
+    background-color: var(--category-bg);
+    color: var(--category-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
 .posts-content {
     width: 100%;
     /* background-color: #ccc; */

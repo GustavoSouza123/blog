@@ -4,6 +4,9 @@
     <div class="content">
         <section class="posts">
             <h1 class="title"><?= $content->blogTitle ?></h1>
+            <div class="browse-categories">
+                <a><?= $content->browseCategories ?></a>
+            </div>
             <div class="posts-content">
             <?php
                 $sql = $pdo->prepare("SELECT * FROM `tb_posts` WHERE published = 1");
