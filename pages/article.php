@@ -35,7 +35,7 @@
                 <span></span>
                 <div class="read-time"><?= $post['read_time'].' '.$content->articleReadTime ?></div>
                 <span></span>
-                <div class="category"><?= $category['name'] ?></div>
+                <div class="category"><a href="<?= INCLUDE_PATH ?>?category=<?= $category['name'] ?>"><?= $category['name'] ?></a></div>
             </div>
         </div>
         <div class="post">

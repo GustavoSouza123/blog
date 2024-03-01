@@ -5,7 +5,7 @@
         <section class="posts">
             <h1 class="title"><?= $content->blogTitle ?></h1>
             <div class="browse-categories">
-                <a><?= $content->browseCategories ?></a>
+                <a href="?category=all"><?= $content->browseCategories ?></a>
             </div>
             <div class="posts-content">
             <?php
@@ -25,7 +25,7 @@
                             <div class="title">'.$value['title'].'</div>
                             <div class="subtitle">'.$value['subtitle'].'</div>
                             <div class="read-more"><a href="article?id='.$value['id'].'">Ler mais</a></div>
-                            <div class="category">'.$category.'</div>
+                            <div class="category"><a href="'.INCLUDE_PATH.'?category='.$category.'">'.$category.'</a></div>
                         </div>
                     </div>
                     ';
