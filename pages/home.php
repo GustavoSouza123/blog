@@ -9,7 +9,7 @@
         <section class="posts">
             <h1 class="title"><?= $content->blogTitle ?></h1>
             <div class="categories">
-                <div class="category <?php if(!isset($_GET['category'])) echo 'active'; ?>"><a href="<?= INCLUDE_PATH ?>">Todas</a></div>
+                <div class="category <?php if(!isset($_GET['category'])) echo 'active'; ?>"><a href="<?= INCLUDE_PATH ?>"><?= $content->allPosts ?></a></div>
                 <?php
                     $sql = $pdo->prepare("SELECT * FROM `tb_categories`");
                     $sql->execute();
