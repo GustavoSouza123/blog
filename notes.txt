@@ -13,5 +13,4 @@ https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp
 
 to-do:
 
-> add back arrow on the edit forms
-> replace font awesome icons with svg images
+fix projects description in the portfolio (idea: put an information svg next to the title of the project and when clicking the svg open a modal window or another page with the project description and more photos/videos/gifs of the project)
