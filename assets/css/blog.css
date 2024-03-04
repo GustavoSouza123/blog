@@ -74,6 +74,10 @@ section.posts .categories .category a {
     transition: .2s;
 }
 
+section.posts .categories .category.active a {
+    background-color: var(--category-bg-active);
+}
+
 section.posts .categories .category a:hover {
     background-color: var(--category-bg-hover);
 }

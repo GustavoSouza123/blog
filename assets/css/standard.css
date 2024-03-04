@@ -38,6 +38,7 @@ html {
     --post-border: #eee;
     --category-bg: #f7f7f7;
     --category-bg-hover: #eee;
+    --category-bg-active: #ddd;
     --category-color: #000;
     --article-division: #ccc;
 }
@@ -61,6 +62,7 @@ html.dark {
     --post-border: #2c2c2c;
     --category-bg: #111;
     --category-bg-hover: #333;
+    --category-bg-active: #444;
     --category-color: #eee;
     --article-division: #444;
 }

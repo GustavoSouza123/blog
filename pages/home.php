@@ -9,14 +9,15 @@
         <section class="posts">
             <h1 class="title"><?= $content->blogTitle ?></h1>
             <div class="categories">
-                <div class="category"><a href="<?= INCLUDE_PATH ?>">Todas</a></div>
+                <div class="category <?php if(!isset($_GET['category'])) echo 'active'; ?>"><a href="<?= INCLUDE_PATH ?>">Todas</a></div>
                 <?php
                     $sql = $pdo->prepare("SELECT * FROM `tb_categories`");
                     $sql->execute();
                     $categories = $sql->fetchAll(PDO::FETCH_ASSOC);
                     foreach($categories as $key => $value) {
+                        $active = $currentCategory == $value['name'] ? 'active' : '';
                         echo '
-                        <div class="category"><a href="'.INCLUDE_PATH.'?category='.$value['name'].'">'.$value['name'].'</a></div>
+                        <div class="category '.$active.'"><a href="'.INCLUDE_PATH.'?category='.$value['name'].'">'.$value['name'].'</a></div>
                         ';
                     }
                 ?>
