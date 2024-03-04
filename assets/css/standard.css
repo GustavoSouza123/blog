@@ -38,7 +38,7 @@ html {
     --post-border: #eee;
     --category-bg: #f7f7f7;
     --category-bg-hover: #eee;
-    --category-bg-active: #ddd;
+    --category-bg-active: #e7e7e7;
     --category-color: #000;
     --article-division: #ccc;
 }
@@ -62,7 +62,7 @@ html.dark {
     --post-border: #2c2c2c;
     --category-bg: #111;
     --category-bg-hover: #333;
-    --category-bg-active: #444;
+    --category-bg-active: #3a3a3a;
     --category-color: #eee;
     --article-division: #444;
 }
