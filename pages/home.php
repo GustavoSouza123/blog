@@ -4,8 +4,17 @@
     <div class="content">
         <section class="posts">
             <h1 class="title"><?= $content->blogTitle ?></h1>
-            <div class="browse-categories">
-                <a href="?category=all"><?= $content->browseCategories ?></a>
+            <div class="categories">
+                <?php
+                    $sql = $pdo->prepare("SELECT * FROM `tb_categories`");
+                    $sql->execute();
+                    $categories = $sql->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($categories as $key => $value) {
+                        echo '
+                        <div class="category"><a href="'.INCLUDE_PATH.'?category='.$value['name'].'">'.$value['name'].'</a></div>
+                        ';
+                    }
+                ?>
             </div>
             <div class="posts-content">
             <?php

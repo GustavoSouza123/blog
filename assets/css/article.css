@@ -95,20 +95,20 @@ main .content h1 {
 }
 
 .post-info .category {
-    background-color: var(--category-bg);
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
     transition: .2s;
 }
 
-.post-info .category:hover {
-    background-color: var(--category-bg-hover);
-}
-
 .post-info .category a {
+    background-color: var(--category-bg);
     color: var(--category-color);
     text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: .2s;
+}
+
+.post-info .category a:hover {
+    background-color: var(--category-bg-hover);
 }
 
 .post-info .post-info-content > span {
