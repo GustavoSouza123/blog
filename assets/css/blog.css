@@ -20,7 +20,7 @@
     justify-content: center; 
 }
 
-/* posts cards */
+/* main */
 
 main {
     width: 100%;
@@ -37,6 +37,8 @@ main .content {
     background-color: var(--body-bg);
     padding-bottom: 30px;
 }
+
+/* posts cards */
 
 section.posts {
     width: 100%;
