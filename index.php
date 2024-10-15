@@ -14,7 +14,7 @@
     }
 
     // website theme
-    $theme = (isset($_COOKIE['portfolioTheme'])) ? $_COOKIE['portfolioTheme'] : 'light';
+    $theme = (isset($_COOKIE['portfolioTheme'])) ? $_COOKIE['portfolioTheme'] : 'dark';
 ?>
 
 <!DOCTYPE html>
